@@ -61,7 +61,7 @@ export default function Hero() {
           className="object-contain"
           priority
           loading="eager"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 538px"
+        //   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 538px"
         />
 
         {/* Chart Image */}
@@ -70,14 +70,14 @@ export default function Hero() {
           alt="Graph chart showing ticket statistics"
           width={324}
           height={217}
-          className="absolute -bottom-6 -right-6 lg:-bottom-12 lg:-right-12"
+          className="absolute -bottom-6 -right-6 lg:-bottom-12 lg:-right-12 animate-zoomInOut"
           priority
           loading="eager"
           sizes="(max-width: 768px) 40vw, 324px"
         />
 
         {/* Face Icon */}
-        <Image
+        {/* <Image
           src="/assets/icons/face_hero.svg"
           alt="A smiling face icon"
           width={60}
@@ -86,10 +86,10 @@ export default function Hero() {
           priority
           loading="eager"
           sizes="60px"
-        />
+        /> */}
 
         {/* Crown Icon */}
-        <Image
+        {/* <Image
           src="/assets/icons/crown-hero.svg"
           alt="Crown icon representing premium experience"
           width={60}
@@ -98,19 +98,19 @@ export default function Hero() {
           priority
           loading="eager"
           sizes="60px"
-        />
+        /> */}
 
         {/* Decorative Blue Circle */}
-        <div
+        {/* <div
           className="w-[20px] h-[20px] rounded-full bg-blue_100 absolute -top-4 right-4 lg:block hidden"
           aria-hidden="true"
-        />
+        /> */}
 
         {/* Decorative Green Circle */}
-        <div
-          className="w-[20px] h-[20px] rounded-full bg-green_100 absolute lg:top-48 lg:block hidden -right-4 top-48"
+        {/* <div
+          className="w-[20px] h-[20px] rounded-full bg-green_100 absolute lg:top-48 lg:block hidden -right-2 top-48"
           aria-hidden="true"
-        />
+        /> */}
 
         {/* Secondary Chart Image */}
         <Image
