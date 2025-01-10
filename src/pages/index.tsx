@@ -1,5 +1,11 @@
 import Head from "next/head";
-import Image from "next/image";
+import dynamic from "next/dynamic";
+
+const Header = dynamic(() => import("../layouts/components/Header"), {
+  ssr: false,
+});
+const Hero = dynamic(() => import("./components/Hero"), { ssr: false });
+const Offer = dynamic(() => import("./components/Offer"), { ssr: false });
 
 export default function Home() {
   return (
@@ -8,19 +14,17 @@ export default function Home() {
         <title>EVENTCOVE</title>
         <link rel="icon" href="/favicon.svg" />
       </Head>
-      <div
-        className={`grid items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
-      >
-        <Image
-          src="/assets/icons/logo.svg"
-          alt="logo"
-          width={0}
-          height={0}
-          unoptimized
-          className="w-full h-full rounded-3xl"
-          style={{ height: "38px", width: "155px" }}
-          priority
-        />
+
+      <div className="scroll-smooth">
+        <div className="sticky top-0 w-full max-w-full flex items-center h-[75px] z-50 bg-white">
+          <Header />
+        </div>
+        <div className="w-full min-h-screen-minus-75 h-full">
+          <Hero />
+        </div>
+        <div className="w-full min-h-screen h-full">
+          <Offer />
+        </div>
       </div>
     </>
   );
