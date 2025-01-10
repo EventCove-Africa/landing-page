@@ -1,14 +1,24 @@
-@import url('https://fonts.cdnfonts.com/css/neutral-face');
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 * {
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
   font-size: 100%;
-  font-family: 'Neutral Face', sans-serif;                                        
+  font-family: 'Public Sans', sans-serif;
 }
+
+body {
+  background-color: #F1F5F8;
+}
+
+.container {
+    @apply max-w-screen-2xl mx-auto;
+}
+
+.padding-spacing {
+  @apply px-4 md:py-4 py-2
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
