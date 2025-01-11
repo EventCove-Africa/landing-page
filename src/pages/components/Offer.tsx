@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Offer() {
   return (
-    <section className="container padding-spacing w-full flex lg:flex-row flex-col lg:justify-between justify-around items-center gap-4 h-full pt-16">
+    <section className="container padding-spacing w-full flex lg:flex-row flex-col lg:justify-between justify-around items-center gap-4 h-full pt-36">
       {/* Text Content */}
       <div className="w-full flex flex-col gap-4 text-center lg:text-left">
         <h1
@@ -38,7 +38,7 @@ export default function Offer() {
         </div>
       </div>
       {/* Hero Image Section */}
-      <div className="w-full bg-background_100 relative flex justify-center">
+      <div className="w-full relative flex justify-center">
         <Image
           src="/assets/images/offer_bg.svg"
           alt="Background image illustrating offer"

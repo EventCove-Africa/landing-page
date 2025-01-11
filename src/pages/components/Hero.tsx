@@ -51,7 +51,7 @@ export default function Hero() {
       </div>
 
       {/* Hero Image Section */}
-      <div className="w-full bg-background_100 relative flex justify-center">
+      <div className="w-full bg-background_100 relative flex justify-center h-full">
         {/* Main Hero Image */}
         <Image
           src="/assets/images/hero_img.svg"
@@ -70,7 +70,7 @@ export default function Hero() {
           alt="Graph chart showing ticket statistics"
           width={324}
           height={217}
-          className="absolute -bottom-6 -right-6 lg:-bottom-12 lg:-right-12 animate-zoomInOut"
+          className="absolute bottom-0 right-0 animate-zoomInOut"
           priority
           loading="eager"
           sizes="(max-width: 768px) 40vw, 324px"
@@ -118,7 +118,7 @@ export default function Hero() {
           alt="Additional graph chart showing data points"
           width={309}
           height={84}
-          className="absolute lg:bottom-12 lg:-left-32 -left-4"
+          className="absolute lg:bottom-12 lg:-left-48 -left-4"
           priority
           loading="eager"
           sizes="(max-width: 768px) 100vw, 309px"
