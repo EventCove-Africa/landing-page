@@ -1,23 +1,9 @@
-import React, { useRef } from "react";
+import React from "react";
 import Image from "next/image";
+import { openNewTabWithUrl } from "@/utils";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  const divRef = useRef<HTMLDivElement>(null);
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    const email = divRef?.current?.innerText?.trim();
-    // Prevent the default behavior of the Enter key to avoid creating new lines
-    if (e.key === "Enter") {
-      if (!email) {
-        alert("Please enter an email to subscribe!");
-        return;
-      }
-      // Call API to submit the email
-      e.preventDefault();
-      console.log(email)
-    }
-  };
 
   return (
     <footer className="container padding-spacing w-full py-16 ">
@@ -38,22 +24,18 @@ export default function Footer() {
             things unforgettable. 🎉 Sign up for our newsletter and never miss a
             moment of the action. Let’s make memories together!
           </h4>
-          <div className="h-[40px] w-full bg-white shadow border border-borderColor rounded-sm outline-none py-6 px-4 flex justify-between items-center">
-            <div
-              className="outline-none text-sm text-[#101828] w-full"
-              ref={divRef}
-              contentEditable={true}
-              onKeyDown={handleKeyDown}
-              role="textbox"
-              aria-label="Email input field"
-            />
-            <button
-              type="button"
-              className="bg-secondary_200 text-white text-sm font-medium px-3 py-2 rounded-md"
-              aria-label="Subscribe to newsletter"
-            >
-              Subscribe
-            </button>
+          <div>
+
+          <button
+            type="button"
+            className="bg-secondary_200 text-white text-sm font-medium px-3 py-2 rounded-md"
+            aria-label="Subscribe to newsletter"
+            onClick={() =>
+              openNewTabWithUrl("https://forms.gle/VD9cQuiUB46yLQRAA")
+            }
+          >
+            Subscribe
+          </button>
           </div>
         </div>
 

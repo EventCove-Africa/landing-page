@@ -1,3 +1,4 @@
+import { openNewTabWithUrl } from "@/utils";
 import Image from "next/image";
 import React from "react";
 
@@ -38,6 +39,9 @@ export default function Hero() {
             type="button"
             className="py-3 px-4 bg-primary_100 text-white rounded-md text-sm font-medium hover:bg-primary_200 transition-colors outline-none focus:ring-2 focus:ring-primary_200"
             aria-label="Join our waitlist"
+            onClick={() =>
+              openNewTabWithUrl("https://forms.gle/i5HJXcnpBsKQWMgeA")
+            }
           >
             Join Waitlist
           </button>
@@ -61,7 +65,7 @@ export default function Hero() {
           className="object-contain"
           priority
           loading="eager"
-        //   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 538px"
+          //   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 538px"
         />
 
         {/* Chart Image */}
