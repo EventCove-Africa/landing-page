@@ -25,17 +25,16 @@ export default function Footer() {
             moment of the action. Let’s make memories together!
           </h4>
           <div>
-
-          <button
-            type="button"
-            className="bg-secondary_200 text-white text-sm font-medium px-3 py-2 rounded-md"
-            aria-label="Subscribe to newsletter"
-            onClick={() =>
-              openNewTabWithUrl("https://forms.gle/VD9cQuiUB46yLQRAA")
-            }
-          >
-            Subscribe
-          </button>
+            <button
+              type="button"
+              className="bg-secondary_200 text-white text-sm font-medium px-3 py-2 rounded-md"
+              aria-label="Subscribe to newsletter"
+              onClick={() =>
+                openNewTabWithUrl("https://forms.gle/VD9cQuiUB46yLQRAA")
+              }
+            >
+              Subscribe
+            </button>
           </div>
         </div>
 
@@ -75,7 +74,12 @@ export default function Footer() {
               Connect with us
             </h3>
             <ul className="flex flex-col gap-4">
-              <li className="flex gap-2 items-center text-sm font-normal text-dark_200 cursor-pointer hover:text-primary_100">
+              <li
+                onClick={() =>
+                  openNewTabWithUrl("https://x.com/eventcoveafrica")
+                }
+                className="flex gap-2 items-center text-sm font-normal text-dark_200 cursor-pointer hover:text-primary_100"
+              >
                 <Image
                   src="/assets/icons/twitter.svg"
                   alt="Twitter icon"
@@ -87,7 +91,14 @@ export default function Footer() {
                 />{" "}
                 X
               </li>
-              <li className="flex gap-2 items-center text-sm font-normal text-dark_200 cursor-pointer hover:text-primary_100">
+              <li
+                onClick={() =>
+                  openNewTabWithUrl(
+                    "https://www.facebook.com/share/14oyN4uSwpE/?mibextid=wwXIfr"
+                  )
+                }
+                className="flex gap-2 items-center text-sm font-normal text-dark_200 cursor-pointer hover:text-primary_100"
+              >
                 <Image
                   src="/assets/icons/facebook.svg"
                   alt="Facebook icon"
@@ -99,7 +110,12 @@ export default function Footer() {
                 />{" "}
                 Facebook
               </li>
-              <li className="flex gap-2 items-center text-sm font-normal text-dark_200 cursor-pointer hover:text-primary_100">
+              <li
+                onClick={() =>
+                  openNewTabWithUrl("https://www.instagram.com/eventcoveafrica")
+                }
+                className="flex gap-2 items-center text-sm font-normal text-dark_200 cursor-pointer hover:text-primary_100"
+              >
                 <Image
                   src="/assets/icons/instagram.svg"
                   alt="Instagram icon"
@@ -111,7 +127,14 @@ export default function Footer() {
                 />{" "}
                 Instagram
               </li>
-              <li className="flex gap-2 items-center text-sm font-normal text-dark_200 cursor-pointer hover:text-primary_100">
+              <li
+                onClick={() =>
+                  openNewTabWithUrl(
+                    "https://www.linkedin.com/company/eventcove-africa"
+                  )
+                }
+                className="flex gap-2 items-center text-sm font-normal text-dark_200 cursor-pointer hover:text-primary_100"
+              >
                 <Image
                   src="/assets/icons/linkedin.svg"
                   alt="LinkedIn icon"
