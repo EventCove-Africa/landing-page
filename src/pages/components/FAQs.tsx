@@ -31,9 +31,8 @@ export default function FAQs() {
               How do I create my first event?
             </h3>
             <p className="text-grey_100 text-base font-normal">
-              Sign up or log in, create your event with details and ticket
-              options, customize the page, publish it, and manage everything
-              from your dashboard.
+              To create an event, click the Create Event button and provide the
+              requested details.
             </p>
           </div>
         </div>
@@ -53,9 +52,8 @@ export default function FAQs() {
               What payment options are available?
             </h3>
             <p className="text-grey_100 text-base font-normal">
-              Sign up or log in, create your event with details and ticket
-              options, customize the page, publish it, and manage everything
-              from your dashboard.
+              Available payment options include card, transfer, USSD, and other
+              convenient methods.
             </p>
           </div>
         </div>
@@ -75,9 +73,9 @@ export default function FAQs() {
               Can I customize my ticket designs?
             </h3>
             <p className="text-grey_100 text-base font-normal">
-              Sign up or log in, create your event with details and ticket
-              options, customize the page, publish it, and manage everything
-              from your dashboard.
+              At the moment, you cannot customize the design for email. However,
+              your event details will be displayed in the ticket email sent to
+              attendees
             </p>
           </div>
         </div>
