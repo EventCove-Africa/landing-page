@@ -14,7 +14,7 @@ export default function WhyChooseUs() {
         <div className="relative w-full lg:w-1/2 flex justify-center">
           {/* Background Image */}
           <Image
-            src="/assets/images/offer_bg.svg"
+            src="/assets/images/whyChooseUs.svg"
             alt="Illustration showing an offer"
             width={593}
             height={402}

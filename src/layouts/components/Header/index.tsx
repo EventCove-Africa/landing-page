@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import toast from 'react-hot-toast';
 
 export default function Header() {
   return (
@@ -56,17 +57,17 @@ export default function Header() {
       </nav>
 
       {/* Call-to-Action Button */}
-      {/* <div className="ml-auto flex md:gap-5 gap-3 items-center">
+      <div className="ml-auto flex md:gap-5 gap-3 items-center">
         <button
           type="button"
           className="py-3 px-4 bg-primary_100 text-white rounded-xl text-sm font-medium hover:bg-primary_200 transition-colors"
-          // onClick={() => {
-          //   window.location.href = "/sign-up";
-          // }}
+          onClick={() => {
+            toast.success("COMING SOON...", { duration: 3000 });
+          }}
         >
           Sign up
         </button>
-      </div> */}
+      </div>
     </header>
   );
 }
