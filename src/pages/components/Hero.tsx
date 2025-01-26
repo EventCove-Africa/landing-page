@@ -58,7 +58,7 @@ export default function Hero() {
       <div className="w-full bg-background_100 relative flex justify-center h-full">
         {/* Main Hero Image */}
         <Image
-          src="/assets/images/hero_img.svg"
+          src="/assets/images/hero_img.png"
           alt="Illustration of event success tools"
           width={538}
           height={515}
