@@ -40,7 +40,7 @@ export default function Offer() {
       {/* Hero Image Section */}
       <div className="w-full relative flex justify-center">
         <Image
-          src="/assets/images/offer_bg.svg"
+          src="/assets/images/offer_bg.png"
           alt="Background image illustrating offer"
           width={593}
           height={402}
@@ -51,8 +51,8 @@ export default function Offer() {
         <Image
           src="/assets/images/calendar.svg"
           alt="Calendar illustration"
-          width={207.2}
-          height={273.81}
+          width={150}
+          height={200}
           className="object-contain absolute left-0 animate-zoomInOut"
           priority
           sizes="(max-width: 1024px) 50vw, 25vw"
