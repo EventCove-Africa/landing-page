@@ -11,12 +11,12 @@ const config: Config = {
     extend: {
       keyframes: {
         zoomInOut: {
-          '0%, 100%': { transform: 'translateY(0) scale(1)' },
-          '50%': { transform: 'translateY(10px) scale(1.1)' },
+          "0%, 100%": { transform: "translateY(0) scale(1)" },
+          "50%": { transform: "translateY(10px) scale(1.1)" },
         },
       },
       animation: {
-        zoomInOut: 'zoomInOut 3s ease-in-out infinite',
+        zoomInOut: "zoomInOut 3s ease-in-out infinite",
       },
       height: {
         "screen-minus-75": "calc(100vh - 75px)",
