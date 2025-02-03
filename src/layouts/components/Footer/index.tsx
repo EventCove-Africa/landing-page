@@ -46,7 +46,7 @@ export default function Footer() {
                 About us
               </li>
               <li className="text-sm font-normal text-dark_200 cursor-pointer hover:text-primary_100">
-                Event Attended
+                Events
               </li>
               <li className="text-sm font-normal text-dark_200 cursor-pointer hover:text-primary_100">
                 Contact Us

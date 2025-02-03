@@ -1,0 +1,97 @@
+import React from "react";
+import Image from "next/image";
+import CustomHead from "@/components/CustomHead";
+import dynamic from "next/dynamic";
+import Button from "@/components/FormComponents/Button";
+import DatePickerComponent from "@/components/FormComponents/DatePickerComponent";
+import SearchField from "@/components/FormComponents/SearchField";
+import SearchableSelect from "@/components/FormComponents/SearchableSelect";
+
+const LandingPageEvents = dynamic(
+  () => import("../components/LandingPageEvents"),
+  { ssr: false }
+);
+
+export default function EventsPage() {
+  return (
+    <div className="w-full container padding-spacing px-4 sm:px-6 lg:px-8">
+      <CustomHead title="EVENTCOVE - Events" />
+      {/* Responsive Image Container */}
+      <div className="relative w-full h-[250px] sm:h-[300px] md:h-[350px] mb-20">
+        <Image
+          src="/assets/images/events_bg.png"
+          alt="event bg"
+          fill
+          className="object-cover cursor-pointer rounded-xl"
+          priority
+        />
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-secondary_200 opacity-60 rounded-xl" />
+        <div className="h-full flex flex-col justify-center items-center gap-3">
+          <h3 className="text-white lg:text-4xl md:text-2xl text-xl font-bold z-50">
+            Our Culture Circuit
+          </h3>
+          <h5 className="text-white md:text-base text-sm font-bold z-50">
+            All The Feels
+          </h5>
+        </div>
+        {/* filter Options */}
+        <div className="absolute -bottom-8 rounded-xl left-8 right-8 bg-white min-h-[68px] h-auto md:flex hidden items-center justify-between px-4">
+          <div className="w-full">
+            <SearchableSelect />
+          </div>
+          <div className="w-full">
+            <DatePickerComponent />
+          </div>
+          <div className="w-full">
+            <SearchField />
+          </div>
+          <Button
+            backgroundColor="bg-primary_300"
+            textColor="text-primary_100"
+            title="Search"
+            type="button"
+          />
+        </div>
+      </div>
+      {/*Event Category */}
+      <div className="w-full h-full flex flex-col gap-2 mb-3">
+        <h3 className="text-base font-bold text-dark_200">
+          Explore by category
+        </h3>
+        <div className="w-full overflow-x-auto sm:overflow-visible">
+          <div className="flex gap-2 items-center py-2 flex-nowrap sm:flex-wrap">
+            {[
+              "Hype List 📆",
+              "EchoVerse 🌍🎤",
+              "Tribe 🏕️",
+              "Squad Play 🎮👾",
+              "Pulse Fest 🏃‍♂️🔥",
+              "LevelUp 🚀💼",
+              "Spirituality ⛪🧘‍♂️",
+              "LOL Fest 😂🔥",
+              "Paint & Chill 🖌️🧊",
+              "Food Fest 🍟🔥",
+            ].map((item, index) => (
+              <div
+                key={index}
+                className="bg-white min-w-max px-4 py-4 cursor-pointer hover:border border-primary_100 hover:bg-secondary_400 text-xs rounded-md shadow flex gap-1 items-center justify-center text-dark_400"
+              >
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="w-full h-full">
+        <LandingPageEvents title="Upcoming  Events" />
+      </div>
+      <div className="w-full h-full">
+        <LandingPageEvents title="Recommended Events" />
+      </div>
+      <div className="w-full h-full">
+        <LandingPageEvents title="All Other events" />
+      </div>
+    </div>
+  );
+}
