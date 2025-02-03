@@ -121,7 +121,7 @@ const EventCard: React.FC<{ event: (typeof allEvents)[0] }> = ({ event }) => {
 export default function Events({ title, showViewAll = false }: EventsProps) {
   const router = useRouter();
   return (
-    <section className="container mx-auto">
+    <section className="container mx-auto p-3">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-base font-bold text-dark_200">{title}</h3>
