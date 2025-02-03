@@ -3,18 +3,26 @@
 @import "slick-carousel/slick/slick.css";
 @import "slick-carousel/slick/slick-theme.css";
 
-* {
-  padding: 0px;
-  margin: 0px;
+html {
   box-sizing: border-box;
-  font-size: 100%;
-  font-family: 'Public Sans', sans-serif;
+  font-size: 16px; /* Explicit base font size */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background-color: #F1F5F8;
+  background-color: #f1f5f8;
+  font-family: 'Public Sans', sans-serif;
+  font-size: 1rem; /* Relative to the root size */
+  line-height: 1.5;
+  margin: 0;
 }
-
 .container {
     @apply max-w-screen-2xl mx-auto;
 }

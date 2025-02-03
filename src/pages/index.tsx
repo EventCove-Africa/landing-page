@@ -1,35 +1,37 @@
-import Head from "next/head";
 import dynamic from "next/dynamic";
+import CustomHead from "@/components/CustomHead";
 
-const Header = dynamic(() => import("../layouts/components/Header"), {
-  ssr: false,
-});
-const Footer = dynamic(() => import("../layouts/components/Footer"), {
-  ssr: false,
-});
 const Hero = dynamic(() => import("./components/Hero"), { ssr: false });
 const Offer = dynamic(() => import("./components/Offer"), { ssr: false });
-const WhyChooseUs = dynamic(() => import("./components/WhyChooseUs"), { ssr: false });
-const Testimonial = dynamic(() => import("./components/Testimonial"), { ssr: false });
+const LandingPageEvents = dynamic(
+  () => import("./components/LandingPageEvents"),
+  { ssr: false }
+);
+const WhyChooseUs = dynamic(() => import("./components/WhyChooseUs"), {
+  ssr: false,
+});
+const Testimonial = dynamic(() => import("./components/Testimonial"), {
+  ssr: false,
+});
 const FAQs = dynamic(() => import("./components/FAQs"), { ssr: false });
 
 export default function Home() {
   return (
     <>
-      <Head>
-        <title>EVENTCOVE</title>
-        <link rel="icon" href="/favicon.svg" />
-      </Head>
-
+      <CustomHead />
       <div className="scroll-smooth">
-        <div className="sticky top-0 w-full flex items-center h-[75px] z-50 bg-white">
-          <Header />
-        </div>
         <div className="w-full h-auto">
           <Hero />
-        </div> 
+        </div>
         <div className="w-full h-full">
           <Offer />
+        </div>
+        {/* Events */}
+        <div className="w-full h-full">
+          <LandingPageEvents title="Recommended Events" showViewAll />
+        </div>
+        <div className="w-full h-full">
+          <LandingPageEvents title="Upcoming  Events" showViewAll />
         </div>
         <div className="w-full h-full">
           <WhyChooseUs />
@@ -39,9 +41,6 @@ export default function Home() {
         </div>
         <div className="w-full h-full">
           <FAQs />
-        </div>
-        <div className="w-full h-full bg-white">
-          <Footer />
         </div>
       </div>
     </>

@@ -7,3 +7,10 @@ export function redirectUrls(route: string) {
     window.location.href = route;
   }
 }
+
+export function formatToNaira(amount: number): string {
+  if (isNaN(amount)) {
+    throw new Error("Invalid amount provided. Please provide a valid number.");
+  }
+  return `₦${amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+}
