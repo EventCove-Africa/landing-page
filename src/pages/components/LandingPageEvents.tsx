@@ -14,7 +14,7 @@ const allEvents = [
     isFree: true,
     location: "Eko Hotel, Lagos, Nigeria",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    date: "19th January",
+    date: "19th July",
     ticketsSold: "30 / 100",
     progress: "30",
     eventType: "upcoming",
@@ -25,34 +25,34 @@ const allEvents = [
     isFree: false,
     location: "Eko Hotel, Lagos, Nigeria",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    date: "19th January",
+    date: "19th August",
     ticketsSold: "10 / 100",
     progress: "50",
     eventType: "completed",
     isPublished: true,
   },
-  {
-    title: "Missoes",
-    isFree: true,
-    location: "Eko Hotel, Lagos, Nigeria",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    date: "19th January",
-    ticketsSold: "80 / 100",
-    progress: "80",
-    eventType: "cancelled",
-    isPublished: false,
-  },
-  {
-    title: "🎉 House Music Party 🎉",
-    isFree: false,
-    location: "Eko Hotel, Lagos, Nigeria",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    date: "19th January",
-    ticketsSold: "80 / 100",
-    progress: "80",
-    eventType: "cancelled",
-    isPublished: false,
-  },
+  // {
+  //   title: "Missoes",
+  //   isFree: true,
+  //   location: "Eko Hotel, Lagos, Nigeria",
+  //   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  //   date: "19th January",
+  //   ticketsSold: "80 / 100",
+  //   progress: "80",
+  //   eventType: "cancelled",
+  //   isPublished: false,
+  // },
+  // {
+  //   title: "🎉 House Music Party 🎉",
+  //   isFree: false,
+  //   location: "Eko Hotel, Lagos, Nigeria",
+  //   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  //   date: "19th January",
+  //   ticketsSold: "80 / 100",
+  //   progress: "80",
+  //   eventType: "cancelled",
+  //   isPublished: false,
+  // },
 ];
 
 type EventsProps = {
@@ -77,7 +77,7 @@ const EventCard: React.FC<{ event: (typeof allEvents)[0] }> = ({ event }) => {
           style={{ aspectRatio: (323.11 / 203.61).toString() }}
         >
           <Image
-            src="/assets/images/upcoming_event_bg2.png"
+            src={`https://picsum.photos/300/300?${new Date().getTime()}`}
             alt={`Event banner for ${title}`}
             fill
             sizes="(max-width: 768px) 100vw, 323.11px"

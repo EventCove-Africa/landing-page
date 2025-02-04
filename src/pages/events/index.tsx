@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import CustomHead from "@/components/CustomHead";
 import dynamic from "next/dynamic";
@@ -13,6 +13,7 @@ const LandingPageEvents = dynamic(
 );
 
 export default function EventsPage() {
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   return (
     <div className="w-full container padding-spacing px-4 sm:px-6 lg:px-8">
       <CustomHead title="EVENTCOVE - Events" />
@@ -62,20 +63,25 @@ export default function EventsPage() {
         <div className="w-full overflow-x-auto sm:overflow-visible">
           <div className="flex gap-2 items-center py-2 flex-nowrap sm:flex-wrap">
             {[
-              "Hype List 📆",
-              "EchoVerse 🌍🎤",
-              "Tribe 🏕️",
-              "Squad Play 🎮👾",
-              "Pulse Fest 🏃‍♂️🔥",
-              "LevelUp 🚀💼",
-              "Spirituality ⛪🧘‍♂️",
-              "LOL Fest 😂🔥",
-              "Paint & Chill 🖌️🧊",
+              // "Hype List 📆",
+              "Conference/Webinar 🌍🎤",
+              // "Tribe 🏕️",
+              // "Squad Play 🎮👾",
+              "Party / Birthday 🏃‍♂️🔥",
+              // "LevelUp 🚀💼",
+              "Religious / Spirituality ⛪🧘‍♂️",
+              "Comedy / LOL Fest 😂🔥",
+              // "Paint & Chill 🖌️🧊",
               "Food Fest 🍟🔥",
             ].map((item, index) => (
               <div
                 key={index}
-                className="bg-white min-w-max px-4 py-4 cursor-pointer hover:border border-primary_100 hover:bg-secondary_400 text-xs rounded-md shadow flex gap-1 items-center justify-center text-dark_400"
+                onClick={() => setSelectedCategory(item)}
+                className={`bg-white min-w-max px-4 py-4 cursor-pointer hover:border border-primary_100 ${
+                  selectedCategory === item
+                    ? "border border-primary_100 bg-secondary_400"
+                    : null
+                }  hover:bg-secondary_400 text-xs rounded-md shadow flex gap-1 items-center justify-center text-dark_400`}
               >
                 {item}
               </div>
