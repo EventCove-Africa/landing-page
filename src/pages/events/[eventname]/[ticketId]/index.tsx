@@ -24,6 +24,10 @@ export default function TicketId() {
     email: Yup.string()
       .email("Invalid email address")
       .required("Email is required"),
+    confirm_email: Yup.string()
+      .email("Invalid email address")
+      .oneOf([Yup.ref("email")], "Email must match")
+      .required("Confirm email is required...."),
     location: Yup.mixed().required("Location is required"),
     phone_number: Yup.string().required("Phone number is required"),
     agreement: Yup.boolean()
@@ -43,6 +47,7 @@ export default function TicketId() {
             email: "",
             location: "",
             phone_number: "",
+            confirm_email: "",
             agreement: false,
           }}
           enableReinitialize
@@ -94,6 +99,18 @@ export default function TicketId() {
                   </div>
                   <div className="mb-2">
                     <TextInputField
+                      labelName="Confirm email"
+                      name="confirm_email"
+                      handleChange={handleChange}
+                      type="email"
+                      placeholder=""
+                      value={values.confirm_email}
+                      errors={errors?.confirm_email}
+                      touched={touched?.confirm_email}
+                    />
+                  </div>
+                  <div className="mb-2">
+                    <TextInputField
                       labelName="Location"
                       name="location"
                       handleChange={handleChange}
@@ -109,7 +126,7 @@ export default function TicketId() {
                       labelName="Phone number"
                       name="phone_number"
                       handleChange={handleChange}
-                      type="text"
+                      type="tel"
                       placeholder=""
                       value={values.phone_number}
                       errors={errors?.phone_number}
