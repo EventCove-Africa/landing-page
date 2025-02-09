@@ -77,11 +77,11 @@ export default function EventsPage() {
               <div
                 key={index}
                 onClick={() => setSelectedCategory(item)}
-                className={`bg-white min-w-max px-4 py-4 cursor-pointer hover:border border-primary_100 ${
+                className={`min-w-max px-4 py-4 cursor-pointer hover:border border-primary_100 ${
                   selectedCategory === item
                     ? "border border-primary_100 bg-secondary_400"
-                    : null
-                }  hover:bg-secondary_400 text-xs rounded-md shadow flex gap-1 items-center justify-center text-dark_400`}
+                    : 'bg-white'
+                } hover:bg-secondary_400 text-xs rounded-md shadow flex gap-1 items-center justify-center text-dark_400`}
               >
                 {item}
               </div>
