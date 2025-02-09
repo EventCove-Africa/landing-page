@@ -4,11 +4,17 @@ import { motion, AnimatePresence } from "framer-motion";
 
 interface ModalPopupProps {
   isOpen: boolean;
+  backdropFilter?: string;
   closeModal?: () => void;
   children: React.ReactNode;
 }
 
-const ModalPopup: React.FC<ModalPopupProps> = ({ children, isOpen, closeModal }) => {
+const ModalPopup: React.FC<ModalPopupProps> = ({
+  children,
+  isOpen,
+  backdropFilter = "2px",
+  closeModal,
+}) => {
   const [isExiting, setIsExiting] = useState(false);
   const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
 
@@ -42,7 +48,7 @@ const ModalPopup: React.FC<ModalPopupProps> = ({ children, isOpen, closeModal })
           transition={{ duration: 0.3, ease: "easeInOut" }}
           onAnimationComplete={handleAnimationComplete}
           className="fixed inset-0 bg-MODAL_BACKGROUND flex items-center justify-center z-[9999] p-4"
-          style={{ backdropFilter: "blur(2px)" }}
+          style={{ backdropFilter: `blur(${backdropFilter})` }}
         >
           <motion.div
             onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the modal content

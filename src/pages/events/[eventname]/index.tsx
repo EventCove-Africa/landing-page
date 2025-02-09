@@ -11,9 +11,12 @@ import { FaChalkboardTeacher } from "react-icons/fa";
 import { FiMinus } from "react-icons/fi";
 import { FaPlus } from "react-icons/fa6";
 import Button from "@/components/FormComponents/Button";
+import ModalPopup from "@/components/ModalPopup";
+import PrivatePassCode from "./components/PrivatePassCode";
 
 export default function EventName() {
   const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
   const { eventname } = router.query;
   const [count, setCount] = useState(1);
 
@@ -181,6 +184,13 @@ export default function EventName() {
           </div>
         </div>
       </div>
+      <ModalPopup
+        backdropFilter="30px"
+        isOpen={isOpen}
+        closeModal={() => setIsOpen(!isOpen)}
+      >
+        <PrivatePassCode closeModal={() => setIsOpen(!isOpen)} />
+      </ModalPopup>
     </>
   );
 }
