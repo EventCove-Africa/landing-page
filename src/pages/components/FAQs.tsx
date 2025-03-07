@@ -30,11 +30,11 @@ export default function FAQs() {
 
   return (
     <section
-      className="container py-16 w-full flex flex-col lg:flex-row lg:justify-between gap-10"
+      className="container md:py-16 py-8 w-full flex flex-col lg:flex-row lg:justify-between gap-10 px-3"
       aria-labelledby="faq-section-title"
       id="faqs"
     >
-      <div className="w-[40%]">
+      <div className="md:w-[40%] w-full">
         <h1
           id="faq-section-title"
           className="text-dark_200 font-medium text-2xl md:text-5xl"
@@ -42,7 +42,7 @@ export default function FAQs() {
           Got Questions? We&apos;ve Got Answers
         </h1>
       </div>
-      <div className="w-[60%] flex flex-col gap-6">
+      <div className="md:w-[60%] w-full flex flex-col gap-6">
         {faqs.map(({ id, question, answer }, index) => {
           const isOpen = openIndex === index;
           return (

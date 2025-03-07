@@ -1,4 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from "react";
+// useEffect,
 import Image from "next/image";
 import CustomHead from "@/components/CustomHead";
 import dynamic from "next/dynamic";
@@ -6,6 +8,8 @@ import Button from "@/components/FormComponents/Button";
 import DatePickerComponent from "@/components/FormComponents/DatePickerComponent";
 import SearchField from "@/components/FormComponents/SearchField";
 import SearchableSelect from "@/components/FormComponents/SearchableSelect";
+// import useEventsHook from "@/hooks/useEventsHook";
+// import SkeletonLoader from "@/components/SkeletonLoader";
 
 const LandingPageEvents = dynamic(
   () => import("../components/LandingPageEvents"),
@@ -14,6 +18,24 @@ const LandingPageEvents = dynamic(
 
 export default function EventsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  // const { fetchEventCategories, categories, loadingEventDetails } =
+  //   useEventsHook();
+
+  // console.log(categories);
+
+  // useEffect(() => {
+  //   let mounted = false;
+  //   (async () => {
+  //     mounted = true;
+  //     if (mounted) {
+  //       fetchEventCategories();
+  //     }
+  //   })();
+  //   return () => {
+  //     mounted = false;
+  //   };
+  // }, []);
+
   return (
     <div className="w-full container padding-spacing px-4 sm:px-6 lg:px-8">
       <CustomHead title="EVENTCOVE - Events" />
@@ -61,6 +83,11 @@ export default function EventsPage() {
           Explore by category
         </h3>
         <div className="w-full overflow-x-auto sm:overflow-visible">
+          {/* {loadingEventDetails?.category && (
+            <div className="grid grid-cols-4 gap-3">
+              <SkeletonLoader count={4} className="h-[50px]" />
+            </div>
+          )} */}
           <div className="flex gap-2 items-center py-2 flex-nowrap sm:flex-wrap">
             {[
               // "Hype List 📆",
@@ -80,7 +107,7 @@ export default function EventsPage() {
                 className={`min-w-max px-4 py-4 cursor-pointer hover:border border-primary_100 ${
                   selectedCategory === item
                     ? "border border-primary_100 bg-secondary_400"
-                    : 'bg-white'
+                    : "bg-white"
                 } hover:bg-secondary_400 text-xs rounded-md shadow flex gap-1 items-center justify-center text-dark_400`}
               >
                 {item}
