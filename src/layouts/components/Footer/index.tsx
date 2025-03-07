@@ -58,7 +58,7 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="container py-16">
+      <footer className="container py-16 px-3">
         <div className="flex flex-col lg:flex-row gap-20">
           <div className="lg:w-2/5 flex flex-col gap-4">
             <Image

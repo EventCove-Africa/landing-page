@@ -2,7 +2,11 @@
 import { FormEvent } from "react";
 
 export interface apiUrlsType {
-  LOGIN_URL: string;
+  EVENT_URL: string;
+  LOCATIONS_URL: string;
+  TICKET_URL: string;
+  TICKET_TYPE_URL: string;
+  EVENT_TICKET_SALES_URL: string;
 }
 
 export interface ButtonProps {
