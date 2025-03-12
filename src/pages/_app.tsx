@@ -11,7 +11,12 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Layout>
-        <Toaster />
+        <Toaster
+          toastOptions={{
+            duration: 4000,
+            className: "z-[9999]",
+          }}
+        />
         <AnimatePresence mode="wait">
           <motion.div
             key={router.route} // Use the route as a unique key to trigger animation on route change

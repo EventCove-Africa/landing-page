@@ -1,78 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import useLocationHook from "@/hooks/useLocationHook";
+import { EventsPageSearchQueryProps } from "@/pages/events";
 import React, { useState, useRef, useEffect } from "react";
 import { CiLocationArrow1 } from "react-icons/ci"; // Assuming you have this icon installed
 
-const SearchableSelect = () => {
+const SearchableSelect = ({ setQueryParams }: EventsPageSearchQueryProps) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const { cities, loading } = useLocationHook();
 
   // Ref to handle clicks outside of the dropdown
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
-
-  // Sample list of cities
-  const cities = [
-    "Abuja",
-    "Lagos",
-    "Kano",
-    "Port Harcourt",
-    "Ibadan",
-    "Benin City",
-    "Maiduguri",
-    "Kaduna",
-    "Zaria",
-    "Aba",
-    "Jos",
-    "Ilorin",
-    "Oyo",
-    "Enugu",
-    "Onitsha",
-    "Warri",
-    "Uyo",
-    "Asaba",
-    "Sokoto",
-    "Abeokuta",
-    "Yola",
-    "Abakaliki",
-    "Makurdi",
-    "Katsina",
-    "Calabar",
-    "Lafia",
-    "Gombe",
-    "Minna",
-    "Damaturu",
-    "Keffi",
-    "Ekiti",
-    "Ilesa",
-    "Akure",
-    "Ogun",
-    "Nsukka",
-    "Nnewi",
-    "Owerri",
-    "Shagamu",
-    "Orlu",
-    "Kano",
-    "Suleja",
-    "Ogun State",
-    "Kogi",
-    "Ekiti State",
-    "Mubi",
-    "Bauchi",
-    "Bida",
-    "Uromi",
-    "Kabba",
-    "Jalingo",
-    "Lagos Island",
-    "Lekki",
-    "Festac Town",
-    "Victoria Island",
-    "Surulere",
-    "Ikeja",
-    "Apapa",
-    "Mushin",
-    "Ikorodu",
-    "Badagry",
-  ];
 
   // Filter cities based on search query
   const filteredCities = cities.filter((city) =>
@@ -109,7 +49,7 @@ const SearchableSelect = () => {
         onClick={handleDivClick}
       >
         <CiLocationArrow1 className="text-grey_100 w-[16px] h-[16px]" />
-        {selectedCity ? selectedCity : "City"}
+        {selectedCity ? selectedCity : loading ? "Loading...." : "States"}
       </div>
 
       {/* Only show the input and dropdown when the user clicks the div */}
@@ -132,6 +72,7 @@ const SearchableSelect = () => {
                     key={city}
                     className="p-2 cursor-pointer hover:bg-primary_100 hover:text-white"
                     onClick={() => {
+                      setQueryParams((prev: any) => ({ ...prev, city }));
                       setSelectedCity(city);
                       setIsDropdownVisible(false); // Close dropdown after selection
                     }}

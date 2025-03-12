@@ -7,6 +7,8 @@ export interface apiUrlsType {
   TICKET_URL: string;
   TICKET_TYPE_URL: string;
   EVENT_TICKET_SALES_URL: string;
+  RESERVE_TICKET_URL: string;
+  INITIATE_TICKET_URL: string;
 }
 
 export interface ButtonProps {

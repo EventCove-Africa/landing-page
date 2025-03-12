@@ -25,7 +25,7 @@ export const useContactSupport = () => {
               alt="info"
               width={70}
               height={70}
-              className="w-[70px] h-[70px]"
+              // className="w-[70px] h-[70px]"
               priority
             />
           </div>

@@ -1,0 +1,144 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { FaChalkboardTeacher } from "react-icons/fa";
+import { FiMinus } from "react-icons/fi";
+import { formatToNaira, isObjectEmpty, setDataINCookies } from "@/utils";
+import { FaPlus } from "react-icons/fa6";
+import Button from "@/components/FormComponents/Button";
+import SkeletonLoader from "@/components/SkeletonLoader";
+import { ticketDetailsProps } from "@/hooks/useEventsHook";
+
+type TicketsDetailsProps = {
+  eventId: string;
+  loadingEventDetails: any;
+  allEventTickets: any;
+};
+
+export default function TicketsDetails({
+  eventId,
+  allEventTickets,
+  loadingEventDetails,
+}: TicketsDetailsProps) {
+  const router = useRouter();
+  const [count, setCount] = useState(1);
+  const [selectedTicket, setSelectedTicket] = useState<any>({});
+  const isNotGroup = selectedTicket?.classification?.toLowerCase() !== "group";
+  const isSelectedTicketEmpty = !isObjectEmpty(selectedTicket);
+  const selectedTicketPrice = selectedTicket?.price;
+  const ticketType = selectedTicket?.ticketType;
+
+  const increment = () => setCount((prev) => Math.min(5, prev + 1));
+  const decrement = () => setCount((prev) => Math.max(1, prev - 1));
+
+  useEffect(() => {
+    let mounted = false;
+    (async () => {
+      mounted = true;
+      if (mounted && !isNotGroup) {
+        setCount(1);
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
+  }, [isNotGroup]);
+
+  return (
+    <>
+      <div className="bg-white w-full rounded-xl h-fit p-3">
+        <h3 className="text-sm font-normal text-dark_200">Select a Ticket</h3>
+        <div className="grid md:grid-cols-3 grid-cols-1 gap-3 mt-4">
+          {loadingEventDetails?.tickets && (
+            <SkeletonLoader count={3} className="h-[100px]" />
+          )}
+          {!loadingEventDetails?.tickets &&
+            allEventTickets.map(
+              ({
+                ticketType,
+                colour,
+                classification,
+                ticketId,
+                perks,
+                price,
+                validatedCount,
+                soldCount,
+                capacity,
+                salesEndDate,
+              }: ticketDetailsProps) => (
+                <div
+                  key={ticketId}
+                  onClick={() =>
+                    setSelectedTicket({
+                      perks,
+                      price,
+                      ticketId,
+                      ticketType,
+                      validatedCount,
+                      soldCount,
+                      capacity,
+                      salesEndDate,
+                      colour,
+                      classification,
+                    })
+                  }
+                  className={`bg-grey_500 hover:border border-primary_100 ${
+                    selectedTicket?.ticketId === ticketId ? "border" : ""
+                  } cursor-pointer rounded-md p-2 flex flex-col justify-between`}
+                >
+                  <div className="flex gap-2 items-center">
+                    <div className="rounded-full bg-[#EEEEFF] p-3 flex justify-center items-center">
+                      <FaChalkboardTeacher className="w-[20px] h-[20px] text-blue_400" />
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      <h3 className="text-grey_100 text-xs font-normal">
+                        {ticketType}
+                      </h3>
+                      <h5 className="text-dark_200 font-normal md:text-base text-sm">
+                        {formatToNaira(price)}
+                      </h5>
+                    </div>
+                  </div>
+                </div>
+              )
+            )}
+        </div>
+        <div className="flex flex-col gap-3 mt-5">
+          {isSelectedTicketEmpty && isNotGroup && (
+            <>
+              <h4 className="text-grey_100 text-sm font-normal">Quantity</h4>
+              <div className="flex items-center gap-3">
+                <div
+                  onClick={decrement}
+                  className="bg-grey_1000 rounded-full cursor-pointer p-3"
+                >
+                  <FiMinus className="text-grey_100 text-xs font-semibold" />
+                </div>
+                <span className="text-dark_200 font-semibold text-sm">
+                  {count}
+                </span>
+                <div
+                  onClick={increment}
+                  className="bg-grey_1000 rounded-full cursor-pointer p-3"
+                >
+                  <FaPlus className="text-grey_100 text-xs font-semibold" />
+                </div>
+              </div>
+            </>
+          )}
+          {isSelectedTicketEmpty && (
+            <Button
+              onClick={() => {
+                setDataINCookies({ selectedTicketPrice, count, ticketType });
+                router.push(`/events/${eventId}/${selectedTicket?.ticketId}`);
+              }}
+              title="Get Ticket"
+              type="button"
+              className="md:w-[20%] w-full"
+            />
+          )}
+        </div>
+      </div>
+    </>
+  );
+}
