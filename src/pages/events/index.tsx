@@ -44,7 +44,6 @@ export default function EventsPage() {
 
   const handleEventsSearch = () => {
     if (!queryParams) {
-      console.error("queryParams is undefined");
       return;
     }
     const queryParts: string[] = [];
