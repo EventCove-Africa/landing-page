@@ -54,7 +54,12 @@ export default function EventsPage() {
     if (queryParams.date) {
       const date = new Date(queryParams.date);
       if (!isNaN(date.getTime())) {
-        const formattedDate = date.toISOString().split("T")[0];
+        const formattedDate =
+          date.getFullYear() +
+          "-" +
+          String(date.getMonth() + 1).padStart(2, "0") +
+          "-" +
+          String(date.getDate()).padStart(2, "0");
         queryParts.push(`date=${formattedDate}`);
       } else {
         console.error("Invalid date format:", queryParams.date);

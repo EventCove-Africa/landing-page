@@ -28,8 +28,23 @@ type ReserveTransactionProps = {
   email: string;
   numberOfTickets: number;
   ticketType: string;
-  eventReference: string;
-  ticketTypeReference: string;
+  eventId: string;
+  ticketTypeId: string;
+};
+
+type IntiateTransactionProps = {
+  email: string;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  numberOfTickets: number;
+  city: string;
+  totalAmount: number;
+  ticketType: string;
+  eventId: string;
+  ticketTypeId: string;
+  emailValidated: boolean;
+  termsAndConditionsAccepted: boolean;
 };
 
 export default function TicketId() {
@@ -62,16 +77,18 @@ export default function TicketId() {
   });
 
   const handleReserveTransaction = async (
-    payload: ReserveTransactionProps,
+    reservePayloadTicket: ReserveTransactionProps,
+    initiatePayloadTicket: IntiateTransactionProps,
     actions: FormikHelpers<any>
   ) => {
     try {
-      const res = await api.post(appUrls.RESERVE_TICKET_URL, payload);
+      const res = await api.post(
+        appUrls.RESERVE_TICKET_URL,
+        reservePayloadTicket
+      );
       const status_code = [200, 201].includes(res?.status);
       if (status_code) {
-        // actions.resetForm();
-        // setIsOpen(!isOpen);
-        handleInitiateTransaction(payload, actions);
+        handleInitiateTransaction(initiatePayloadTicket, actions);
       }
     } catch (error: any) {
       const err_message = _handleThrowErrorMessage(error?.data?.message);
@@ -149,23 +166,34 @@ export default function TicketId() {
               location,
               termsAndConditionsAccepted,
             } = values;
-            const payload = {
+            
+            const reservePayloadTicket = {
               email,
               numberOfTickets: QTY,
               ticketType,
-              eventReference: eventId,
-              ticketTypeReference: ticketId,
+              eventId,
+              ticketTypeId: ticketId,
+            };
+            const initiatePayloadTicket = {
+              email,
               firstName,
               lastName,
               phoneNumber,
+              numberOfTickets: QTY,
               city: location,
               totalAmount: price * QTY,
+              ticketType,
               eventId,
               ticketTypeId: ticketId,
               emailValidated: true,
               termsAndConditionsAccepted: termsAndConditionsAccepted,
             };
-            handleReserveTransaction(payload, actions);
+
+            handleReserveTransaction(
+              reservePayloadTicket,
+              initiatePayloadTicket,
+              actions
+            );
           }}
         >
           {({
