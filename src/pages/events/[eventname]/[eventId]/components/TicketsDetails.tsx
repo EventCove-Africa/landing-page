@@ -13,12 +13,14 @@ type TicketsDetailsProps = {
   eventId: string;
   loadingEventDetails: any;
   allEventTickets: any;
+  eventDetails: any;
 };
 
 export default function TicketsDetails({
   eventId,
   allEventTickets,
   loadingEventDetails,
+  eventDetails,
 }: TicketsDetailsProps) {
   const router = useRouter();
   const [count, setCount] = useState(1);
@@ -130,7 +132,9 @@ export default function TicketsDetails({
             <Button
               onClick={() => {
                 setDataINCookies({ selectedTicketPrice, count, ticketType });
-                router.push(`/events/${eventId}/${selectedTicket?.ticketId}`);
+                router.push(
+                  `/events/${eventDetails?.eventName}/${eventId}/${selectedTicket?.ticketId}`
+                );
               }}
               title="Get Ticket"
               type="button"

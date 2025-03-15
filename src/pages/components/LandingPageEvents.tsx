@@ -54,7 +54,7 @@ const EventCard: React.FC<{ event: allEventsProps }> = ({ event }) => {
   return (
     <article
       className="bg-white shadow rounded-lg p-3 cursor-pointer"
-      onClick={() => router.push(`/events/${eventId}`)}
+      onClick={() => router.push(`/events/${eventName}/${eventId}`)}
       id="event"
     >
       {/* Image container with fixed aspect ratio */}
