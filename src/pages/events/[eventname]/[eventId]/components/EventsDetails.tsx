@@ -15,14 +15,14 @@ export default function EventsDetails({
     <>
       <div className="w-full relative">
         {eventDetails?.eventImageUrl ? (
-         <Image
-         src={eventDetails?.eventImageUrl}
-         alt="event banner"
-         width={700} // Increase width
-         height={600} // Increase height
-         quality={100}
-         className="object-cover rounded-xl w-full h-[200px] sm:h-[300px] md:h-[300px] lg:h-[300px] xl:h-[300px]"
-       />
+          <Image
+            src={eventDetails?.eventImageUrl}
+            alt="event banner"
+            width={700} // Increase width
+            height={600} // Increase height
+            quality={100}
+            className="object-cover rounded-xl w-full h-[200px] sm:h-[300px] md:h-[300px] lg:h-[300px] xl:h-[300px]"
+          />
         ) : null}
       </div>
       <div className="flex flex-col gap-1 w-full mt-4">

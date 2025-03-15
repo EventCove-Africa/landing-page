@@ -67,7 +67,7 @@ const EventCard: React.FC<{ event: allEventsProps }> = ({ event }) => {
             alt={`Event banner for ${eventName}`}
             fill
             sizes="(max-width: 768px) 100vw, 323.11px"
-            className="object-cover"
+            className="object-fit"
             priority
           />
         </div>
