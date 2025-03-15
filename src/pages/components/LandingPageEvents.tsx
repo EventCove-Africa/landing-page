@@ -173,7 +173,7 @@ export default function Events({
       {/* Event Cards Grid */}
       <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {renderSkeletonLoaderForEventDetails()}
-        {!loadingEventDetails?.all_events && (
+        {!loadingEventDetails?.all_events && isArrayEmpty(filteredEvents) && (
           <>
             {filteredEvents.slice(0, endingIndex).map((event, index) => (
               <EventCard key={`event-${index}`} event={event} />
@@ -183,7 +183,7 @@ export default function Events({
       </div>
       {!loadingEventDetails?.all_events && (
         <div className="w-full flex justify-center items-center">
-          {isArrayEmpty(filteredEvents) && (
+          {!isArrayEmpty(filteredEvents) && (
             <Image
               width={250}
               height={300}
