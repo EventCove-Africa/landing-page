@@ -54,56 +54,57 @@ export default function TicketsDetails({
           {loadingEventDetails?.tickets && (
             <SkeletonLoader count={3} className="h-[100px]" />
           )}
-          {!loadingEventDetails?.tickets &&
-            allEventTickets.map(
-              ({
-                ticketType,
-                colour,
-                classification,
-                ticketId,
-                perks,
-                price,
-                validatedCount,
-                soldCount,
-                capacity,
-                salesEndDate,
-              }: ticketDetailsProps) => (
-                <div
-                  key={ticketId}
-                  onClick={() =>
-                    setSelectedTicket({
-                      perks,
-                      price,
-                      ticketId,
-                      ticketType,
-                      validatedCount,
-                      soldCount,
-                      capacity,
-                      salesEndDate,
-                      colour,
-                      classification,
-                    })
-                  }
-                  className={`bg-grey_500 hover:border border-primary_100 ${
-                    selectedTicket?.ticketId === ticketId ? "border" : ""
-                  } cursor-pointer rounded-md p-2 flex flex-col justify-between`}
-                >
-                  <div className="flex gap-2 items-center">
-                    <div className="rounded-full bg-[#EEEEFF] p-3 flex justify-center items-center">
-                      <FaChalkboardTeacher className="w-[20px] h-[20px] text-blue_400" />
-                    </div>
-                    <div className="flex flex-col gap-1">
-                      <h3 className="text-grey_100 text-xs font-normal">
-                        {ticketType}
-                      </h3>
-                      <h5 className="text-dark_200 font-normal md:text-base text-sm">
-                        {formatToNaira(price)}
-                      </h5>
+          {!loadingEventDetails?.tickets && Array.isArray(allEventTickets)
+            ? allEventTickets?.map(
+                ({
+                  ticketType,
+                  colour,
+                  classification,
+                  ticketId,
+                  perks,
+                  price,
+                  validatedCount,
+                  soldCount,
+                  capacity,
+                  salesEndDate,
+                }: ticketDetailsProps) => (
+                  <div
+                    key={ticketId}
+                    onClick={() =>
+                      setSelectedTicket({
+                        perks,
+                        price,
+                        ticketId,
+                        ticketType,
+                        validatedCount,
+                        soldCount,
+                        capacity,
+                        salesEndDate,
+                        colour,
+                        classification,
+                      })
+                    }
+                    className={`bg-grey_500 hover:border border-primary_100 ${
+                      selectedTicket?.ticketId === ticketId ? "border" : ""
+                    } cursor-pointer rounded-md p-2 flex flex-col justify-between`}
+                  >
+                    <div className="flex gap-2 items-center">
+                      <div className="rounded-full bg-[#EEEEFF] p-3 flex justify-center items-center">
+                        <FaChalkboardTeacher className="w-[20px] h-[20px] text-blue_400" />
+                      </div>
+                      <div className="flex flex-col gap-1">
+                        <h3 className="text-grey_100 text-xs font-normal">
+                          {ticketType}
+                        </h3>
+                        <h5 className="text-dark_200 font-normal md:text-base text-sm">
+                          {formatToNaira(price)}
+                        </h5>
+                      </div>
                     </div>
                   </div>
-                </div>
+                )
               )
-            )}
+            : null}
         </div>
         <div className="flex flex-col gap-3 mt-5">
           {isSelectedTicketEmpty && isNotGroup && (
