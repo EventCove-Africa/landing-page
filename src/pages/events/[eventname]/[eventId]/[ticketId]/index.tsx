@@ -166,7 +166,7 @@ export default function TicketId() {
               location,
               termsAndConditionsAccepted,
             } = values;
-            
+
             const reservePayloadTicket = {
               email,
               numberOfTickets: QTY,
@@ -342,7 +342,7 @@ export default function TicketId() {
                   </div>
                   <div>
                     <Button
-                      title="Proceed to Payment"
+                      title={`${price ? "Proceed to Payment" : "Proceed"}`}
                       className="h-[40px] text-center my-6 border border-dark_200"
                       type="submit"
                       isLoading={isSubmitting}
