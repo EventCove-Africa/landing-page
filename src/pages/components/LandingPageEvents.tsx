@@ -54,7 +54,7 @@ const EventCard: React.FC<{ event: allEventsProps }> = ({ event }) => {
   return (
     <article
       className="bg-white shadow rounded-lg p-3 cursor-pointer"
-      onClick={() => router.push(`/events/${eventId}`)}
+      onClick={() => router.push(`/events/${eventName}/${eventId}`)}
       id="event"
     >
       {/* Image container with fixed aspect ratio */}
@@ -67,7 +67,7 @@ const EventCard: React.FC<{ event: allEventsProps }> = ({ event }) => {
             alt={`Event banner for ${eventName}`}
             fill
             sizes="(max-width: 768px) 100vw, 323.11px"
-            className="object-cover"
+            className="object-fit"
             priority
           />
         </div>
@@ -173,7 +173,7 @@ export default function Events({
       {/* Event Cards Grid */}
       <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {renderSkeletonLoaderForEventDetails()}
-        {!loadingEventDetails?.all_events && (
+        {!loadingEventDetails?.all_events && isArrayEmpty(filteredEvents) && (
           <>
             {filteredEvents.slice(0, endingIndex).map((event, index) => (
               <EventCard key={`event-${index}`} event={event} />
@@ -183,7 +183,7 @@ export default function Events({
       </div>
       {!loadingEventDetails?.all_events && (
         <div className="w-full flex justify-center items-center">
-          {isArrayEmpty(filteredEvents) && (
+          {!isArrayEmpty(filteredEvents) && (
             <Image
               width={250}
               height={300}

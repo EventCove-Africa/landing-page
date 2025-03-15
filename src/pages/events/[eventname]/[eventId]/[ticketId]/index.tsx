@@ -144,7 +144,7 @@ export default function TicketId() {
     <>
       <CustomHead title={`EVENTCOVE - ${eventId} - ${ticketId}`} />
       <div className="container padding-spacing w-full h-full">
-        <DescriptionBar text="Get the full picture of your event 🌟" />
+        <DescriptionBar text="Ticket purchase 🌟" />
         <Formik
           validationSchema={registerTicketSchema}
           initialValues={{

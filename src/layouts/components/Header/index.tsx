@@ -24,7 +24,7 @@ export default function Header() {
 
   const navLinks = [
     { id: "about-us", label: "About Us" },
-    { id: "event", label: "Event" },
+    { id: "event", label: "Events", action: () => router.push("/events") },
     { id: "faqs", label: "FAQs" },
     { id: "contact-us", label: "Contact Us", action: handleOpenClose },
   ];

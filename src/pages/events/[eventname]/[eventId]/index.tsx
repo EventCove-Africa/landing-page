@@ -72,6 +72,7 @@ export default function EventDetails() {
           </div>
           <TicketsDetails
             allEventTickets={allEventTickets}
+            eventDetails={eventDetails}
             loadingEventDetails={loadingEventDetails}
             eventId={eventId}
           />
