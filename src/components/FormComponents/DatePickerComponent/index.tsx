@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { EventsPageSearchQueryProps } from "@/pages/events";
 import dynamic from "next/dynamic";
 import { useState, useRef, useEffect } from "react";
 import { CiCalendar } from "react-icons/ci";
@@ -11,7 +12,7 @@ const DatePicker = dynamic(
   }
 ) as React.ComponentType<any>;
 
-const DatePickerComponent = () => {
+const DatePickerComponent = ({ setQueryParams }: EventsPageSearchQueryProps) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const datePickerRef = useRef<HTMLDivElement | null>(null);
@@ -51,7 +52,8 @@ const DatePickerComponent = () => {
         <div className="absolute top-10 left-0 z-50">
           <DatePicker
             selected={selectedDate}
-            onChange={(date: Date | null) => {
+            onChange={(date: any) => {
+              setQueryParams((prev: any) => ({ ...prev, date }));
               setSelectedDate(date);
               setIsOpen(false);
             }}

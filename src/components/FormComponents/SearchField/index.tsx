@@ -1,11 +1,14 @@
-import { useState } from 'react';
-import { IoIosSearch } from 'react-icons/io';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { EventsPageSearchQueryProps } from "@/pages/events";
+import { useState } from "react";
+import { IoIosSearch } from "react-icons/io";
 
-const SearchField: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState<string>('');
+const SearchField = ({ setQueryParams }: EventsPageSearchQueryProps) => {
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
+    setQueryParams((prev: any) => ({ ...prev, eventName: e.target.value }));
   };
 
   return (

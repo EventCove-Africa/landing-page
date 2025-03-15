@@ -6,22 +6,19 @@ import { LuBadgeCheck } from "react-icons/lu";
 
 type InfoModalProps = {
   closeModal: () => void;
+  info?: string
 };
 
-export default function InfoModal({ closeModal }: InfoModalProps) {
+export default function InfoModal({ closeModal, info = '' }: InfoModalProps) {
   const router = useRouter();
   return (
     <div className="md:w-[458px] w-full h-auto bg-white rounded-xl px-3 py-4">
-      {/* <div className="w-full flex justify-end">
-        <IoIosCloseCircle className="w-[24px] h-[24px] cursor-pointer" />
-      </div> */}
       <div className="w-full flex justify-center">
         <LuBadgeCheck className="w-[87px] h-[87px] text-green_200" />
       </div>
       <div className="w-full flex justify-center">
         <p className="text-dark_200 md:text-base text-sm font-normal text-center">
-          Congratulations! Your purchase was successful. Check your email for
-          your receipt.
+          {info}
         </p>
       </div>
       <Button

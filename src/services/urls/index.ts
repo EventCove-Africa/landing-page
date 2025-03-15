@@ -6,4 +6,6 @@ export const appUrls: apiUrlsType = {
   TICKET_URL: "/ticket",
   TICKET_TYPE_URL: "/tickets",
   EVENT_TICKET_SALES_URL: "/details",
+  RESERVE_TICKET_URL: "/guest/reserve",
+  INITIATE_TICKET_URL: "/guest/payment",
 };

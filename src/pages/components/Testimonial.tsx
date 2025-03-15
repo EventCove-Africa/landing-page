@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Image from "next/image";
 import { Rating } from "react-simple-star-rating";
 import { FaArrowLeftLong, FaArrowRight } from "react-icons/fa6";
@@ -34,6 +34,7 @@ const testimonials = [
 ];
 
 export default function Testimonial() {
+  const memoizedTestimonials = useMemo(() => testimonials, []);
   const settings = {
     infinite: true,
     speed: 500,
@@ -43,22 +44,20 @@ export default function Testimonial() {
     autoplaySpeed: 4000,
     arrows: true,
     prevArrow: (
-      <div
+      <button
         className="absolute -left-6 bottom-20 cursor-pointer"
-        role="button"
         aria-label="Previous Testimonial"
       >
         <FaArrowLeftLong />
-      </div>
+      </button>
     ),
     nextArrow: (
-      <div
+      <button
         className="absolute -right-6 bottom-16 cursor-pointer bg-white w-10 h-10 flex items-center justify-center rounded-full shadow-md"
-        role="button"
         aria-label="Next Testimonial"
       >
         <FaArrowRight className="text-dark_200" />
-      </div>
+      </button>
     ),
   };
 
@@ -76,19 +75,19 @@ export default function Testimonial() {
             experience with our top-rated products!
           </p>
           <div className="flex -space-x-1 overflow-hidden">
-            {testimonials.map((t, index) => (
+            {memoizedTestimonials.map((t, index) => (
               <Image
                 key={index}
                 src={t.image}
-                alt={`Testimonial by ${t.name}`}
+                alt={`Profile picture of ${t.name}`}
                 width={32}
                 height={32}
                 className="inline-block rounded-full"
-                priority
+                priority={index === 0}
               />
             ))}
           </div>
-          <div className="flex">
+          <div className="flex" aria-label="User rating">
             <Rating
               emptyStyle={{ display: "flex" }}
               emptyColor="#ffbc0b"
@@ -96,6 +95,7 @@ export default function Testimonial() {
               readonly
               allowHover={false}
               size={16}
+              aria-label="Rated 5 out of 5 stars"
             />
           </div>
         </div>
@@ -103,7 +103,7 @@ export default function Testimonial() {
         {/* Right Section (Carousel) */}
         <div className="w-[97%] lg:w-1/2 relative">
           <Slider {...settings}>
-            {testimonials.map((t, index) => (
+            {memoizedTestimonials.map((t, index) => (
               <div
                 key={index}
                 className="bg-white rounded-md p-6 flex flex-col shadow-md gap-8 relative min-h-[220px] h-full"
@@ -114,9 +114,11 @@ export default function Testimonial() {
                   width={72}
                   height={72}
                   className="rounded-full shadow-lg mb-2"
-                  priority
+                  priority={index === 0}
                 />
-                <p className="text-dark_200 md:text-base text-sm font-normal">{t.text}</p>
+                <p className="text-dark_200 md:text-base text-sm font-normal">
+                  {t.text}
+                </p>
                 <h3 className="text-grey_200 md:text-sm text-xs font-semibold my-1">
                   {t.name}
                 </h3>
