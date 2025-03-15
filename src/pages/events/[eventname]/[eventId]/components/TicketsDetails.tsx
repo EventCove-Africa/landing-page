@@ -24,14 +24,46 @@ export default function TicketsDetails({
 }: TicketsDetailsProps) {
   const router = useRouter();
   const [count, setCount] = useState(1);
+  const [maxCapacity, setMaxCapacity] = useState(5);
   const [selectedTicket, setSelectedTicket] = useState<any>({});
   const isNotGroup = selectedTicket?.classification?.toLowerCase() !== "group";
   const isSelectedTicketEmpty = !isObjectEmpty(selectedTicket);
   const selectedTicketPrice = selectedTicket?.price;
   const ticketType = selectedTicket?.ticketType;
 
-  const increment = () => setCount((prev) => Math.min(5, prev + 1));
+  const increment = () => setCount((prev) => Math.min(maxCapacity, prev + 1));
   const decrement = () => setCount((prev) => Math.max(1, prev - 1));
+
+  const handleSelectedTicketAction = ({
+    perks,
+    price,
+    ticketId,
+    ticketType,
+    validatedCount,
+    soldCount,
+    capacity,
+    salesEndDate,
+    colour,
+    classification,
+    notAllowedToSelect,
+  }: any) => {
+    if (notAllowedToSelect) return null;
+    if (capacity < 5) {
+      setMaxCapacity(capacity);
+    }
+    setSelectedTicket({
+      perks,
+      price,
+      ticketId,
+      ticketType,
+      validatedCount,
+      soldCount,
+      capacity,
+      salesEndDate,
+      colour,
+      classification,
+    });
+  };
 
   useEffect(() => {
     let mounted = false;
@@ -67,42 +99,55 @@ export default function TicketsDetails({
                   soldCount,
                   capacity,
                   salesEndDate,
-                }: ticketDetailsProps) => (
-                  <div
-                    key={ticketId}
-                    onClick={() =>
-                      setSelectedTicket({
-                        perks,
-                        price,
-                        ticketId,
-                        ticketType,
-                        validatedCount,
-                        soldCount,
-                        capacity,
-                        salesEndDate,
-                        colour,
-                        classification,
-                      })
-                    }
-                    className={`bg-grey_500 hover:border border-primary_100 ${
-                      selectedTicket?.ticketId === ticketId ? "border" : ""
-                    } cursor-pointer rounded-md p-2 flex flex-col justify-between`}
-                  >
-                    <div className="flex gap-2 items-center">
-                      <div className="rounded-full bg-[#EEEEFF] p-3 flex justify-center items-center">
-                        <FaChalkboardTeacher className="w-[20px] h-[20px] text-blue_400" />
+                }: ticketDetailsProps) => {
+                  const notAllowedToSelect = soldCount >= capacity;
+                  return (
+                    <div
+                      key={ticketId}
+                      onClick={() =>
+                        handleSelectedTicketAction({
+                          perks,
+                          price,
+                          ticketId,
+                          ticketType,
+                          validatedCount,
+                          soldCount,
+                          capacity,
+                          salesEndDate,
+                          colour,
+                          classification,
+                          notAllowedToSelect,
+                        })
+                      }
+                      className={`bg-grey_500 ${
+                        selectedTicket?.ticketId === ticketId ? "border" : ""
+                      } ${
+                        notAllowedToSelect
+                          ? "cursor-not-allowed"
+                          : "cursor-pointer hover:border border-primary_100"
+                      } rounded-md p-2 flex flex-col justify-between`}
+                    >
+                      <div className="flex gap-2 items-center">
+                        <div className="rounded-full bg-[#EEEEFF] p-3 flex justify-center items-center">
+                          <FaChalkboardTeacher className="w-[20px] h-[20px] text-blue_400" />
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <h3 className="text-grey_100 text-xs font-normal">
+                            {ticketType}
+                          </h3>
+                          <h5 className="text-dark_200 font-normal md:text-base text-sm">
+                            {formatToNaira(price)}
+                          </h5>
+                        </div>
                       </div>
-                      <div className="flex flex-col gap-1">
-                        <h3 className="text-grey_100 text-xs font-normal">
-                          {ticketType}
-                        </h3>
-                        <h5 className="text-dark_200 font-normal md:text-base text-sm">
-                          {formatToNaira(price)}
-                        </h5>
-                      </div>
+                      {notAllowedToSelect && (
+                        <span className="w-full flex justify-end self-end text-primary_100 text-xs font-semibold">
+                          Sold Out
+                        </span>
+                      )}
                     </div>
-                  </div>
-                )
+                  );
+                }
               )
             : null}
         </div>
