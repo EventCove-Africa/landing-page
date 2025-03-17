@@ -60,13 +60,13 @@ const Button = ({
           </span>
         </div>
       ) : (
-        <p
+        <div
           className={`font-medium leading-5 text-base ${
             textColor || "text-[#FFFFFF]"
           } ${textClassName}`}
         >
           {title}
-        </p>
+        </div>
       )}
       {renderIconRight ? (
         <div className="flex flex-grow justify-end items-center">
