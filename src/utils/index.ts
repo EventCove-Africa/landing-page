@@ -101,21 +101,10 @@ export const calculateTotalAmountForBuyers = (
 ): any => {
   const charges = chargePercent * price;
   const chargeValue = charges + 100;
-  const fullAmount = chargeValue + price;
-  const totalAmount = fullAmount * QTY;
+  const fullAmountForATicket = chargeValue + price;
+  const totalAmount = fullAmountForATicket * QTY;
   return totalAmount;
 };
-
-// export const calculateTotalAmountForBuyers = (
-//   price: number,
-//   QTY: number,
-//   chargePercent: number
-// ): number => {
-//   const charges = chargePercent * price * QTY; // Apply charge percent to total price
-//   const totalPrice = (price * QTY) + charges; // Add percentage charge
-//   const totalAmount = totalPrice + 100; // Add fixed charge once
-//   return totalAmount;
-// };
 
 export const toBoolean = (value: any): boolean => {
   return value?.toLowerCase() === "true";

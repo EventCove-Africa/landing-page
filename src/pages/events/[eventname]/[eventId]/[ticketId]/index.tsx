@@ -336,7 +336,7 @@ export default function TicketId() {
                         </h3>
                         {isClient && (
                           <h5 className="text-dark_200 md:text-sm text-xs font-semibold">
-                            {formatToNaira(price * charges + 100)}
+                            {formatToNaira(price * charges + 100)} X {QTY}
                           </h5>
                         )}
                       </div>
