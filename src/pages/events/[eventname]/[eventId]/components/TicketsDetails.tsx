@@ -196,7 +196,10 @@ export default function TicketsDetails({
                   transferTransactionFeeToBuyer,
                 });
                 router.push(
-                  `/events/${eventDetails?.eventName}/${eventId}/${selectedTicket?.ticketId}`
+                  `/events/${eventDetails?.eventName.replaceAll(
+                    " ",
+                    "-"
+                  )}/${eventId}/${selectedTicket?.ticketId}`
                 );
               }}
               title="Get Ticket"
