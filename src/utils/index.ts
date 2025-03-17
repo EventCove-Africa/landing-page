@@ -93,3 +93,19 @@ export function setDataINCookies(tokens: Record<any, any>) {
     });
   });
 }
+
+export const calculateTotalAmountForBuyers = (
+  price: any,
+  QTY: any,
+  chargePercent: any
+): any => {
+  const charges = chargePercent * price;
+  const chargeValue = charges + 100;
+  const fullAmountForATicket = chargeValue + price;
+  const totalAmount = fullAmountForATicket * QTY;
+  return totalAmount;
+};
+
+export const toBoolean = (value: any): boolean => {
+  return value?.toLowerCase() === "true";
+};

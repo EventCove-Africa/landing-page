@@ -12,6 +12,8 @@ export type ticketDetailsProps = {
   ticketId: string;
   perks: string;
   price: number;
+  charges: number;
+  transferTransactionFeeToBuyer: boolean;
   validatedCount: number;
   soldCount: number;
   capacity: number;
