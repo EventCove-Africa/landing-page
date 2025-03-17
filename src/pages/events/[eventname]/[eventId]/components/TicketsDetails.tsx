@@ -29,6 +29,9 @@ export default function TicketsDetails({
   const isNotGroup = selectedTicket?.classification?.toLowerCase() !== "group";
   const isSelectedTicketEmpty = !isObjectEmpty(selectedTicket);
   const selectedTicketPrice = selectedTicket?.price;
+  const charges = selectedTicket?.charges;
+  const transferTransactionFeeToBuyer =
+    selectedTicket?.transferTransactionFeeToBuyer;
   const ticketType = selectedTicket?.ticketType;
 
   const increment = () => setCount((prev) => Math.min(maxCapacity, prev + 1));
@@ -43,6 +46,8 @@ export default function TicketsDetails({
     soldCount,
     capacity,
     salesEndDate,
+    charges,
+    transferTransactionFeeToBuyer,
     colour,
     classification,
     notAllowedToSelect,
@@ -58,6 +63,8 @@ export default function TicketsDetails({
       ticketType,
       validatedCount,
       soldCount,
+      charges,
+      transferTransactionFeeToBuyer,
       capacity,
       salesEndDate,
       colour,
@@ -95,6 +102,8 @@ export default function TicketsDetails({
                   ticketId,
                   perks,
                   price,
+                  charges,
+                  transferTransactionFeeToBuyer,
                   validatedCount,
                   soldCount,
                   capacity,
@@ -113,6 +122,8 @@ export default function TicketsDetails({
                           validatedCount,
                           soldCount,
                           capacity,
+                          charges,
+                          transferTransactionFeeToBuyer,
                           salesEndDate,
                           colour,
                           classification,
@@ -177,7 +188,13 @@ export default function TicketsDetails({
           {isSelectedTicketEmpty && (
             <Button
               onClick={() => {
-                setDataINCookies({ selectedTicketPrice, count, ticketType });
+                setDataINCookies({
+                  selectedTicketPrice,
+                  count,
+                  ticketType,
+                  charges,
+                  transferTransactionFeeToBuyer,
+                });
                 router.push(
                   `/events/${eventDetails?.eventName}/${eventId}/${selectedTicket?.ticketId}`
                 );

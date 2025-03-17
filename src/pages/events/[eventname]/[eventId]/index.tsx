@@ -48,7 +48,13 @@ export default function EventDetails() {
     (async () => {
       mounted = true;
       if (mounted) {
-        _handleClearCookiesAndSession("selectedTicketPrice", "count", 'ticketType');
+        _handleClearCookiesAndSession(
+          "selectedTicketPrice",
+          "count",
+          "ticketType",
+          "charges",
+          "transferTransactionFeeToBuyer"
+        );
       }
     })();
     return () => {

@@ -18,14 +18,18 @@ const Testimonial = dynamic(() => import("./components/Testimonial"), {
 const FAQs = dynamic(() => import("./components/FAQs"), { ssr: false });
 
 export default function Home() {
-
-  
   useEffect(() => {
     let mounted = false;
     (async () => {
       mounted = true;
       if (mounted) {
-        _handleClearCookiesAndSession("selectedTicketPrice", "count", 'ticketType' );
+        _handleClearCookiesAndSession(
+          "selectedTicketPrice",
+          "count",
+          "ticketType",
+          "charges",
+          "transferTransactionFeeToBuyer"
+        );
       }
     })();
     return () => {

@@ -12,8 +12,10 @@ import Button from "@/components/FormComponents/Button";
 import TextInputField from "@/components/FormComponents/TextInputField";
 import {
   _handleThrowErrorMessage,
+  calculateTotalAmountForBuyers,
   formatToNaira,
   isObjectEmpty,
+  toBoolean,
 } from "@/utils";
 import ModalPopup from "@/components/ModalPopup";
 import InfoModal from "@/pages/components/InfoModal";
@@ -58,6 +60,14 @@ export default function TicketId() {
   const price = Number(Cookies.get("selectedTicketPrice")) || 0;
   const QTY = Number(Cookies.get("count")) || 0;
   const ticketType = Cookies.get("ticketType") || "";
+  const charges: any = Number(Cookies.get("charges") || 0);
+  const transferTransactionFeeToBuyer =
+    toBoolean(Cookies.get("transferTransactionFeeToBuyer")) || false;
+  const calculateTotalAmountForBuyer = calculateTotalAmountForBuyers(
+    price,
+    QTY,
+    charges
+  );
 
   const registerTicketSchema = Yup.object().shape({
     firstName: Yup.mixed().required("Firstname is required"),
@@ -158,6 +168,9 @@ export default function TicketId() {
           }}
           enableReinitialize
           onSubmit={(values, actions) => {
+            const totalAmount = transferTransactionFeeToBuyer
+              ? calculateTotalAmountForBuyer
+              : price * QTY;
             const {
               email,
               firstName,
@@ -181,7 +194,7 @@ export default function TicketId() {
               phoneNumber,
               numberOfTickets: QTY,
               city: location,
-              totalAmount: price * QTY,
+              totalAmount,
               ticketType,
               eventId,
               ticketTypeId: ticketId,
@@ -296,33 +309,50 @@ export default function TicketId() {
                     )}
                   <div className="w-full mt-4 flex flex-col gap-4">
                     <div className="border-b border-grey_100 pb-2 flex justify-between items-center">
-                      <h3 className="text-grey_100 md:text-sm text-xs font-normal">
+                      <h3 className="text-grey_100 md:text-sm text-xs font-semibold">
                         Total Ticket
                       </h3>
                       {isClient && (
-                        <h5 className="text-dark_200 md:text-sm text-xs font-normal">
+                        <h5 className="text-dark_200 md:text-sm text-xs font-semibold">
                           {" "}
                           {QTY} X {formatToNaira(price || 0)} ({ticketType})
                         </h5>
                       )}
                     </div>
                     <div className="border-b border-grey_100 pb-2 flex justify-between items-center">
-                      <h3 className="text-grey_100 md:text-sm text-xs font-normal">
+                      <h3 className="text-grey_100 md:text-sm text-xs font-semibold">
                         Total Amount
                       </h3>
                       {isClient && (
-                        <h5 className="text-dark_200 md:text-sm text-xs font-normal">
+                        <h5 className="text-dark_200 md:text-sm text-xs font-semibold">
                           {formatToNaira(price * QTY)}
                         </h5>
                       )}
                     </div>
+                    {isClient && transferTransactionFeeToBuyer && (
+                      <div className="border-b border-grey_100 pb-2 flex justify-between items-center">
+                        <h3 className="text-grey_100 md:text-sm text-xs font-semibold">
+                          Total Charge
+                        </h3>
+                        {isClient && (
+                          <h5 className="text-dark_200 md:text-sm text-xs font-semibold">
+                            {formatToNaira(price * charges + 100)}
+                          </h5>
+                        )}
+                      </div>
+                    )}
+
                     <div className="border-b border-grey_100 pb-2 flex justify-between items-center">
-                      <h3 className="text-grey_100 md:text-sm text-xs font-normal">
+                      <h3 className="text-grey_100 md:text-sm text-xs font-semibold">
                         Total Payment
                       </h3>
                       {isClient && (
-                        <h5 className="text-dark_200 md:text-sm text-xs font-normal">
-                          {formatToNaira(price * QTY)}
+                        <h5 className="text-dark_200 md:text-sm text-xs font-semibold">
+                          {!transferTransactionFeeToBuyer ? (
+                            <>{formatToNaira(price * QTY)}</>
+                          ) : (
+                            <>{formatToNaira(calculateTotalAmountForBuyer)}</>
+                          )}
                         </h5>
                       )}
                     </div>
@@ -341,12 +371,14 @@ export default function TicketId() {
                     </h4>
                   </div>
                   <div>
-                    <Button
-                      title={`${price ? "Proceed to Payment" : "Proceed"}`}
-                      className="h-[40px] text-center my-6 border border-dark_200"
-                      type="submit"
-                      isLoading={isSubmitting}
-                    />
+                    {isClient && (
+                      <Button
+                        title={`${price ? "Proceed to Payment" : "Proceed"}`}
+                        className="h-[40px] text-center my-6 border border-dark_200"
+                        type="submit"
+                        isLoading={isSubmitting}
+                      />
+                    )}
                   </div>
                 </div>
               </Form>
