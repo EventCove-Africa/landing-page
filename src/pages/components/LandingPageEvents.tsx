@@ -175,7 +175,7 @@ export default function Events({
         {renderSkeletonLoaderForEventDetails()}
         {!loadingEventDetails?.all_events && (
           <>
-            {filteredEvents.slice(0, endingIndex).map((event, index) => (
+            {[].slice(0, endingIndex).map((event, index) => (
               <EventCard key={`event-${index}`} event={event} />
             ))}
           </>
@@ -183,7 +183,7 @@ export default function Events({
       </div>
       {!loadingEventDetails?.all_events && (
         <div className="w-full flex justify-center items-center">
-          {isArrayEmpty(filteredEvents) && (
+          {!isArrayEmpty(filteredEvents) && (
             <Image
               width={250}
               height={300}
