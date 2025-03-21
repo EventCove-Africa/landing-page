@@ -9,7 +9,11 @@ import { FaArrowRight, FaLink } from "react-icons/fa6";
 import { PiCalendarDotsThin } from "react-icons/pi";
 import { TfiTimer } from "react-icons/tfi";
 import useEventsHook from "@/hooks/useEventsHook";
-import { arrayToFormattedDateWithYear, formatTimeToshowAmPm, isArrayEmpty } from "@/utils";
+import {
+  arrayToFormattedDateWithYear,
+  formatTimeToshowAmPm,
+  isArrayEmpty,
+} from "@/utils";
 import SkeletonLoader from "@/components/SkeletonLoader";
 
 type allEventsProps = {
@@ -54,23 +58,25 @@ const EventCard: React.FC<{ event: allEventsProps }> = ({ event }) => {
   return (
     <article
       className="bg-white shadow rounded-lg p-3 cursor-pointer"
-      onClick={() => router.push(`/events/${eventName?.replaceAll(' ', '-')}/${eventId}`)}
+      onClick={() =>
+        router.push(`/events/${eventName?.replaceAll(" ", "-")}/${eventId}`)
+      }
       id="event"
     >
       {/* Image container with fixed aspect ratio */}
-        <div
-          className="relative rounded-xl overflow-hidden"
-          style={{ aspectRatio: (323.11 / 203.61).toString() }}
-        >
-          <Image
-            src={eventImageUrl}
-            alt={`Event banner for ${eventName}`}
-            fill
-            sizes="(max-width: 768px) 100vw, 323.11px"
-            className="object-fit"
-            priority
-          />
-        </div>
+      <div
+        className="relative rounded-xl overflow-hidden"
+        style={{ aspectRatio: (323.11 / 203.61).toString() }}
+      >
+        <Image
+          src={eventImageUrl}
+          alt={`Event banner for ${eventName}`}
+          fill
+          sizes="(max-width: 768px) 100vw, 323.11px"
+          className="object-fit"
+          priority
+        />
+      </div>
       <div className="mt-2 flex flex-col gap-1">
         <h3 className="text-dark_200 font-medium text-xs md:text-sm">
           {eventName}
@@ -81,8 +87,7 @@ const EventCard: React.FC<{ event: allEventsProps }> = ({ event }) => {
           ) : (
             <FaLink />
           )}{" "}
-          {location}{' '}
-          {eventVenueType?.toLowerCase() === "physical" && city}
+          {location} {eventVenueType?.toLowerCase() === "physical" && city}
         </p>
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1 text-xs font-medium text-primary_100">
@@ -132,10 +137,7 @@ export default function Events({
     return (
       <>
         {[...Array(4)].map((_, i) => (
-          <div
-            key={i}
-            className="bg-white shadow rounded-lg p-3"
-          >
+          <div key={i} className="bg-white shadow rounded-lg p-3">
             <SkeletonLoader
               count={1}
               className="w-full flex justify-between rounded-md"
@@ -183,7 +185,7 @@ export default function Events({
       </div>
       {!loadingEventDetails?.all_events && (
         <div className="w-full flex justify-center items-center">
-          {!isArrayEmpty(filteredEvents) && (
+          {isArrayEmpty(filteredEvents) && (
             <Image
               width={250}
               height={300}
