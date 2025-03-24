@@ -89,7 +89,7 @@ export default function TicketsDetails({
     <>
       <div className="bg-white w-full rounded-xl h-fit p-3">
         <h3 className="text-sm font-normal text-dark_200">Select a Ticket</h3>
-        <div className="grid md:grid-cols-3 grid-cols-1 gap-3 mt-4">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3 mt-4">
           {loadingEventDetails?.tickets && (
             <SkeletonLoader count={3} className="h-[100px]" />
           )}
@@ -140,13 +140,13 @@ export default function TicketsDetails({
                     >
                       <div className="flex gap-2 items-center">
                         <div className="rounded-full bg-[#EEEEFF] p-3 flex justify-center items-center">
-                          <FaChalkboardTeacher className="w-[20px] h-[20px] text-blue_400" />
+                          <FaChalkboardTeacher className="lg:w-[20px] lg:h-[20px] w-[10px] h-[10px] text-blue_400" />
                         </div>
                         <div className="flex flex-col gap-1">
-                          <h3 className="text-grey_100 text-xs font-normal">
+                          <h3 className="text-grey_100 lg:text-xs text-sm font-normal">
                             {ticketType}
                           </h3>
-                          <h5 className="text-dark_200 font-normal md:text-base text-sm">
+                          <h5 className="text-dark_200 font-normal lg:text-base text-sm">
                             {formatToNaira(price)}
                           </h5>
                         </div>
@@ -204,7 +204,7 @@ export default function TicketsDetails({
               }}
               title="Get Ticket"
               type="button"
-              className="md:w-[20%] w-full"
+              className="md:w-fit w-full px-6 py-2"
             />
           )}
         </div>

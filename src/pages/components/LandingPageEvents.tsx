@@ -136,7 +136,7 @@ export default function Events({
     if (!loadingEventDetails?.all_events) return null;
     return (
       <>
-        {[...Array(4)].map((_, i) => (
+        {[...Array(1)].map((_, i) => (
           <div key={i} className="bg-white shadow rounded-lg p-3">
             <SkeletonLoader
               count={1}
@@ -177,7 +177,7 @@ export default function Events({
         {renderSkeletonLoaderForEventDetails()}
         {!loadingEventDetails?.all_events && (
           <>
-            {[].slice(0, endingIndex).map((event, index) => (
+            {filteredEvents.slice(0, endingIndex).map((event, index) => (
               <EventCard key={`event-${index}`} event={event} />
             ))}
           </>
