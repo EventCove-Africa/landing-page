@@ -80,7 +80,11 @@ export default function TicketId() {
       .oneOf([Yup.ref("email")], "Email must match")
       .required("Confirm email is required...."),
     location: Yup.mixed().required("Location is required"),
-    phoneNumber: Yup.string().required("Phone number is required"),
+    phoneNumber: Yup.string()
+      .matches(/^\d+$/, "Phone number must contain only digits") // Ensures only digits
+      .min(11, "Phone number must be at least 10 digits") // Adjust as needed
+      .max(15, "Phone number cannot exceed 15 digits") // Adjust as needed
+      .required("Phone number is required"), // Required field
     termsAndConditionsAccepted: Yup.boolean()
       .oneOf([true], "You must accept the terms and conditions")
       .required("Required"),
