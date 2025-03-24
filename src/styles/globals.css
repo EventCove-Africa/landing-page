@@ -3,10 +3,13 @@
 @import "slick-carousel/slick/slick.css";
 @import "slick-carousel/slick/slick-theme.css";
 
-html {
+html,body {
   box-sizing: border-box;
   scroll-behavior: smooth;
   font-size: 16px; /* Explicit base font size */
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 *,
