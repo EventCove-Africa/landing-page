@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { openNewTabWithUrl } from "@/utils";
+import { legalURL, openNewTabWithUrl } from "@/utils";
 import { useContactSupport } from "@/hooks/useContactSupport";
 
 const socialLinks = [
@@ -31,8 +31,8 @@ const quickLinks = [
 ];
 
 const otherLinks = [
-  { href: "/privacy-policy", label: "Privacy Policy" },
-  { href: "/terms-and-conditions", label: "Terms & Conditions" },
+  { href: `${legalURL}/eventcove-privacy-policy`, label: "Privacy Policy" },
+  { href: `${legalURL}/eventcove-terms-of-use`, label: "Terms & Conditions" },
 ];
 
 export default function Footer() {
@@ -43,16 +43,11 @@ export default function Footer() {
     label: string,
     e: React.MouseEvent
   ) => {
-    if (
-      ["contact us", "privacy policy", "terms & conditions"].includes(
-        label.toLocaleLowerCase()
-      )
-    ) {
-      e.preventDefault(); // Optional: Prevent default if needed
+    e.preventDefault();
+    if (["contact us"].includes(label.toLocaleLowerCase())) {
       handleOpenClose();
-      // Perform any action like opening a modal, scrolling, etc.
     } else {
-      window.location.href = href; // Default navigation
+      openNewTabWithUrl(href);
     }
   };
 

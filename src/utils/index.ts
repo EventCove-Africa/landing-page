@@ -3,8 +3,20 @@
 import Cookies from "js-cookie";
 
 export const openNewTabWithUrl = (url: string) => {
-  window.open(url, "_blank", "noopener,noreferrer");
+  if (typeof window !== "undefined") {
+    const newWindow = window.open(url, "_blank");
+    if (
+      !newWindow ||
+      newWindow.closed ||
+      typeof newWindow.closed === "undefined"
+    ) {
+      // Fallback: Open in the same tab if blocked
+      window.location.href = url;
+    }
+  }
 };
+
+export const legalURL = "https://eventcove-africa.gitbook.io/legal";
 
 export const isArrayEmpty = (arr: any[]): boolean => arr.length === 0;
 
