@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-import { useContactSupport } from "@/hooks/useContactSupport";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
-import toast from "react-hot-toast";
+import { useContactSupport } from "@/hooks/useContactSupport";
+import { openNewTabWithUrl } from "@/utils";
+import { URLS } from "@/constants";
 
 export default function Header() {
   const router = useRouter();
@@ -78,11 +79,27 @@ export default function Header() {
         <div className="ml-auto flex items-center gap-3 md:gap-5">
           <button
             type="button"
-            className="px-4 py-3 text-sm font-medium text-white bg-primary_100 rounded-xl transition-colors"
-            onClick={() => toast.success("COMING SOON...", { duration: 3000 })}
+            className="px-4 py-3 text-sm font-medium text-primary_100 border border-primary_100 rounded-xl transition-colors md:block hidden"
+            onClick={() => openNewTabWithUrl(`${URLS.webAllURL}/#/auth/login`)}
+            aria-label="Login"
+          >
+            Login
+          </button>
+          <button
+            type="button"
+            className="px-4 py-3 text-sm font-medium text-white bg-primary_100 rounded-xl transition-colors md:block hidden"
+            onClick={() => openNewTabWithUrl(`${URLS.webAllURL}/#/auth/signup`)}
             aria-label="Sign Up"
           >
-            Sign up
+            Sign Up
+          </button>
+          <button
+            type="button"
+            className="px-4 py-3 text-sm font-medium text-white bg-primary_100 rounded-xl transition-colors md:hidden block"
+            onClick={() => openNewTabWithUrl(`${URLS.webAllURL}/#/auth/signup`)}
+            aria-label="Sign Up"
+          >
+            Get Started
           </button>
         </div>
       </header>
