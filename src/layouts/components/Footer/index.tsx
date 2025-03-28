@@ -1,8 +1,9 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { legalURL, openNewTabWithUrl } from "@/utils";
+import { openNewTabWithUrl } from "@/utils";
 import { useContactSupport } from "@/hooks/useContactSupport";
+import { URLS } from "@/constants";
 
 const socialLinks = [
   { href: "https://x.com/eventcoveafrica", icon: "twitter.svg", label: "X" },
@@ -31,8 +32,14 @@ const quickLinks = [
 ];
 
 const otherLinks = [
-  { href: `${legalURL}/eventcove-privacy-policy`, label: "Privacy Policy" },
-  { href: `${legalURL}/eventcove-terms-of-use`, label: "Terms & Conditions" },
+  {
+    href: `${URLS.legalURL}/eventcove-privacy-policy`,
+    label: "Privacy Policy",
+  },
+  {
+    href: `${URLS.legalURL}/eventcove-terms-of-use`,
+    label: "Terms & Conditions",
+  },
 ];
 
 export default function Footer() {

@@ -16,8 +16,6 @@ export const openNewTabWithUrl = (url: string) => {
   }
 };
 
-export const legalURL = "https://eventcove-africa.gitbook.io/legal";
-
 export const isArrayEmpty = (arr: any[]): boolean => arr.length === 0;
 
 export const isObjectEmpty = (obj: Record<string, unknown>): boolean => {
