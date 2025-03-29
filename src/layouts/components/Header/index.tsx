@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useContactSupport } from "@/hooks/useContactSupport";
 import { openNewTabWithUrl } from "@/utils";
 import { URLS } from "@/constants";
+import toast from "react-hot-toast";
 
 export default function Header() {
   const router = useRouter();
@@ -26,13 +27,14 @@ export default function Header() {
   const navLinks = [
     { id: "about-us", label: "About Us" },
     { id: "event", label: "Events", action: () => router.push("/events") },
+    { id: "pricing", label: "Pricing", action: () => toast.success('COMING SOON..') },
     { id: "faqs", label: "FAQs" },
     { id: "contact-us", label: "Contact Us", action: handleOpenClose },
   ];
 
   return (
     <>
-      <header className="container padding-spacing flex w-full items-center gap-5 md:gap-10 lg:gap-20">
+      <header className="container padding-spacing flex w-full items-center lg:gap-10 gap-5">
         {/* Logo */}
         <Image
           src="/assets/icons/logo.svg"
@@ -96,10 +98,10 @@ export default function Header() {
           <button
             type="button"
             className="px-4 py-3 text-sm font-medium text-white bg-primary_100 rounded-xl transition-colors md:hidden block"
-            onClick={() => openNewTabWithUrl(`${URLS.webAllURL}/#/auth/signup`)}
-            aria-label="Sign Up"
+            onClick={() => openNewTabWithUrl(`${URLS.webAllURL}/#/auth/login`)}
+            aria-label="Login"
           >
-            Get Started
+            Login
           </button>
         </div>
       </header>

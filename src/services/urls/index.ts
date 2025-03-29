@@ -8,4 +8,5 @@ export const appUrls: apiUrlsType = {
   EVENT_TICKET_SALES_URL: "/details",
   RESERVE_TICKET_URL: "/guest/reserve",
   INITIATE_TICKET_URL: "/guest/payment",
+  SUBSCRIBE_NEWSLETTER_URL: "/subscribe",
 };
