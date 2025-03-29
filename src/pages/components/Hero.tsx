@@ -1,3 +1,4 @@
+import { URLS } from "@/constants";
 import { openNewTabWithUrl } from "@/utils";
 import Image from "next/image";
 import React from "react";
@@ -37,13 +38,11 @@ export default function Hero() {
         <div>
           <button
             type="button"
-            className="py-3 px-4 bg-primary_100 text-white rounded-md text-sm font-medium hover:bg-primary_200 transition-colors outline-none focus:ring-2 focus:ring-primary_200"
-            aria-label="Join our waitlist"
-            onClick={() =>
-              openNewTabWithUrl("https://forms.gle/i5HJXcnpBsKQWMgeA")
-            }
+            className="py-3 px-4 bg-primary_100 text-white rounded-md text-sm font-medium outline-none"
+            onClick={() => openNewTabWithUrl(`${URLS.webAllURL}/#/auth/signup`)}
+            aria-label="Get Started"
           >
-            Join Waitlist
+            Get Started
           </button>
         </div>
 

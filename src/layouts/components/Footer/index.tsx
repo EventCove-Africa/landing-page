@@ -1,9 +1,13 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { openNewTabWithUrl } from "@/utils";
+import { _handleThrowErrorMessage, openNewTabWithUrl } from "@/utils";
 import { useContactSupport } from "@/hooks/useContactSupport";
 import { URLS } from "@/constants";
+import { api } from "@/services/apiClients";
+import { appUrls } from "@/services/urls";
+import toast from "react-hot-toast";
 
 const socialLinks = [
   { href: "https://x.com/eventcoveafrica", icon: "twitter.svg", label: "X" },
@@ -44,6 +48,8 @@ const otherLinks = [
 
 export default function Footer() {
   const { handleOpenClose, ModalComponent } = useContactSupport();
+  const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState("");
 
   const handleLinkClick = (
     href: string,
@@ -55,6 +61,28 @@ export default function Footer() {
       handleOpenClose();
     } else {
       openNewTabWithUrl(href);
+    }
+  };
+
+  const handleSubcribeNewsletter = async () => {
+    const payload = {
+      email,
+    };
+    setIsLoading(true);
+    try {
+      const res = await api.post(appUrls.SUBSCRIBE_NEWSLETTER_URL, payload);
+      const status_code = [200, 201].includes(res?.status);
+      if (status_code) {
+        const message = res?.data?.data;
+        toast.success(message);
+        setEmail("");
+      }
+    } catch (error: any) {
+      const message = error?.data?.message || error?.data?.email;
+      const err_message = _handleThrowErrorMessage(message);
+      toast.error(err_message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -74,15 +102,24 @@ export default function Footer() {
               Stay updated on exclusive events and unforgettable moments. 🎉
               Sign up for our newsletter now!
             </p>
-            <button
-              className="md:w-[30%] w-full bg-secondary_200 text-white text-sm font-medium px-3 py-2 rounded-md"
-              aria-label="Subscribe to newsletter"
-              onClick={() =>
-                openNewTabWithUrl("https://forms.gle/VD9cQuiUB46yLQRAA")
-              }
-            >
-              Subscribe
-            </button>
+            <div className="flex lg:w-[70%] md:w-[50%] w-full md:p-2 p-1 bg-white border border-gray-300 rounded-md overflow-hidden">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-3 py-2 text-sm outline-none"
+                aria-label="Email address"
+              />
+              <button
+                className="bg-secondary_200 text-white md:text-sm text-xs font-medium p-2 disabled:opacity-50 rounded-md"
+                aria-label="Subscribe to newsletter"
+                onClick={handleSubcribeNewsletter}
+                disabled={isLoading || !email}
+              >
+                Subscribe
+              </button>
+            </div>
           </div>
 
           <div className="lg:w-3/5 flex flex-col md:flex-row gap-6 justify-between">
