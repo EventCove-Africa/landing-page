@@ -8,6 +8,7 @@ import { URLS } from "@/constants";
 import { api } from "@/services/apiClients";
 import { appUrls } from "@/services/urls";
 import toast from "react-hot-toast";
+import { useRouter } from "next/router";
 
 const socialLinks = [
   { href: "https://x.com/eventcoveafrica", icon: "twitter.svg", label: "X" },
@@ -31,6 +32,7 @@ const socialLinks = [
 const quickLinks = [
   { href: "#about-us", label: "About us" },
   { href: "/events", label: "Events" },
+  { href: "/pricing", label: "Pricing" },
   { href: "#contact-us", label: "Contact Us" },
   { href: "#faq", label: "FAQ’s" },
 ];
@@ -50,6 +52,7 @@ export default function Footer() {
   const { handleOpenClose, ModalComponent } = useContactSupport();
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
+  const router = useRouter();
 
   const handleLinkClick = (
     href: string,
@@ -57,8 +60,27 @@ export default function Footer() {
     e: React.MouseEvent
   ) => {
     e.preventDefault();
+
     if (["contact us"].includes(label.toLocaleLowerCase())) {
       handleOpenClose();
+    } else if (["pricing", "events"].includes(label.toLocaleLowerCase())) {
+      router.push(href);
+    } else if (["#about-us", "#faq"].includes(href.toLocaleLowerCase())) {
+      if (router.pathname !== "/") {
+        router.push("/").then(() => {
+          setTimeout(() => {
+            const element = document.querySelector(href);
+            if (element) {
+              element.scrollIntoView({ behavior: "smooth" });
+            }
+          }, 100); // Small delay to ensure the page has loaded
+        });
+      } else {
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }
     } else {
       openNewTabWithUrl(href);
     }
