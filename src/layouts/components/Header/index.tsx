@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useContactSupport } from "@/hooks/useContactSupport";
 import { openNewTabWithUrl } from "@/utils";
 import { URLS } from "@/constants";
-import toast from "react-hot-toast";
 
 export default function Header() {
   const router = useRouter();
@@ -27,7 +26,7 @@ export default function Header() {
   const navLinks = [
     { id: "about-us", label: "About Us" },
     { id: "event", label: "Events", action: () => router.push("/events") },
-    { id: "pricing", label: "Pricing", action: () => toast.success('COMING SOON..') },
+    { id: "pricing", label: "Pricing", action: () => router.push("/pricing") },
     { id: "faqs", label: "FAQs" },
     { id: "contact-us", label: "Contact Us", action: handleOpenClose },
   ];
