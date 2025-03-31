@@ -85,7 +85,7 @@ export default function EventsPage() {
   }, []);
 
   return (
-    <div className="w-full container padding-spacing px-4 sm:px-6 lg:px-8">
+    <div className="w-full container padding-spacing px-4 sm:px-6 lg:px-4">
       <CustomHead title="EVENTCOVE - Events" />
       {/* Responsive Image Container */}
       <div className="relative w-full h-[250px] sm:h-[300px] md:h-[350px] mb-20">
