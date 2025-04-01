@@ -34,7 +34,7 @@ export default function FAQs() {
       aria-labelledby="faq-section-title"
       id="faqs"
     >
-      <div className="md:w-[40%] w-full">
+      <div className="lg:w-[40%] w-full">
         <h1
           id="faq-section-title"
           className="text-dark_200 font-medium text-2xl md:text-5xl"
@@ -42,7 +42,7 @@ export default function FAQs() {
           Got Questions? We&apos;ve Got Answers
         </h1>
       </div>
-      <div className="md:w-[60%] w-full flex flex-col gap-6">
+      <div className="lg:w-[60%] w-full flex flex-col gap-6">
         {faqs.map(({ id, question, answer }, index) => {
           const isOpen = openIndex === index;
           return (
