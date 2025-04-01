@@ -53,7 +53,7 @@ export default function Offer() {
           alt="Calendar illustration"
           width={150}
           height={200}
-          className="object-contain absolute left-0 animate-zoomInOut"
+          className="object-contain absolute left-0 animate-zoomInOut lg:block hidden"
           priority
           sizes="(max-width: 1024px) 50vw, 25vw"
         />
