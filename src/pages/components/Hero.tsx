@@ -73,47 +73,11 @@ export default function Hero() {
           alt="Graph chart showing ticket statistics"
           width={324}
           height={217}
-          className="absolute bottom-0 right-0 animate-zoomInOut"
+          className="absolute bottom-0 right-0 animate-zoomInOut lg:block hidden"
           priority
           loading="eager"
           sizes="(max-width: 768px) 40vw, 324px"
         />
-
-        {/* Face Icon */}
-        {/* <Image
-          src="/assets/icons/face_hero.svg"
-          alt="A smiling face icon"
-          width={60}
-          height={60}
-          className="absolute lg:top-24 -right-4 top-16 lg:block hidden"
-          priority
-          loading="eager"
-          sizes="60px"
-        /> */}
-
-        {/* Crown Icon */}
-        {/* <Image
-          src="/assets/icons/crown-hero.svg"
-          alt="Crown icon representing premium experience"
-          width={60}
-          height={60}
-          className="absolute lg:top-48 left-16 lg:block hidden"
-          priority
-          loading="eager"
-          sizes="60px"
-        /> */}
-
-        {/* Decorative Blue Circle */}
-        {/* <div
-          className="w-[20px] h-[20px] rounded-full bg-blue_100 absolute -top-4 right-4 lg:block hidden"
-          aria-hidden="true"
-        /> */}
-
-        {/* Decorative Green Circle */}
-        {/* <div
-          className="w-[20px] h-[20px] rounded-full bg-green_100 absolute lg:top-48 lg:block hidden -right-2 top-48"
-          aria-hidden="true"
-        /> */}
 
         {/* Secondary Chart Image */}
         <Image
@@ -121,7 +85,7 @@ export default function Hero() {
           alt="Additional graph chart showing data points"
           width={309}
           height={84}
-          className="absolute lg:bottom-12 lg:-left-48 -left-4"
+          className="absolute lg:bottom-12 lg:-left-48 -left-4 lg:block hidden"
           priority
           loading="eager"
           sizes="(max-width: 768px) 100vw, 309px"
