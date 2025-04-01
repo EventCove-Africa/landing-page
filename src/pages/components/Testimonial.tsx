@@ -8,27 +8,15 @@ import "slick-carousel/slick/slick-theme.css";
 
 const testimonials = [
   {
-    image: "/assets/icons/testimonial_1.svg",
-    text: "Managing our annual conference has never been this simple. The platform saved us so much time!",
-    name: "Benita Oriaku",
-    location: "Lagos, Nigeria",
-  },
-  {
-    image: "/assets/icons/testimonial_2.svg",
-    text: "Managing our annual conference has never been this simple. The platform saved us so much time!",
-    name: "Benita Oriaku",
-    location: "Lagos, Nigeria",
-  },
-  {
-    image: "/assets/icons/testimonial_3.svg",
-    text: "Managing our annual conference has never been this simple. The platform saved us so much time!",
-    name: "Benita Oriaku",
+    image: "/assets/images/rose.jpeg",
+    text: "EventCove makes event planning easy with a user-friendly interface, effortless ticketing, and smart event management. Customizable branding, an awesome plus. Great for organizers!",
+    name: "Rose Adeyinka",
     location: "Lagos, Nigeria",
   },
   {
     image: "/assets/icons/testimonial_4.svg",
     text: "Managing our annual conference has never been this simple. The platform saved us so much time!",
-    name: "Benita Oriaku",
+    name: "John Doe",
     location: "Lagos, Nigeria",
   },
 ];
@@ -76,15 +64,19 @@ export default function Testimonial() {
           </p>
           <div className="flex -space-x-1 overflow-hidden">
             {memoizedTestimonials.map((t, index) => (
-              <Image
+              <div
                 key={index}
-                src={t.image}
-                alt={`Profile picture of ${t.name}`}
-                width={32}
-                height={32}
-                className="inline-block rounded-full"
-                priority={index === 0}
-              />
+                className="w-[32px] h-[32px] overflow-hidden rounded-full"
+              >
+                <Image
+                  src={t.image}
+                  alt={`Profile picture of ${t.name}`}
+                  width={32}
+                  height={32}
+                  className="w-full h-full object-cover"
+                  priority={index === 0}
+                />
+              </div>
             ))}
           </div>
           <div className="flex" aria-label="User rating">
@@ -108,14 +100,17 @@ export default function Testimonial() {
                 key={index}
                 className="bg-white rounded-md p-6 flex flex-col shadow-md gap-8 relative min-h-[220px] h-full"
               >
-                <Image
-                  src={t.image}
-                  alt={`Image of ${t.name}`}
-                  width={72}
-                  height={72}
-                  className="rounded-full shadow-lg mb-2"
-                  priority={index === 0}
-                />
+                <div className="w-[72px] h-[72px] overflow-hidden rounded-full shadow-lg mb-2">
+                  <Image
+                    src={t.image}
+                    alt={`Image of ${t.name}`}
+                    width={72}
+                    height={72}
+                    className="w-full h-full object-cover"
+                    priority={index === 0}
+                  />
+                </div>
+
                 <p className="text-dark_200 md:text-base text-sm font-normal">
                   {t.text}
                 </p>
