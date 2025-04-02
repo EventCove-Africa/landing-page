@@ -38,7 +38,7 @@ export default function Offer() {
         </div>
       </div>
       {/* Hero Image Section */}
-      <div className="w-full relative flex justify-center">
+      <div className="w-full relative flex justify-center md:mt-0 my-8">
         <Image
           src="/assets/images/offer_bg.png"
           alt="Background image illustrating offer"
