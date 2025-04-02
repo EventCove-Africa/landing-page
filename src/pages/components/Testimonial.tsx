@@ -98,7 +98,7 @@ export default function Testimonial() {
             {memoizedTestimonials.map((t, index) => (
               <div
                 key={index}
-                className="bg-white rounded-md p-6 flex flex-col shadow-md gap-8 relative min-h-[220px] h-full"
+                className="bg-white rounded-md p-6 flex flex-col justify-center shadow-md gap-8 relative min-h-[220px] h-[300px]" // Set a fixed height (e.g., h-[300px])
               >
                 <div className="w-[72px] h-[72px] overflow-hidden rounded-full shadow-lg mb-2">
                   <Image
