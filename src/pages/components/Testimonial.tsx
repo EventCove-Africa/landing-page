@@ -14,9 +14,9 @@ const testimonials = [
     location: "Lagos, Nigeria",
   },
   {
-    image: "/assets/icons/testimonial_4.svg",
-    text: "Managing our annual conference has never been this simple. The platform saved us so much time!",
-    name: "John Doe",
+    image: "/assets/images/Oluwatunmise.jpeg",
+    text: "Eventcove has really been an helpful platform for me to purchase my event ticket without any hassle. I will definitely recommend anytime anywhere",
+    name: "Oluwatunmise Akinola",
     location: "Lagos, Nigeria",
   },
 ];
