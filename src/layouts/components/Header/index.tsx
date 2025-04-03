@@ -2,12 +2,15 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
+
 import { useContactSupport } from "@/hooks/useContactSupport";
 import { openNewTabWithUrl } from "@/utils";
 import { URLS } from "@/constants";
+import MobileMenu from "./components/MobileMenu";
 
 export default function Header() {
   const router = useRouter();
+
   const { handleOpenClose, ModalComponent } = useContactSupport();
 
   // Scroll to section if there's a hash in the URL
@@ -94,15 +97,9 @@ export default function Header() {
           >
             Sign Up
           </button>
-          <button
-            type="button"
-            className="px-4 py-3 text-sm font-medium text-white bg-primary_100 rounded-xl transition-colors md:hidden block"
-            onClick={() => openNewTabWithUrl(`${URLS.webAllURL}/#/auth/login`)}
-            aria-label="Login"
-          >
-            Login
-          </button>
         </div>
+        {/* Mobile Menu */}
+        <MobileMenu router={router} navLinks={navLinks} />
       </header>
       {ModalComponent}
     </>
