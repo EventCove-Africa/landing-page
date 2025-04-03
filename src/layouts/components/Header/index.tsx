@@ -36,7 +36,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="container padding-spacing flex w-full items-center lg:gap-10 gap-5">
+      <header className="container padding-spacing flex w-full items-center lg:gap-10 gap-5 relative">
         {/* Logo */}
         <Image
           src="/assets/icons/logo.svg"
