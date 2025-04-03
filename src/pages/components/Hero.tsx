@@ -1,6 +1,7 @@
 import { URLS } from "@/constants";
 import { openNewTabWithUrl } from "@/utils";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React from "react";
 
 const HeroStat = ({
@@ -17,6 +18,7 @@ const HeroStat = ({
 );
 
 export default function Hero() {
+  const router = useRouter();
   return (
     <section
       className="container padding-spacing w-full flex lg:flex-row flex-col lg:justify-between justify-around items-center gap-4 h-full pt-12"
@@ -26,23 +28,32 @@ export default function Hero() {
       <div className="w-full flex flex-col gap-4 text-center lg:text-left">
         <h1
           id="hero-heading"
-          className="font-bold text-2xl md:text-4xl lg:text-6xl text-dark_200"
+          className="font-bold text-2xl md:text-4xl lg:text-6xl text-dark_200 animate-pulse"
         >
-          Level Up Your Event <span className="text-primary_100">Game.</span>
+          Elevate Your
+          <span className="text-primary_100 animate-pulse"> Experience!</span>
         </h1>
         <p className="text-grey_100 md:text-base text-sm font-normal">
-          We’ve got the tools to help you slay every detail and give your
-          audience the legendary experience they deserve. Let’s make magic
-          happen!
+          Unlock incredible experiences and create lasting memories—every detail
+          perfected, every moment unforgettable. Your next great event is just a
+          click away!
         </p>
-        <div>
+        <div className="flex gap-4 lg:justify-start justify-center">
           <button
             type="button"
-            className="py-3 px-4 bg-primary_100 text-white rounded-md text-sm font-medium outline-none"
+            className="py-3 px-4 bg-primary_100 text-white rounded-md text-sm font-medium outline-none lg:block hidden"
             onClick={() => openNewTabWithUrl(`${URLS.webAllURL}/#/auth/signup`)}
             aria-label="Get Started"
           >
             Get Started
+          </button>
+          <button
+            type="button"
+            className="w-auto py-3 px-4 bg-primary_100 text-white rounded-md text-sm font-medium outline-none lg:hidden block"
+            onClick={() => router.push("/events")}
+            aria-label="Discover Events"
+          >
+            Discover Events
           </button>
         </div>
 
