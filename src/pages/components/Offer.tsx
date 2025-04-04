@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Offer() {
   return (
-    <section id='about-us' className="container padding-spacing w-full flex lg:flex-row flex-col lg:justify-between justify-around items-center gap-4 h-full pt-36">
+    <section id='about-us' className="container padding-spacing w-full flex lg:flex-row flex-col lg:justify-between justify-around items-center gap-4 h-full lg:pt-36 md:pt-16 pt-8">
       {/* Text Content */}
       <div className="w-full flex flex-col gap-4 text-center lg:text-left">
         <h1
