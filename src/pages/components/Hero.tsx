@@ -1,5 +1,3 @@
-import { URLS } from "@/constants";
-import { openNewTabWithUrl } from "@/utils";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
@@ -41,15 +39,7 @@ export default function Hero() {
         <div className="flex gap-4 lg:justify-start justify-center">
           <button
             type="button"
-            className="py-3 px-4 bg-primary_100 text-white rounded-md text-sm font-medium outline-none lg:block hidden"
-            onClick={() => openNewTabWithUrl(`${URLS.webAllURL}/#/auth/signup`)}
-            aria-label="Get Started"
-          >
-            Get Started
-          </button>
-          <button
-            type="button"
-            className="w-auto py-3 px-4 bg-primary_100 text-white rounded-md text-sm font-medium outline-none lg:hidden block"
+            className="w-auto py-3 px-4 bg-primary_100 text-white rounded-md text-sm font-medium outline-none"
             onClick={() => router.push("/events")}
             aria-label="Discover Events"
           >
