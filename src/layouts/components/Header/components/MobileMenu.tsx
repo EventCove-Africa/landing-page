@@ -74,25 +74,14 @@ export default function MobileMenu({ router, navLinks }: any) {
             <div className="w-full flex gap-2 items-center mt-4">
               <button
                 type="button"
-                className="w-full px-4 py-3 text-sm font-medium text-primary_100 border border-primary_100 rounded-xl transition-colors"
-                onClick={() => {
-                  openNewTabWithUrl(`${URLS.webAllURL}/#/auth/login`);
-                  closeMenu();
-                }}
-                aria-label="Login"
-              >
-                Login
-              </button>
-              <button
-                type="button"
                 className="w-full px-4 py-3 text-sm font-medium text-white bg-primary_100 rounded-xl transition-colors"
                 onClick={() => {
                   openNewTabWithUrl(`${URLS.webAllURL}/#/auth/signup`);
                   closeMenu();
                 }}
-                aria-label="Sign Up"
+                aria-label="Create Event"
               >
-                Sign Up
+                Create Event
               </button>
             </div>
           </motion.div>
