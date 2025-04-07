@@ -83,19 +83,11 @@ export default function Header() {
         <div className="ml-auto flex items-center gap-3 md:gap-5">
           <button
             type="button"
-            className="px-4 py-3 text-sm font-medium text-primary_100 border border-primary_100 rounded-xl transition-colors md:block hidden"
-            onClick={() => openNewTabWithUrl(`${URLS.webAllURL}/#/auth/login`)}
-            aria-label="Login"
-          >
-            Login
-          </button>
-          <button
-            type="button"
             className="px-4 py-3 text-sm font-medium text-white bg-primary_100 rounded-xl transition-colors md:block hidden"
             onClick={() => openNewTabWithUrl(`${URLS.webAllURL}/#/auth/signup`)}
-            aria-label="Sign Up"
+            aria-label="Create Event"
           >
-            Sign Up
+            Create Event
           </button>
         </div>
         {/* Mobile Menu */}
