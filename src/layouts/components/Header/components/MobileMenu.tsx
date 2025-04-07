@@ -71,10 +71,21 @@ export default function MobileMenu({ router, navLinks }: any) {
                 {record?.label}
               </button>
             ))}
-            <div className="w-full flex gap-2 items-center mt-4">
+            <div className="w-full flex gap-2 items-center mt-2">
               <button
                 type="button"
-                className="w-full px-4 py-3 text-sm font-medium text-white bg-primary_100 rounded-xl transition-colors"
+                className="w-full px-4 py-3 text-sm font-medium border border-primary_100 text-primary_100 rounded-xl"
+                onClick={() => {
+                  openNewTabWithUrl(`${URLS.webAllURL}/#/auth/login`);
+                  closeMenu();
+                }}
+                aria-label="Login"
+              >
+                Login
+              </button>
+              <button
+                type="button"
+                className="w-full px-4 py-3 text-sm font-medium text-white bg-primary_100 rounded-xl"
                 onClick={() => {
                   openNewTabWithUrl(`${URLS.webAllURL}/#/auth/signup`);
                   closeMenu();
