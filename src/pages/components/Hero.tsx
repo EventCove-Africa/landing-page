@@ -39,7 +39,7 @@ export default function Hero() {
         <div className="flex gap-4 lg:justify-start justify-center">
           <button
             type="button"
-            className="w-auto py-3 px-4 bg-primary_100 text-white rounded-md text-sm font-medium outline-none"
+            className="w-auto py-3 px-4 bg-primary_100 text-white rounded-md hover:opacity-90 text-sm font-medium outline-none"
             onClick={() => router.push("/events")}
             aria-label="Discover Events"
           >
