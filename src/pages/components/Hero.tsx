@@ -1,3 +1,5 @@
+import { URLS } from "@/constants";
+import { openNewTabWithUrl } from "@/utils";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
@@ -44,6 +46,14 @@ export default function Hero() {
             aria-label="Discover Events"
           >
             Discover Events
+          </button>
+          <button
+            type="button"
+            className="w-auto py-3 px-4 text-primary_100 border border-primary_100 rounded-md hover:opacity-90 text-sm font-medium outline-none"
+            onClick={() => openNewTabWithUrl(`${URLS.webAllURL}/#/auth/signup`)}
+            aria-label="Discover Events"
+          >
+            Create Events
           </button>
         </div>
 
