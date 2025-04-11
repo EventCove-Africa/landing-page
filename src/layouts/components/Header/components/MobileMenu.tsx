@@ -52,7 +52,7 @@ export default function MobileMenu({ router, navLinks }: any) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="absolute top-full left-0 w-full bg-white shadow-lg p-5 md:hidden flex flex-col gap-4 z-50"
+            className="absolute top-full transition-all left-0 w-full bg-white shadow-lg p-5 md:hidden flex flex-col gap-4 z-50"
           >
             {navLinks.map((record: any) => (
               <button
