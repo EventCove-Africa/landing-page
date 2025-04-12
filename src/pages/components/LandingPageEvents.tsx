@@ -12,7 +12,7 @@ import useEventsHook from "@/hooks/useEventsHook";
 import {
   arrayToFormattedDateWithYear,
   formatTimeToshowAmPm,
-  // isArrayEmpty,
+  isArrayEmpty,
 } from "@/utils";
 import SkeletonLoader from "@/components/SkeletonLoader";
 
@@ -115,7 +115,7 @@ export default function Events({
 
   const {
     handleGetFilteredEvents,
-    // allEvents: filteredEvents,
+    allEvents: filteredEvents,
     loadingEventDetails,
   } = useEventsHook();
 
@@ -177,7 +177,7 @@ export default function Events({
         {renderSkeletonLoaderForEventDetails()}
         {!loadingEventDetails?.all_events && (
           <>
-            {[].slice(0, endingIndex).map((event, index) => (
+            {filteredEvents.slice(0, endingIndex).map((event, index) => (
               <EventCard key={`event-${index}`} event={event} />
             ))}
           </>
@@ -185,7 +185,7 @@ export default function Events({
       </div>
       {!loadingEventDetails?.all_events && (
         <div className="w-full flex justify-center items-center">
-          {/* {!isArrayEmpty(filteredEvents) && ( */}
+          {isArrayEmpty(filteredEvents) && (
             <Image
               width={250}
               height={300}
@@ -193,7 +193,7 @@ export default function Events({
               alt="empty_state"
               priority
             />
-          {/* )} */}
+          )}
         </div>
       )}
     </section>

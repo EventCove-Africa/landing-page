@@ -46,6 +46,10 @@ const otherLinks = [
     href: `${URLS.legalURL}/eventcove-terms-of-use`,
     label: "Terms & Conditions",
   },
+  {
+    href: `${URLS.webAllURL}/#/auth/signup`,
+    label: "Create Event",
+  },
 ];
 
 export default function Footer() {
