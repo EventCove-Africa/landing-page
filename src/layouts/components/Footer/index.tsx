@@ -50,6 +50,10 @@ const otherLinks = [
     href: `${URLS.webAllURL}/#/auth/signup`,
     label: "Create Event",
   },
+  {
+    href: `${URLS.webAllURL}/#/auth/login`,
+    label: "Login",
+  },
 ];
 
 export default function Footer() {
