@@ -30,7 +30,7 @@ export const useContactSupport = () => {
             />
           </div>
           <h4 className="text-dark_200 text-base font-semibold text-center my-4">
-            Please contact our support team on eventcoveafrica@gmail.com
+            Please contact our support team on support@eventcove.africa
           </h4>
         </div>
       </ModalPopup>
