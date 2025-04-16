@@ -55,7 +55,7 @@ export default function TicketId() {
     useEventsHook();
   const [isOpen, setIsOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
-  const [isRedirecting, setIsRedirecting] = useState(false);
+  const [redirecting, setRedirecting] = useState(false);
   const [paystackUrl, setPaystackUrl] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const { eventId, ticketId } = router.query as any;
@@ -144,7 +144,7 @@ export default function TicketId() {
 
   const handleFinalAction = () => {
     if (paystackUrl !== "") {
-      setIsRedirecting(true)
+      setRedirecting(true)
       window.location.href = paystackUrl;
     } else {
       setIsOpen(!isOpen);
@@ -410,7 +410,7 @@ export default function TicketId() {
           info={successMessage}
           onClick={handleFinalAction}
           title={`${paystackUrl !== "" ? "Proceed" : "View more Events"}`}
-          isRedirecting={isRedirecting}
+          redirecting={redirecting}
         />
       </ModalPopup>
     </>
