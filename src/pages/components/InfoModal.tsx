@@ -6,14 +6,14 @@ type InfoModalProps = {
   onClick: () => void;
   info?: string;
   title?: string;
-  isRedirecting?: boolean;
+  redirecting?: boolean;
 };
 
 export default function InfoModal({
   onClick,
   info = "",
   title,
-  isRedirecting,
+  redirecting,
 }: InfoModalProps) {
   return (
     <div className="md:w-[458px] w-full h-auto bg-white rounded-xl px-3 py-4">
@@ -30,7 +30,7 @@ export default function InfoModal({
         className="w-full h-[40px] text-center mt-3 border border-dark_200"
         type="button"
         onClick={onClick}
-        isLoading={isRedirecting}
+        isLoading={redirecting}
       />
     </div>
   );
