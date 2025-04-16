@@ -55,6 +55,8 @@ export default function TicketId() {
     useEventsHook();
   const [isOpen, setIsOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const [isRedirecting, setIsRedirecting] = useState(false);
+  const [paystackUrl, setPaystackUrl] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const { eventId, ticketId } = router.query as any;
   const price = Number(Cookies.get("selectedTicketPrice")) || 0;
@@ -121,12 +123,15 @@ export default function TicketId() {
       if (status_code) {
         const result = res?.data?.data;
         const url = result?.url;
+        actions.resetForm();
+        setIsOpen(!isOpen);
         if (!url) {
-          actions.resetForm();
-          setIsOpen(!isOpen);
           setSuccessMessage(result?.message);
         } else {
-          window.location.href = url;
+          setPaystackUrl(url);
+          setSuccessMessage(
+            "Once payment is successful kindly check your email"
+          );
         }
       }
     } catch (error: any) {
@@ -134,6 +139,16 @@ export default function TicketId() {
       toast.error(err_message);
     } finally {
       actions.setSubmitting(false);
+    }
+  };
+
+  const handleFinalAction = () => {
+    if (paystackUrl !== "") {
+      setIsRedirecting(true)
+      window.location.href = paystackUrl;
+    } else {
+      setIsOpen(!isOpen);
+      router.push("/events");
     }
   };
 
@@ -393,7 +408,9 @@ export default function TicketId() {
       <ModalPopup isOpen={isOpen} closeModal={() => setIsOpen(!isOpen)}>
         <InfoModal
           info={successMessage}
-          closeModal={() => setIsOpen(!isOpen)}
+          onClick={handleFinalAction}
+          title={`${paystackUrl !== "" ? "Proceed" : "View more Events"}`}
+          isRedirecting={isRedirecting}
         />
       </ModalPopup>
     </>
