@@ -88,7 +88,7 @@ export default function TicketsDetails({
   return (
     <>
       <div className="bg-white w-full rounded-xl h-fit p-3">
-        <h3 className="text-sm font-normal text-dark_200">Select a Ticket</h3>
+        <h3 className="text-sm font-bold text-dark_200">Select a Ticket</h3>
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3 mt-4">
           {loadingEventDetails?.tickets && (
             <SkeletonLoader count={3} className="h-[100px]" />
@@ -131,11 +131,11 @@ export default function TicketsDetails({
                         })
                       }
                       className={`bg-grey_500 ${
-                        selectedTicket?.ticketId === ticketId ? "border" : ""
+                        selectedTicket?.ticketId === ticketId ? "border border-primary_100" : "border border-grey_700"
                       } ${
                         notAllowedToSelect
                           ? "cursor-not-allowed"
-                          : "cursor-pointer hover:border border-primary_100"
+                          : "cursor-pointer border hover:border-primary_100"
                       } rounded-md p-2 flex flex-col justify-between`}
                     >
                       <div className="flex gap-2 items-center">
