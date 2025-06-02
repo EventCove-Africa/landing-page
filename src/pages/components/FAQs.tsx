@@ -19,6 +19,12 @@ const faqs = [
     answer:
       "At the moment, you cannot customize the design for email. However, your event details will be displayed in the ticket email sent to attendees.",
   },
+  {
+    id: "faq4",
+    question: "Can I make money with EventCove?",
+    answer:
+      "Yes! Share your referral link. When they sign up and create their first paid event, you will get a commission off the profits from the event",
+  },
 ];
 
 export default function FAQs() {
