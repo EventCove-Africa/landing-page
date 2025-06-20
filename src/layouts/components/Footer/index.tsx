@@ -18,7 +18,7 @@ const socialLinks = [
     label: "Facebook",
   },
   {
-    href: "https://www.instagram.com/eventcoveafrica",
+    href: "https://www.instagram.com/eventcove_africa",
     icon: "instagram.svg",
     label: "Instagram",
   },
