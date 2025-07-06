@@ -12,18 +12,21 @@ import { appUrls } from "@/services/urls";
 type InfoModalProps = {
   closeModal: () => void;
   eventId: string | undefined;
-  handleFetchEventsDetails: (eventId: any) => void;
-  handleFetchEventTicketsDetails: (eventId: any) => void;
+  isSlug: boolean;
+  handleFetchEventsDetails: (eventId: any, isSlug: boolean) => void;
+  handleFetchEventTicketsDetails: (eventId: any, isSlug: boolean) => void;
 };
 
 export type PrivatePassCodeApiProp = {
   passcode: string;
+  isSlug: boolean;
   eventId?: string | undefined;
 };
 
 export default function PrivatePassCode({
   closeModal,
   eventId,
+  isSlug = false,
   handleFetchEventsDetails,
   handleFetchEventTicketsDetails,
 }: InfoModalProps) {
@@ -32,8 +35,8 @@ export default function PrivatePassCode({
   });
 
   const handleValidatePasscode = async (
-    payload: PrivatePassCodeApiProp,
-    actions: FormikHelpers<PrivatePassCodeApiProp>
+    payload: any,
+    actions: FormikHelpers<any>
   ) => {
     try {
       const res = await api.post(
@@ -44,16 +47,19 @@ export default function PrivatePassCode({
       if (status_code) {
         closeModal();
         actions.resetForm();
-        handleFetchEventsDetails(eventId);
-        handleFetchEventTicketsDetails(eventId);
+        handleFetchEventsDetails(eventId, isSlug);
+        if (!isSlug) {
+          handleFetchEventTicketsDetails(eventId, isSlug);
+        }
       }
     } catch (error: any) {
       const err_message = _handleThrowErrorMessage(error?.data?.message);
       toast.error(err_message);
-    } finally{
+    } finally {
       actions.setSubmitting(false);
     }
   };
+  
   return (
     <div className="md:w-[458px] w-full h-auto bg-white rounded-xl px-3 py-4">
       <Formik

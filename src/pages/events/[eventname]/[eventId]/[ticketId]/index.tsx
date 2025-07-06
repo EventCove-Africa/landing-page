@@ -20,7 +20,7 @@ import {
 import ModalPopup from "@/components/ModalPopup";
 import InfoModal from "@/pages/components/InfoModal";
 import useEventsHook from "@/hooks/useEventsHook";
-import EventsDetails from "../components/EventsDetails";
+import EventsDetails from "../../../components/EventsDetails";
 import SkeletonLoaderEventDetails from "@/pages/components/SkeletonLoaderEventDetails";
 import { api } from "@/services/apiClients";
 import { appUrls } from "@/services/urls";

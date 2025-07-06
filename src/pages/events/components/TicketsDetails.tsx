@@ -14,13 +14,15 @@ type TicketsDetailsProps = {
   loadingEventDetails: any;
   allEventTickets: any;
   eventDetails: any;
+  isSlug?: boolean;
 };
 
 export default function TicketsDetails({
-  eventId,
+  // eventId,
   allEventTickets,
   loadingEventDetails,
   eventDetails,
+  // isSlug = false,
 }: TicketsDetailsProps) {
   const router = useRouter();
   const [count, setCount] = useState(1);
@@ -131,7 +133,9 @@ export default function TicketsDetails({
                         })
                       }
                       className={`bg-grey_500 ${
-                        selectedTicket?.ticketId === ticketId ? "border border-primary_100" : "border border-grey_700"
+                        selectedTicket?.ticketId === ticketId
+                          ? "border border-primary_100"
+                          : "border border-grey_700"
                       } ${
                         notAllowedToSelect
                           ? "cursor-not-allowed"
@@ -199,7 +203,7 @@ export default function TicketsDetails({
                   `/events/${eventDetails?.eventName.replaceAll(
                     " ",
                     "-"
-                  )}/${eventId}/${selectedTicket?.ticketId}`
+                  )}/${eventDetails?.eventId}/${selectedTicket?.ticketId}`
                 );
               }}
               title="Get Ticket"

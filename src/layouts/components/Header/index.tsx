@@ -83,7 +83,7 @@ export default function Header() {
         <div className="ml-auto flex items-center gap-3 md:gap-5">
           <button
             type="button"
-            className="px-4 py-3 text-sm font-medium border border-primary_100 text-primary_100 rounded-xl transition-colors md:block hidden"
+            className="lg:px-4 lg:py-3 p-2 text-sm font-medium border border-primary_100 text-primary_100 rounded-xl transition-colors md:block hidden"
             onClick={() => openNewTabWithUrl(`${URLS.webAllURL}/#/auth/login`)}
             aria-label="Login"
           >
@@ -91,7 +91,7 @@ export default function Header() {
           </button>
           <button
             type="button"
-            className="px-4 py-3 text-sm font-medium text-white bg-primary_100 hover:opacity-90 rounded-xl transition-colors md:block hidden"
+            className="lg:px-4 lg:py-3 p-2 whitespace-nowrap text-sm font-medium text-white bg-primary_100 hover:opacity-90 rounded-xl transition-colors md:block hidden"
             onClick={() => openNewTabWithUrl(`${URLS.webAllURL}/#/auth/signup`)}
             aria-label="Create Event"
           >
