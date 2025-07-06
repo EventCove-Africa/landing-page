@@ -21,7 +21,7 @@ export default function EventsDetails({
             width={700} // Increase width
             height={600} // Increase height
             quality={100}
-            className="object-cover rounded-xl w-full h-[200px] sm:h-[300px] md:h-[300px] lg:h-[300px] xl:h-[300px]"
+            className="object-fit rounded-xl w-full h-[200px] sm:h-[300px] md:h-[300px] lg:h-[300px] xl:h-[400px]"
           />
         ) : null}
       </div>

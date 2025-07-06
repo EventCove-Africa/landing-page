@@ -8,16 +8,17 @@ import { _handleClearCookiesAndSession, isObjectEmpty } from "@/utils";
 import { useRouter } from "next/router";
 
 import ModalPopup from "@/components/ModalPopup";
-import PrivatePassCode from "./components/PrivatePassCode";
+import PrivatePassCode from "../../components/PrivatePassCode";
 import useEventsHook from "@/hooks/useEventsHook";
-import EventsDetails from "./components/EventsDetails";
+import EventsDetails from "../../components/EventsDetails";
 import Loaders from "@/components/Loaders";
-import TicketsDetails from "./components/TicketsDetails";
+import TicketsDetails from "../../components/TicketsDetails";
 import SkeletonLoaderEventDetails from "@/pages/components/SkeletonLoaderEventDetails";
 
 export default function EventDetails() {
   const router = useRouter();
   const { eventId } = router.query as any;
+  const isSlug = false
 
   const {
     eventDetails,
@@ -35,7 +36,7 @@ export default function EventDetails() {
     (async () => {
       mounted = true;
       if (mounted && eventId) {
-        handleCheckIfEventIsPrivate(eventId);
+        handleCheckIfEventIsPrivate(eventId, isSlug);
       }
     })();
     return () => {
@@ -81,6 +82,7 @@ export default function EventDetails() {
             eventDetails={eventDetails}
             loadingEventDetails={loadingEventDetails}
             eventId={eventId}
+            isSlug={isSlug}
           />
         </div>
       </div>
@@ -94,6 +96,7 @@ export default function EventDetails() {
           eventId={eventId}
           handleFetchEventsDetails={handleFetchEventsDetails}
           handleFetchEventTicketsDetails={handleFetchEventTicketsDetails}
+          isSlug={isSlug}
         />
       </ModalPopup>
       <ModalPopup backdropFilter="30px" isOpen={loadingEventDetails?.isPrivate}>
