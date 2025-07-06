@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { api } from "@/services/apiClients";
 import { appUrls } from "@/services/urls";
@@ -94,28 +96,34 @@ const useEventsHook = () => {
     []
   );
 
-  const handleFetchEventsDetails = useCallback(async (eventId: string) => {
-    setLoadingEventDetails((prev) => ({
-      ...prev,
-      details: true,
-    }));
-    try {
-      const res = await api.get(appUrls.EVENT_URL + `/guest/${eventId}`);
-      const status_code = [200, 201].includes(res?.status);
-      if (status_code) {
-        const result = res.data?.data ?? null;
-        setEventDetails(result);
-      }
-    } catch (error: any) {
-      const err_message = _handleThrowErrorMessage(error?.data?.message);
-      toast.error(err_message);
-    } finally {
+  const handleFetchEventsDetails = useCallback(
+    async (eventId: string, isSlug: boolean = false) => {
       setLoadingEventDetails((prev) => ({
         ...prev,
-        details: false,
+        details: true,
       }));
-    }
-  }, []);
+      try {
+        const res = await api.get(
+          appUrls.EVENT_URL + `/guest/${eventId}?isSlug=${isSlug}`
+        );
+        const status_code = [200, 201].includes(res?.status);
+        if (status_code) {
+          const result = res.data?.data ?? null;
+          setEventDetails(result);
+          if (isSlug) return handleFetchEventTicketsDetails(result?.eventId);
+        }
+      } catch (error: any) {
+        const err_message = _handleThrowErrorMessage(error?.data?.message);
+        toast.error(err_message);
+      } finally {
+        setLoadingEventDetails((prev) => ({
+          ...prev,
+          details: false,
+        }));
+      }
+    },
+    []
+  );
 
   const handleFetchEventTicketsDetails = useCallback(
     async (eventId: string) => {
@@ -145,25 +153,32 @@ const useEventsHook = () => {
     []
   );
 
-  const handleCheckIfEventIsPrivate = async (eventId: string) => {
+  const handleCheckIfEventIsPrivate = async (
+    eventId: string,
+    isSlug: boolean = false
+  ) => {
     setLoadingEventDetails((prev) => ({
       ...prev,
       isPrivate: true,
     }));
     try {
-      const res = await api.get(appUrls.EVENT_URL + `/status/guest/${eventId}`);
+      const res = await api.get(
+        appUrls.EVENT_URL + `/status/guest/${eventId}?isSlug=${isSlug}`
+      );
       const status_code = [200, 201].includes(res?.status);
       if (status_code) {
         const isEventPublic = res?.data?.data.toLowerCase();
         if (isEventPublic === "public") {
-          handleFetchEventTicketsDetails(eventId);
-          return handleFetchEventsDetails(eventId);
+          if (!isSlug) {
+            handleFetchEventTicketsDetails(eventId);
+          }
+          return handleFetchEventsDetails(eventId, isSlug);
         }
         setOpenPassCodeModal(true);
       }
     } catch (error: any) {
-      const err_message = _handleThrowErrorMessage(error?.data?.message);
-      toast.error(err_message);
+      // const err_message = _handleThrowErrorMessage(error?.data?.message);
+      // toast.error(err_message);
     } finally {
       setLoadingEventDetails((prev) => ({
         ...prev,
