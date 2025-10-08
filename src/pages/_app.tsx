@@ -14,7 +14,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <Toaster
           toastOptions={{
             duration: 4000,
-            className: "z-[9999]",
+            className: "z-[9999] text-xs",
           }}
         />
         <AnimatePresence mode="wait">
