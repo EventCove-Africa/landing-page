@@ -22,8 +22,8 @@ export default function TicketsDetails({
   allEventTickets,
   loadingEventDetails,
   eventDetails,
-  // isSlug = false,
-}: TicketsDetailsProps) {
+}: // isSlug = false,
+TicketsDetailsProps) {
   const router = useRouter();
   const [count, setCount] = useState(1);
   const [maxCapacity, setMaxCapacity] = useState(5);
@@ -151,7 +151,7 @@ export default function TicketsDetails({
                             {ticketType}
                           </h3>
                           <h5 className="text-dark_200 font-normal lg:text-base text-sm">
-                            {formatToNaira(price)}
+                            {price ? formatToNaira(price) : "Free"}
                           </h5>
                         </div>
                       </div>
@@ -200,10 +200,9 @@ export default function TicketsDetails({
                   transferTransactionFeeToBuyer,
                 });
                 router.push(
-                  `/events/${eventDetails?.eventName.replaceAll(
-                    " ",
-                    "-"
-                  )}/${eventDetails?.eventId}/${selectedTicket?.ticketId}`
+                  `/events/${eventDetails?.eventName.replaceAll(" ", "-")}/${
+                    eventDetails?.eventId
+                  }/${selectedTicket?.ticketId}`
                 );
               }}
               title="Get Ticket"
