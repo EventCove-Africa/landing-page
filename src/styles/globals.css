@@ -27,12 +27,13 @@ body {
   line-height: 1.5;
   margin: 0;
 }
+
 .container {
     @apply max-w-screen-2xl mx-auto;
 }
 
 .padding-spacing {
-  @apply px-4 md:py-4 py-2
+  @apply px-2 md:py-4 py-2
 }
 
 .btn-circle {
