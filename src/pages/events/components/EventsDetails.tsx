@@ -41,7 +41,7 @@ export default function EventsDetails({
         </p>
       </div>
       <div className="flex flex-wrap gap-4 mt-4">
-        <div className="bg-grey_500 rounded-md md:w-fit w-full p-2 flex gap-2 items-center">
+        <div className="bg-grey_300 rounded-md md:w-fit w-full p-2 flex gap-2 items-center">
           <LuCalendarDays className="w-[20px] h-[20px] text-blue_200" />
           <div className="flex flex-col gap-1">
             <h3 className="text-grey_100 text-xs font-normal">Start Date</h3>
@@ -50,7 +50,7 @@ export default function EventsDetails({
             </h5>
           </div>
         </div>
-        <div className="bg-grey_500 rounded-md md:w-fit w-full p-2 flex gap-2 items-center">
+        <div className="bg-grey_300 rounded-md md:w-fit w-full p-2 flex gap-2 items-center">
           <IoTimeOutline className="text-secondary_500 w-[20px] h-[20px]" />
           <div className="flex flex-col gap-1">
             <h3 className="text-grey_100 text-xs font-normal">Start Time</h3>
@@ -59,7 +59,7 @@ export default function EventsDetails({
             </h5>
           </div>
         </div>
-        <div className="bg-grey_500 rounded-md md:w-fit w-full p-2 flex gap-2 items-center">
+        <div className="bg-grey_300 rounded-md md:w-fit w-full p-2 flex gap-2 items-center">
           <CiUser className="text-secondary_500 w-[20px] h-[20px]" />
           <div className="flex flex-col gap-1">
             <h3 className="text-grey_100 text-xs font-normal">
@@ -74,7 +74,7 @@ export default function EventsDetails({
       {showDescription && (
         <div className="mt-4">
           <h3 className="text-dark_200 font-normal text-sm">Event Details</h3>
-          <div className="h-auto max-h-[200px] overflow-auto bg-grey_500 p-3 text-grey_100 font-normal text-sm">
+          <div className="h-auto max-h-[200px] overflow-auto bg-grey_300 p-3 text-grey_100 font-normal text-sm">
             {eventDetails?.eventDescription}
           </div>
         </div>
