@@ -153,7 +153,7 @@ TicketsDetailsProps) {
                       } rounded-md p-2 flex flex-col justify-between`}
                     >
                       {classification.toLowerCase() === "group" && (
-                        <span className="text-white w-fit mb-5 bg-green_100 text-xs font-semibold p-1 rounded">
+                        <span className="text-white w-fit mb-5 bg-green_500 text-xs font-semibold p-1 rounded">
                           Group ticket
                         </span>
                       )}
