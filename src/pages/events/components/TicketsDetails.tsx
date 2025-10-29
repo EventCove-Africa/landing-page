@@ -99,7 +99,7 @@ TicketsDetailsProps) {
     <>
       <div className="bg-white w-full rounded-xl h-fit p-3">
         <h3 className="text-sm font-bold text-dark_200">Select a Ticket</h3>
-        <div className="grid md:grid-cols-2 grid-cols-1 gap-3 mt-4">
+        <div className="grid md:grid-cols-2 grid-cols-1 md:gap-3 gap-6 mt-4">
           {loadingEventDetails?.tickets && (
             <SkeletonLoader count={2} className="h-[100px]" />
           )}
@@ -145,11 +145,11 @@ TicketsDetailsProps) {
                       className={`bg-grey_300 h-fit ${
                         selectedTicket?.ticketId === ticketId
                           ? "border border-primary_100"
-                          : "border border-transparent"
+                          : "border border-grey_1100"
                       } ${
                         notAllowedToSelect
                           ? "cursor-not-allowed"
-                          : "cursor-pointer border hover:border-primary_100"
+                          : "cursor-pointer border hover:border-primary_400"
                       } rounded-md p-2 flex flex-col justify-between`}
                     >
                       {classification.toLowerCase() === "group" && (
