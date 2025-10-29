@@ -50,6 +50,7 @@ const config: Config = {
         green_200: "#4CAF50",
         green_400: "#EDF7EE",
         green_300: "#D7EFD8",
+        green_500: "#079455",
         background_100: "#F1F5F8",
         green_100: "#34C759",
         pink_100: "#FAF5F8",
