@@ -18,6 +18,7 @@ export type ticketDetailsProps = {
   transferTransactionFeeToBuyer: boolean;
   validatedCount: number;
   soldCount: number;
+  chargeAmount: number;
   capacity: number;
   salesEndDate: [number, number, number];
 };
