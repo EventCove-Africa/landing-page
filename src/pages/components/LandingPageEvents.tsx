@@ -57,13 +57,12 @@ const EventCard: React.FC<{ event: allEventsProps }> = ({ event }) => {
 
   return (
     <article
-      className="bg-white shadow rounded-lg p-3 cursor-pointer"
+      className="bg-white shadow-md rounded-lg p-3 cursor-pointer flex flex-row-reverse h-[180px]"
       onClick={() =>
         router.push(`/events/${eventName?.replaceAll(" ", "-")}/${eventId}`)
       }
       id="event"
     >
-      {/* Image container with fixed aspect ratio */}
       <div
         className="relative rounded-xl overflow-hidden"
         style={{ aspectRatio: (323.11 / 203.61).toString() }}
@@ -77,11 +76,11 @@ const EventCard: React.FC<{ event: allEventsProps }> = ({ event }) => {
           priority
         />
       </div>
-      <div className="mt-2 flex flex-col gap-1">
-        <h3 className="text-dark_200 font-medium text-xs md:text-sm">
+      <div className="mt-2 flex flex-col gap-4 w-full">
+        <h3 className="text-dark_200 font-medium text-sm md:text-base">
           {eventName}
         </h3>
-        <p className="flex items-center gap-1 text-xs font-normal text-grey_100">
+        <p className="flex items-center gap-1 md:text-sm text-xs font-normal text-grey_100">
           {eventVenueType?.toLowerCase() === "physical" ? (
             <CiLocationOn className="w-4 h-4" />
           ) : (
@@ -89,12 +88,12 @@ const EventCard: React.FC<{ event: allEventsProps }> = ({ event }) => {
           )}{" "}
           {location} {eventVenueType?.toLowerCase() === "physical" && city}
         </p>
-        <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1 text-xs font-medium text-primary_100">
+        <div className="flex md:flex-row flex-col md:items-center items-start md:gap-2 gap-4">
+          <div className="flex items-center gap-1 md:text-sm text-xs font-medium text-primary_100">
             <PiCalendarDotsThin className="w-4 h-4" />{" "}
             {arrayToFormattedDateWithYear(startDate)}
           </div>
-          <div className="flex items-center justify-center gap-1 rounded-md p-2 text-xs font-medium text-dark_100">
+          <div className="flex items-center justify-center gap-1 rounded-md md:text-sm text-xs font-medium text-dark_100">
             <TfiTimer className="w-4 h-4" /> {formatTimeToshowAmPm(startTime)}
           </div>
         </div>
@@ -135,24 +134,13 @@ export default function Events({
   const renderSkeletonLoaderForEventDetails = () => {
     if (!loadingEventDetails?.all_events) return null;
     return (
-      <>
-        {[...Array(1)].map((_, i) => (
-          <div key={i} className="bg-white shadow rounded-lg p-3">
-            <SkeletonLoader
-              count={1}
-              className="w-full flex justify-between rounded-md"
-              style={{ aspectRatio: (323.11 / 203.61).toString() }}
-            />
-            {[...Array(3)].map((_, index) => (
-              <SkeletonLoader
-                key={index}
-                count={1}
-                className="md:w-1/3 h-[10px] rounded-md mt-2"
-              />
-            ))}
-          </div>
-        ))}
-      </>
+      <div className="rounded-lg p-3 w-full h-[180px]">
+        <SkeletonLoader
+          count={1}
+          className="w-full h-full"
+          style={{ aspectRatio: (323.11 / 203.61).toString() }}
+        />
+      </div>
     );
   };
 
@@ -160,7 +148,9 @@ export default function Events({
     <section className="container mx-auto p-3">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-base font-bold text-dark_200">{title}</h3>
+        <h3 className="md:text-lg text-base font-bold text-dark_200">
+          {title}
+        </h3>
         {showViewAll && (
           <button
             type="button"
@@ -173,7 +163,7 @@ export default function Events({
         )}
       </div>
       {/* Event Cards Grid */}
-      <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="w-full grid gap-4 grid-cols-1 lg:grid-cols-2">
         {renderSkeletonLoaderForEventDetails()}
         {!loadingEventDetails?.all_events && (
           <>
