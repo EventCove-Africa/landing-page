@@ -72,12 +72,13 @@ const useEventsHook = () => {
         ...prev,
         all_events: true,
       }));
+      const statusType = eventType ? `?status=${eventType}` : "";
       const eventCategory = category ? `&eventCategory=${category}` : "";
       const querySearchParam = querySearch ? `${querySearch}` : "";
       try {
         const { status, data } = await api.get(
           appUrls.EVENT_URL +
-            `/guest/all?status=${eventType}${eventCategory}${querySearchParam}`
+            `/guest/all${statusType}${eventCategory}${querySearchParam}`
         );
         // page=${1}&size=9
         const results = data?.data || null;

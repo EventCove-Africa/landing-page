@@ -21,7 +21,8 @@ export default function EventsDetails({
             width={700} // Increase width
             height={600} // Increase height
             quality={100}
-            className="object-fit rounded-xl w-full h-[200px] sm:h-[300px] md:h-[300px] lg:h-[300px] xl:h-[400px]"
+            priority
+            className="object-fit rounded-xl w-full h-[300px] sm:h-[350px] md:h-[350px] lg:h-[350px] xl:h-[400px]"
           />
         ) : null}
       </div>
