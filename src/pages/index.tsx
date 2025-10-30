@@ -49,10 +49,10 @@ export default function Home() {
         </div>
         <div className="w-full h-full">
           <LandingPageEvents
-            title="Upcoming  Events"
+            title="Upcoming Events"
             status="upcoming"
             showViewAll
-            endingIndex={4}
+            endingIndex={10}
           />
         </div>
         <div className="w-full h-full">
