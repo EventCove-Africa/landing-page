@@ -33,7 +33,7 @@ body {
 }
 
 .padding-spacing {
-  @apply px-2 md:py-4 py-2
+  @apply px-1 md:py-4 py-2
 }
 
 .btn-circle {
