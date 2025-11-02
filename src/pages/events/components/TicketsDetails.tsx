@@ -173,9 +173,17 @@ TicketsDetailsProps) {
                             </span>
                           </h3>
                           <h5 className="text-dark_200 font-normal lg:text-base text-sm">
-                            {price
-                              ? formatToNaira(price + chargeAmount)
-                              : "Free"}
+                            {price ? (
+                              <>
+                                {!transferTransactionFeeToBuyer ? (
+                                  <>{formatToNaira(price)}</>
+                                ) : (
+                                  <>{formatToNaira(price + chargeAmount)}</>
+                                )}
+                              </>
+                            ) : (
+                              "Free"
+                            )}
                           </h5>
                         </div>
                       </div>
