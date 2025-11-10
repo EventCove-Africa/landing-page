@@ -57,7 +57,7 @@ const EventCard: React.FC<{ event: allEventsProps }> = ({ event }) => {
 
   return (
     <article
-      className="bg-white shadow-md rounded-lg md:p-3 p-2 cursor-pointer flex flex-row-reverse h-[180px]"
+      className="bg-white shadow-md rounded-lg md:p-3 p-2 cursor-pointer flex flex-row-reverse md:h-[180px] h-auto"
       onClick={() =>
         router.push(`/events/${eventName?.replaceAll(" ", "-")}/${eventId}`)
       }
