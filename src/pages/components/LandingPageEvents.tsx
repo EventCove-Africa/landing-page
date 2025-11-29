@@ -46,7 +46,7 @@ const EventCard: React.FC<{ event: allEventsProps }> = ({ event }) => {
   const router = useRouter();
   const {
     eventName,
-    // location,
+    location,
     startDate,
     eventId,
     eventImageUrl,
@@ -86,8 +86,9 @@ const EventCard: React.FC<{ event: allEventsProps }> = ({ event }) => {
             <CiLocationOn className="w-8 h-8" />
           ) : (
             <FaLink />
+
           )}{" "}
-          {'British Council, Ibrahim Babangida Way, Maitama, Abuja FCT'} {eventVenueType?.toLowerCase() === "physical" && city}
+          {location} {eventVenueType?.toLowerCase() === "physical" && city}
         </p>
         <div className="flex md:flex-row flex-col md:items-center items-start md:gap-2 gap-4">
           <div className="flex items-center gap-1 md:text-sm text-xs font-medium text-primary_100">
