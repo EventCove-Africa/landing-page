@@ -16,8 +16,8 @@ const CustomHead: React.FC<CustomHeadProps> = ({
   slug,
   image,
 }) => {
-  const titleName = title ? `${title}` : "EventCove";
-  const descriptionName = description ?? "Event details and tickets.";
+  const titleName = title ? title : "EventCove";
+  const descriptionName = description ?? "Discover amazing events";
   const favicon = image ?? "/favicon.svg";
   const url = `https://www.eventcove.africa/events/${slug ?? ""}`;
   return (
