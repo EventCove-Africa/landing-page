@@ -171,7 +171,7 @@ export default function TicketId() {
 
   return (
     <>
-      <CustomHead title={`EVENTCOVE - ${eventId} - ${ticketId}`} />
+      <CustomHead title={`EVENTCOVE`} />
       <div className="container padding-spacing w-full h-full">
         <DescriptionBar text="Ticket purchase 🌟" />
         <Formik
@@ -351,7 +351,7 @@ export default function TicketId() {
                     {isClient && transferTransactionFeeToBuyer && (
                       <div className="border-b border-grey_100 pb-2 flex justify-between items-center">
                         <h3 className="text-grey_100 md:text-sm text-xs font-semibold">
-                          Total Charge
+                          Service Charge
                         </h3>
                         {isClient && (
                           <h5 className="text-dark_200 md:text-sm text-xs font-semibold">
