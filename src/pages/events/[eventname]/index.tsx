@@ -20,7 +20,6 @@ type Props = {
 };
 
 export default function Eventname({ eventname }: Props) {
-  console.log(eventname)
   const isSlug = true;
   const formattedEventName = eventname ? eventname.replace(/-/g, " ") : "Event";
 
@@ -53,7 +52,7 @@ export default function Eventname({ eventname }: Props) {
 
   return (
     <>
-      <CustomHead title={formattedEventName} />
+      <CustomHead title={formattedEventName} image={eventDetails?.eventImageUrl} />
       <div className="container padding-spacing w-full h-full">
         <DescriptionBar text="Get the full picture of your event 🌟" />
         <div className="w-full flex lg:flex-row flex-col gap-4">

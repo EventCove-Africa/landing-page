@@ -16,21 +16,20 @@ const CustomHead: React.FC<CustomHeadProps> = ({
   slug,
   image,
 }) => {
-  const titleName = title ? title : "EventCove";
   const descriptionName = description ?? "Discover amazing events";
   const favicon = image ?? "/favicon.svg";
   const url = `https://www.eventcove.africa/events/${slug ?? ""}`;
   return (
     <Head>
-      <title>{titleName}</title>
+      <title>{title}</title>
       <link rel="icon" href={icon} />
       <meta name="description" content={descriptionName} />
       <meta property="og:type" content="website" />
       <meta property="og:url" content={url} />
-      <meta property="og:title" content={titleName ?? "EventCove"} />
+      <meta property="og:title" content={title ?? "EventCove"} />
       <meta property="og:description" content={descriptionName} />
       <meta property="og:image" content={favicon} />
-      <meta name="twitter:title" content={titleName ?? "EventCove"} />
+      <meta name="twitter:title" content={title ?? "EventCove"} />
       <meta name="twitter:description" content={descriptionName} />
       <meta name="twitter:image" content={favicon} />
     </Head>
