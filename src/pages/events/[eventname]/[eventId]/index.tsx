@@ -18,7 +18,7 @@ import SkeletonLoaderEventDetails from "@/pages/components/SkeletonLoaderEventDe
 export default function EventDetails() {
   const router = useRouter();
   const { eventId } = router.query as any;
-  const isSlug = false
+  const isSlug = false;
 
   const {
     eventDetails,
@@ -54,7 +54,7 @@ export default function EventDetails() {
           "count",
           "ticketType",
           "charges",
-          "transferTransactionFeeToBuyer"
+          "transferTransactionFeeToBuyer",
         );
       }
     })();
