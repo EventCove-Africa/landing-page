@@ -14,13 +14,16 @@ import EventsDetails from "../components/EventsDetails";
 import Loaders from "@/components/Loaders";
 import TicketsDetails from "../components/TicketsDetails";
 import SkeletonLoaderEventDetails from "@/pages/components/SkeletonLoaderEventDetails";
+import { api } from "@/services/apiClients";
+import { appUrls } from "@/services/urls";
 
 type Props = {
   eventname: string;
+  eventImageUrl: string;
   isSlug: boolean;
 };
 
-export default function Eventname({ eventname, isSlug }: Props) {
+export default function Eventname({ eventname, isSlug, eventImageUrl }: Props) {
   const formattedEventName = eventname ? eventname.replace(/-/g, " ") : "Event";
 
   const {
@@ -54,7 +57,8 @@ export default function Eventname({ eventname, isSlug }: Props) {
     <>
       <CustomHead
         title={formattedEventName}
-        image={eventDetails?.eventImageUrl}
+        image={eventImageUrl}
+        slug={eventname}
       />
       <div className="container padding-spacing w-full h-full">
         <DescriptionBar text="Get the full picture of your event 🌟" />
@@ -103,11 +107,16 @@ export default function Eventname({ eventname, isSlug }: Props) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { eventname } = context.params as { eventname: string };
   const isSlug = true;
+  const res = await api.get(
+    appUrls.EVENT_URL + `/guest/${eventname}?isSlug=${isSlug}`,
+  );
+  const result = res.data?.data;
 
   return {
     props: {
       eventname,
       isSlug,
+      eventImageUrl: result?.eventImageUrl,
     },
   };
 };
