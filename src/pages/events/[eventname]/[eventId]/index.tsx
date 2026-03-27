@@ -65,7 +65,7 @@ export default function EventDetails() {
 
   return (
     <>
-      <CustomHead title={`EVENTCOVE - ${eventId}`} />
+      <CustomHead title={`EVENTCOVE`} />
       <div className="container padding-spacing w-full h-full">
         <DescriptionBar text="Get the full picture of your event 🌟" />
         <div className="w-full flex lg:flex-row flex-col gap-4">
