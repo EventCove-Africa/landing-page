@@ -17,11 +17,10 @@ import SkeletonLoaderEventDetails from "@/pages/components/SkeletonLoaderEventDe
 
 type Props = {
   eventname: string;
+  isSlug: boolean;
 };
 
-export default function Eventname({ eventname }: Props) {
-  console.log(eventname)
-  const isSlug = true;
+export default function Eventname({ eventname, isSlug }: Props) {
   const formattedEventName = eventname ? eventname.replace(/-/g, " ") : "Event";
 
   const {
@@ -53,7 +52,10 @@ export default function Eventname({ eventname }: Props) {
 
   return (
     <>
-      <CustomHead title={formattedEventName} />
+      <CustomHead
+        title={formattedEventName}
+        image={eventDetails?.eventImageUrl}
+      />
       <div className="container padding-spacing w-full h-full">
         <DescriptionBar text="Get the full picture of your event 🌟" />
         <div className="w-full flex lg:flex-row flex-col gap-4">
@@ -100,10 +102,12 @@ export default function Eventname({ eventname }: Props) {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { eventname } = context.params as { eventname: string };
+  const isSlug = true;
 
   return {
     props: {
       eventname,
+      isSlug,
     },
   };
 };
