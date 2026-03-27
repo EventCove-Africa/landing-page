@@ -68,7 +68,7 @@ export default function TicketId() {
   const calculateTotalAmountForBuyer = calculateTotalAmountForBuyers(
     price,
     QTY,
-    charges
+    charges,
   );
 
   const registerTicketSchema = Yup.object().shape({
@@ -95,12 +95,12 @@ export default function TicketId() {
   const handleReserveTransaction = async (
     reservePayloadTicket: ReserveTransactionProps,
     initiatePayloadTicket: IntiateTransactionProps,
-    actions: FormikHelpers<any>
+    actions: FormikHelpers<any>,
   ) => {
     try {
       const res = await api.post(
         appUrls.RESERVE_TICKET_URL,
-        reservePayloadTicket
+        reservePayloadTicket,
       );
       const status_code = [200, 201].includes(res?.status);
       if (status_code) {
@@ -115,7 +115,7 @@ export default function TicketId() {
 
   const handleInitiateTransaction = async (
     payload: ReserveTransactionProps,
-    actions: FormikHelpers<any>
+    actions: FormikHelpers<any>,
   ) => {
     try {
       const res = await api.post(appUrls.INITIATE_TICKET_URL, payload);
@@ -130,7 +130,7 @@ export default function TicketId() {
         } else {
           setPaystackUrl(url);
           setSuccessMessage(
-            "Once payment is successful kindly check your email"
+            "Once payment is successful kindly check your email",
           );
         }
       }
@@ -144,7 +144,7 @@ export default function TicketId() {
 
   const handleFinalAction = () => {
     if (paystackUrl !== "") {
-      setRedirecting(true)
+      setRedirecting(true);
       window.location.href = paystackUrl;
     } else {
       setIsOpen(!isOpen);
@@ -171,7 +171,9 @@ export default function TicketId() {
 
   return (
     <>
-      <CustomHead title={`EVENTCOVE`} />
+      <CustomHead
+        title="Event ticket details"
+      />
       <div className="container padding-spacing w-full h-full">
         <DescriptionBar text="Ticket purchase 🌟" />
         <Formik
@@ -224,7 +226,7 @@ export default function TicketId() {
             handleReserveTransaction(
               reservePayloadTicket,
               initiatePayloadTicket,
-              actions
+              actions,
             );
           }}
         >
