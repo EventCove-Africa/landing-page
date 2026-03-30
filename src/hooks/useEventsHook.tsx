@@ -16,6 +16,7 @@ export type ticketDetailsProps = {
   price: number;
   charges: number;
   transferTransactionFeeToBuyer: boolean;
+  showCapacityToUsers: boolean;
   validatedCount: number;
   soldCount: number;
   chargeAmount: number;
