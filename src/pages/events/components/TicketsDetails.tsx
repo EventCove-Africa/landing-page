@@ -30,7 +30,7 @@ TicketsDetailsProps) {
   const [maxCapacity, setMaxCapacity] = useState(5);
   const [selectedTicket, setSelectedTicket] = useState<any>({});
   const [expandedPerks, setExpandedPerks] = useState<Record<string, boolean>>(
-    {}
+    {},
   );
   const togglePerks = (ticketId: string) =>
     setExpandedPerks((p) => ({ ...p, [ticketId]: !p[ticketId] }));
@@ -60,6 +60,7 @@ TicketsDetailsProps) {
     colour,
     classification,
     notAllowedToSelect,
+    showCapacityToUsers,
   }: any) => {
     if (notAllowedToSelect) return null;
     if (capacity < 5) {
@@ -79,6 +80,7 @@ TicketsDetailsProps) {
       salesEndDate,
       colour,
       classification,
+      showCapacityToUsers,
     });
   };
 
@@ -119,8 +121,12 @@ TicketsDetailsProps) {
                   capacity,
                   chargeAmount,
                   salesEndDate,
+                  showCapacityToUsers,
                 }: ticketDetailsProps) => {
                   const notAllowedToSelect = soldCount >= capacity;
+                  const showCapacityCountClassification =
+                    showCapacityToUsers ||
+                    classification.toLowerCase() === "group";
                   return (
                     <div
                       key={ticketId}
@@ -140,6 +146,7 @@ TicketsDetailsProps) {
                           colour,
                           classification,
                           notAllowedToSelect,
+                          showCapacityToUsers,
                         })
                       }
                       className={`bg-grey_300 h-fit ${
@@ -152,10 +159,19 @@ TicketsDetailsProps) {
                           : "cursor-pointer border hover:border-primary_400"
                       } rounded-md p-2 flex flex-col justify-between`}
                     >
-                      {classification.toLowerCase() === "group" && (
-                        <span className="text-white w-fit mb-5 bg-green_500 text-xs font-semibold p-1 rounded">
-                          Group ticket
-                        </span>
+                      {showCapacityCountClassification && (
+                        <div className="w-full flex justify-between mb-2">
+                          {classification.toLowerCase() === "group" && (
+                            <span className="text-white w-fit h-fit bg-green_500 text-xs font-semibold p-1 rounded">
+                              Group ticket
+                            </span>
+                          )}
+                          {showCapacityToUsers && (
+                            <span className="text-dark_200 bg-blue_500 text-xs font-extrabold p-1 rounded w-full flex justify-end">
+                              {soldCount} / {capacity} sold
+                            </span>
+                          )}
+                        </div>
                       )}
                       <div className="flex gap-2 items-center">
                         <div className="rounded-full bg-[#EEEEFF] p-3 flex justify-center items-center">
@@ -168,7 +184,7 @@ TicketsDetailsProps) {
                               {!price
                                 ? null
                                 : `: includes (${formatToNaira(
-                                    chargeAmount
+                                    chargeAmount,
                                   )}) fee`}
                             </span>
                           </h3>
@@ -236,7 +252,7 @@ TicketsDetailsProps) {
                       )}
                     </div>
                   );
-                }
+                },
               )
             : null}
         </div>
@@ -276,7 +292,7 @@ TicketsDetailsProps) {
                 router.push(
                   `/events/${eventDetails?.eventName.replaceAll(" ", "-")}/${
                     eventDetails?.eventId
-                  }/${selectedTicket?.ticketId}`
+                  }/${selectedTicket?.ticketId}`,
                 );
               }}
               title="Get Ticket"
