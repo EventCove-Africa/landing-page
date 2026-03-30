@@ -162,13 +162,13 @@ TicketsDetailsProps) {
                       {showCapacityCountClassification && (
                         <div className="w-full flex justify-between mb-2">
                           {classification.toLowerCase() === "group" && (
-                            <span className="text-white w-fit h-fit bg-green_500 text-xs font-semibold p-1 rounded">
+                            <span className="text-white w-fit whitespace-nowrap h-fit bg-green_500 text-xs font-semibold p-1 rounded">
                               Group ticket
                             </span>
                           )}
                           {showCapacityToUsers && (
                             <span className="text-dark_200 bg-blue_500 text-xs font-extrabold p-1 rounded w-full flex justify-end">
-                              {soldCount} / {capacity} sold
+                              {capacity} slot left
                             </span>
                           )}
                         </div>
