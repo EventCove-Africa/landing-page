@@ -124,6 +124,7 @@ TicketsDetailsProps) {
                   showCapacityToUsers,
                 }: ticketDetailsProps) => {
                   const notAllowedToSelect = soldCount >= capacity;
+                  const ticketLeft = capacity - soldCount;
                   const showCapacityCountClassification =
                     showCapacityToUsers ||
                     classification.toLowerCase() === "group";
@@ -168,7 +169,7 @@ TicketsDetailsProps) {
                           )}
                           {showCapacityToUsers && (
                             <span className="text-dark_200 bg-blue_500 text-xs font-extrabold p-1 rounded w-full flex justify-end">
-                              {!notAllowedToSelect ? `${capacity} ${soldCount > 1 ? "slots" : "slot"} left` : ""}
+                              {!notAllowedToSelect ? `${ticketLeft} ${ticketLeft > 1 ? "slots" : "slot"} left` : ""}
                             </span>
                           )}
                         </div>
