@@ -168,7 +168,7 @@ TicketsDetailsProps) {
                           )}
                           {showCapacityToUsers && (
                             <span className="text-dark_200 bg-blue_500 text-xs font-extrabold p-1 rounded w-full flex justify-end">
-                              {capacity} slot left
+                              {!notAllowedToSelect ? `${capacity} ${soldCount > 1 ? "slots" : "slot"} left` : ""}
                             </span>
                           )}
                         </div>
