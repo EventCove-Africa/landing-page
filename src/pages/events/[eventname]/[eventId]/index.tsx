@@ -14,6 +14,7 @@ import EventsDetails from "../../components/EventsDetails";
 import Loaders from "@/components/Loaders";
 import TicketsDetails from "../../components/TicketsDetails";
 import SkeletonLoaderEventDetails from "@/pages/components/SkeletonLoaderEventDetails";
+import InfoModal from "@/pages/components/InfoModal";
 
 export default function EventDetails() {
   const router = useRouter();
@@ -22,6 +23,7 @@ export default function EventDetails() {
 
   const {
     eventDetails,
+    eventExpired,
     loadingEventDetails,
     handleCheckIfEventIsPrivate,
     handleFetchEventsDetails,
@@ -101,6 +103,14 @@ export default function EventDetails() {
       </ModalPopup>
       <ModalPopup backdropFilter="30px" isOpen={loadingEventDetails?.isPrivate}>
         <Loaders />
+      </ModalPopup>
+
+      <ModalPopup isOpen={eventExpired}>
+        <InfoModal
+          info="This event has expired, you can view other events on our platform"
+          onClick={() => router.push("/events")}
+          title="View more Events"
+        />
       </ModalPopup>
     </>
   );

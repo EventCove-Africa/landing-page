@@ -16,6 +16,8 @@ import TicketsDetails from "../components/TicketsDetails";
 import SkeletonLoaderEventDetails from "@/pages/components/SkeletonLoaderEventDetails";
 import { api } from "@/services/apiClients";
 import { appUrls } from "@/services/urls";
+import InfoModal from "@/pages/components/InfoModal";
+import { useRouter } from "next/router";
 
 type Props = {
   eventname: string;
@@ -24,11 +26,18 @@ type Props = {
   isSlug: boolean;
 };
 
-export default function Eventname({ eventname, isSlug, eventImageUrl, description }: Props) {
+export default function Eventname({
+  eventname,
+  isSlug,
+  eventImageUrl,
+  description,
+}: Props) {
   const formattedEventName = eventname ? eventname.replace(/-/g, " ") : "Event";
+  const router = useRouter();
 
   const {
     eventDetails,
+    eventExpired,
     loadingEventDetails,
     handleCheckIfEventIsPrivate,
     handleFetchEventsDetails,
@@ -102,6 +111,14 @@ export default function Eventname({ eventname, isSlug, eventImageUrl, descriptio
       <ModalPopup backdropFilter="30px" isOpen={loadingEventDetails?.isPrivate}>
         <Loaders />
       </ModalPopup>
+      
+      <ModalPopup isOpen={eventExpired}>
+        <InfoModal
+          info="This event has expired, you can view other events on our platform"
+          onClick={() => router.push("/events")}
+          title="View more Events"
+        />
+      </ModalPopup>
     </>
   );
 }
@@ -120,7 +137,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       isSlug,
       eventImageUrl: result?.eventImageUrl,
       description: result?.eventDescription,
-
     },
   };
 };
