@@ -35,10 +35,11 @@ const useEventsHook = () => {
   });
   const [allEvents, setAllEvents] = useState([]);
   const [allEventTickets, setAllEventTickets] = useState<ticketDetailsProps[]>(
-    []
+    [],
   );
   const [eventDetails, setEventDetails] = useState<any>({});
   const [openPassCodeModal, setOpenPassCodeModal] = useState<boolean>(false);
+  const [eventExpired, setEventExpired] = useState<boolean>(false);
 
   const fetchEventCategories = async () => {
     setLoadingEventDetails((prev) => ({
@@ -67,7 +68,7 @@ const useEventsHook = () => {
     async (
       eventType?: string | undefined,
       category?: string | undefined | null,
-      querySearch?: string
+      querySearch?: string,
     ) => {
       setLoadingEventDetails((prev) => ({
         ...prev,
@@ -79,7 +80,7 @@ const useEventsHook = () => {
       try {
         const { status, data } = await api.get(
           appUrls.EVENT_URL +
-            `/guest/all${statusType}${eventCategory}${querySearchParam}`
+            `/guest/all${statusType}${eventCategory}${querySearchParam}`,
         );
         // page=${1}&size=9
         const results = data?.data || null;
@@ -96,7 +97,7 @@ const useEventsHook = () => {
         }));
       }
     },
-    []
+    [],
   );
 
   const handleFetchEventsDetails = useCallback(
@@ -107,7 +108,7 @@ const useEventsHook = () => {
       }));
       try {
         const res = await api.get(
-          appUrls.EVENT_URL + `/guest/${eventId}?isSlug=${isSlug}`
+          appUrls.EVENT_URL + `/guest/${eventId}?isSlug=${isSlug}`,
         );
         const status_code = [200, 201].includes(res?.status);
         if (status_code) {
@@ -125,7 +126,7 @@ const useEventsHook = () => {
         }));
       }
     },
-    []
+    [],
   );
 
   const handleFetchEventTicketsDetails = useCallback(
@@ -136,7 +137,7 @@ const useEventsHook = () => {
       }));
       try {
         const res = await api.get(
-          appUrls.TICKET_TYPE_URL + `/guest/${eventId}`
+          appUrls.TICKET_TYPE_URL + `/guest/${eventId}`,
         );
         const status_code = [200, 201].includes(res?.status);
         if (status_code) {
@@ -153,12 +154,12 @@ const useEventsHook = () => {
         }));
       }
     },
-    []
+    [],
   );
 
   const handleCheckIfEventIsPrivate = async (
     eventId: string,
-    isSlug: boolean = false
+    isSlug: boolean = false,
   ) => {
     setLoadingEventDetails((prev) => ({
       ...prev,
@@ -166,11 +167,14 @@ const useEventsHook = () => {
     }));
     try {
       const res = await api.get(
-        appUrls.EVENT_URL + `/status/guest/${eventId}?isSlug=${isSlug}`
+        appUrls.EVENT_URL + `/status/guest/${eventId}?isSlug=${isSlug}`,
       );
       const status_code = [200, 201].includes(res?.status);
       if (status_code) {
-        const isEventPublic = res?.data?.data.toLowerCase();
+        const result = res?.data?.data;
+        const isEventPublic = result.eventPrivacy.toLowerCase();
+        const eventHasExpired = result.eventHasExpired;
+        if (eventHasExpired) return setEventExpired(eventHasExpired);
         if (isEventPublic === "public") {
           if (!isSlug) {
             handleFetchEventTicketsDetails(eventId);
@@ -203,6 +207,7 @@ const useEventsHook = () => {
     setOpenPassCodeModal,
     eventDetails,
     allEvents,
+    eventExpired,
   };
 };
 
