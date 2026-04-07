@@ -169,7 +169,9 @@ TicketsDetailsProps) {
                           )}
                           {showCapacityToUsers && (
                             <span className="text-dark_200 bg-blue_500 text-xs font-extrabold p-1 rounded w-full flex justify-end">
-                              {!notAllowedToSelect ? `${ticketLeft} ${ticketLeft > 1 ? "slots" : "slot"} left` : ""}
+                              {!notAllowedToSelect
+                                ? `${ticketLeft} ${ticketLeft > 1 ? "slots" : "slot"} left`
+                                : ""}
                             </span>
                           )}
                         </div>
@@ -181,13 +183,15 @@ TicketsDetailsProps) {
                         <div className="flex flex-col gap-1">
                           <h3 className="text-dark_200 text-sm font-semibold">
                             {ticketType}
-                            <span className="text-grey_100 text-xs text-inherit font-normal">
-                              {!price
-                                ? null
-                                : `: includes (${formatToNaira(
-                                    chargeAmount,
-                                  )}) fee`}
-                            </span>
+                            {transferTransactionFeeToBuyer && (
+                              <span className="text-grey_100 text-xs text-inherit font-normal">
+                                {!price
+                                  ? null
+                                  : `: includes (${formatToNaira(
+                                      chargeAmount,
+                                    )}) fee`}
+                              </span>
+                            )}
                           </h3>
                           <h5 className="text-dark_200 font-normal lg:text-base text-sm">
                             {price ? (
