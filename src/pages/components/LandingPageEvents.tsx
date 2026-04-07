@@ -19,6 +19,7 @@ import SkeletonLoader from "@/components/SkeletonLoader";
 type allEventsProps = {
   eventId: string;
   eventName: string;
+  slug: string;
   eventImageUrl: string;
   startDate: any;
   endDate: any;
@@ -47,6 +48,7 @@ const EventCard: React.FC<{ event: allEventsProps }> = ({ event }) => {
   const {
     eventName,
     location,
+    slug,
     startDate,
     eventId,
     eventImageUrl,
@@ -54,13 +56,13 @@ const EventCard: React.FC<{ event: allEventsProps }> = ({ event }) => {
     city,
     eventVenueType,
   } = event;
-
+  const route = slug
+    ? `/events/${slug}`
+    : `/events/${eventName?.replaceAll(" ", "-")}/${eventId}`;
   return (
     <article
       className="bg-white shadow-md rounded-lg md:p-3 p-2 cursor-pointer flex flex-row-reverse md:h-[180px] h-auto"
-      onClick={() =>
-        router.push(`/events/${eventName?.replaceAll(" ", "-")}/${eventId}`)
-      }
+      onClick={() => router.push(route)}
       id="event"
     >
       <div
@@ -86,7 +88,6 @@ const EventCard: React.FC<{ event: allEventsProps }> = ({ event }) => {
             <CiLocationOn className="w-8 h-8" />
           ) : (
             <FaLink />
-
           )}{" "}
           {location} {eventVenueType?.toLowerCase() === "physical" && city}
         </p>

@@ -59,7 +59,10 @@ export default function Pricing() {
 
   return (
     <div className="w-full container padding-spacing px-4 sm:px-6 lg:px-4">
-      <CustomHead title="EVENTCOVE - Pricing" />
+      <CustomHead
+        title="EVENTCOVE - Pricing"
+        description="Explore affordable pricing for event ticketing in Nigeria. Eventcove offers transparent fees to help you create, manage, and sell tickets بسهولة."
+      />
       <div className="relative w-full h-[250px] sm:h-[300px] md:h-[350px] md:mb-8 mb-4">
         <Image
           src="/assets/images/pricing_bg.png"
