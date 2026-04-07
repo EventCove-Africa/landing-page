@@ -20,10 +20,11 @@ import { appUrls } from "@/services/urls";
 type Props = {
   eventname: string;
   eventImageUrl: string;
+  description: string;
   isSlug: boolean;
 };
 
-export default function Eventname({ eventname, isSlug, eventImageUrl }: Props) {
+export default function Eventname({ eventname, isSlug, eventImageUrl, description }: Props) {
   const formattedEventName = eventname ? eventname.replace(/-/g, " ") : "Event";
 
   const {
@@ -59,6 +60,7 @@ export default function Eventname({ eventname, isSlug, eventImageUrl }: Props) {
         title={formattedEventName}
         image={eventImageUrl}
         slug={eventname}
+        description={description}
       />
       <div className="container padding-spacing w-full h-full">
         <DescriptionBar text="Get the full picture of your event 🌟" />
@@ -117,6 +119,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       eventname,
       isSlug,
       eventImageUrl: result?.eventImageUrl,
+      description: result?.eventDescription,
+
     },
   };
 };
