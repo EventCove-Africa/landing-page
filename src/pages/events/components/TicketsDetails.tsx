@@ -3,7 +3,12 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import { FiMinus } from "react-icons/fi";
-import { formatToNaira, isObjectEmpty, MAX_NUMBER_OF_ALLOWED_TICKETS_TO_PURCHASE, setDataINCookies } from "@/utils";
+import {
+  formatToNaira,
+  isObjectEmpty,
+  MAX_NUMBER_OF_ALLOWED_TICKETS_TO_PURCHASE,
+  setDataINCookies,
+} from "@/utils";
 import { FaPlus } from "react-icons/fa6";
 import Button from "@/components/FormComponents/Button";
 import SkeletonLoader from "@/components/SkeletonLoader";
@@ -27,7 +32,9 @@ export default function TicketsDetails({
 TicketsDetailsProps) {
   const router = useRouter();
   const [count, setCount] = useState<number>(1);
-  const [maxCapacity, setMaxCapacity] = useState<number>(MAX_NUMBER_OF_ALLOWED_TICKETS_TO_PURCHASE);
+  const [maxCapacity, setMaxCapacity] = useState<number>(
+    MAX_NUMBER_OF_ALLOWED_TICKETS_TO_PURCHASE,
+  );
   const [selectedTicket, setSelectedTicket] = useState<any>({});
   const [expandedPerks, setExpandedPerks] = useState<Record<string, boolean>>(
     {},
@@ -63,9 +70,12 @@ TicketsDetailsProps) {
     showCapacityToUsers,
     ticketUnsold,
   }: any) => {
+    setCount(1);
     if (notAllowedToSelect) return null;
     if (ticketUnsold < MAX_NUMBER_OF_ALLOWED_TICKETS_TO_PURCHASE) {
       setMaxCapacity(ticketUnsold);
+    } else {
+      setMaxCapacity(MAX_NUMBER_OF_ALLOWED_TICKETS_TO_PURCHASE);
     }
     setSelectedTicket({
       perks,
@@ -82,6 +92,7 @@ TicketsDetailsProps) {
       colour,
       classification,
       showCapacityToUsers,
+      ticketUnsold,
     });
   };
 
