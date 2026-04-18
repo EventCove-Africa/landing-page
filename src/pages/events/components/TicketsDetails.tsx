@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import { FiMinus } from "react-icons/fi";
-import { formatToNaira, isObjectEmpty, setDataINCookies } from "@/utils";
+import { formatToNaira, isObjectEmpty, MAX_NUMBER_OF_ALLOWED_TICKETS_TO_PURCHASE, setDataINCookies } from "@/utils";
 import { FaPlus } from "react-icons/fa6";
 import Button from "@/components/FormComponents/Button";
 import SkeletonLoader from "@/components/SkeletonLoader";
@@ -26,8 +26,8 @@ export default function TicketsDetails({
 }: // isSlug = false,
 TicketsDetailsProps) {
   const router = useRouter();
-  const [count, setCount] = useState(1);
-  const [maxCapacity, setMaxCapacity] = useState(5);
+  const [count, setCount] = useState<number>(1);
+  const [maxCapacity, setMaxCapacity] = useState<number>(MAX_NUMBER_OF_ALLOWED_TICKETS_TO_PURCHASE);
   const [selectedTicket, setSelectedTicket] = useState<any>({});
   const [expandedPerks, setExpandedPerks] = useState<Record<string, boolean>>(
     {},
@@ -61,10 +61,11 @@ TicketsDetailsProps) {
     classification,
     notAllowedToSelect,
     showCapacityToUsers,
+    ticketUnsold,
   }: any) => {
     if (notAllowedToSelect) return null;
-    if (capacity < 5) {
-      setMaxCapacity(capacity);
+    if (ticketUnsold < MAX_NUMBER_OF_ALLOWED_TICKETS_TO_PURCHASE) {
+      setMaxCapacity(ticketUnsold);
     }
     setSelectedTicket({
       perks,
@@ -124,7 +125,7 @@ TicketsDetailsProps) {
                   showCapacityToUsers,
                 }: ticketDetailsProps) => {
                   const notAllowedToSelect = soldCount >= capacity;
-                  const ticketLeft = capacity - soldCount;
+                  const ticketUnsold = capacity - soldCount;
                   const showCapacityCountClassification =
                     showCapacityToUsers ||
                     classification.toLowerCase() === "group";
@@ -148,6 +149,7 @@ TicketsDetailsProps) {
                           classification,
                           notAllowedToSelect,
                           showCapacityToUsers,
+                          ticketUnsold,
                         })
                       }
                       className={`bg-grey_300 h-fit ${
@@ -170,7 +172,7 @@ TicketsDetailsProps) {
                           {showCapacityToUsers && (
                             <span className="text-dark_200 bg-blue_500 text-xs font-extrabold p-1 rounded w-full flex justify-end">
                               {!notAllowedToSelect
-                                ? `${ticketLeft} ${ticketLeft > 1 ? "slots" : "slot"} left`
+                                ? `${ticketUnsold} ${ticketUnsold > 1 ? "slots" : "slot"} left`
                                 : ""}
                             </span>
                           )}
