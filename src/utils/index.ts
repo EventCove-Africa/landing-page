@@ -119,3 +119,5 @@ export const calculateTotalAmountForBuyers = (
 export const toBoolean = (value: any): boolean => {
   return value?.toLowerCase() === "true";
 };
+
+export const MAX_NUMBER_OF_ALLOWED_TICKETS_TO_PURCHASE = 5
