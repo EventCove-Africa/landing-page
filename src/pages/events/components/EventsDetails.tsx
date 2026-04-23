@@ -11,6 +11,15 @@ export default function EventsDetails({
   eventDetails,
   showDescription = true,
 }: any) {
+  const isPhysical = eventDetails?.eventVenueType?.toLowerCase() === "physical";
+  const shouldShowAddress = eventDetails?.displayAddressToUsers;
+
+  const locationText = shouldShowAddress
+    ? `${eventDetails?.location ?? ""} ${
+        isPhysical ? (eventDetails?.city ?? "") : ""
+      }`
+    : "To be communicated after registration";
+
   return (
     <>
       <div className="w-full relative">
@@ -31,21 +40,15 @@ export default function EventsDetails({
           {eventDetails?.eventName}
         </h3>
         <p className="flex items-center gap-1 text-sm font-normal text-grey_100">
-          {eventDetails?.eventVenueType?.toLowerCase() === "physical" ? (
-            <CiLocationOn className="w-4 h-4" />
-          ) : (
-            <FaLink />
-          )}{" "}
-          {eventDetails?.location}{" "}
-          {eventDetails?.eventVenueType?.toLowerCase() === "physical" &&
-            eventDetails?.city}
+          {isPhysical ? <CiLocationOn className="w-4 h-4" /> : <FaLink />}
+          {locationText}
         </p>
       </div>
       <div className="flex flex-wrap gap-4 mt-4">
         <div className="bg-grey_300 rounded-md md:w-fit w-full p-2 flex gap-2 items-center">
           <LuCalendarDays className="w-[20px] h-[20px] text-blue_200" />
           <div className="flex flex-col gap-1">
-            <h3 className="text-grey_100 text-xs font-normal">Start Date</h3>
+            <h3 className="text-grey_100 text-xs font-normal">Date</h3>
             <h5 className="text-dark_200 font-normal md:text-base text-sm">
               {arrayToFormattedDateWithYear(eventDetails?.startDate || [])}
             </h5>
@@ -54,7 +57,7 @@ export default function EventsDetails({
         <div className="bg-grey_300 rounded-md md:w-fit w-full p-2 flex gap-2 items-center">
           <IoTimeOutline className="text-secondary_500 w-[20px] h-[20px]" />
           <div className="flex flex-col gap-1">
-            <h3 className="text-grey_100 text-xs font-normal">Start Time</h3>
+            <h3 className="text-grey_100 text-xs font-normal">Time</h3>
             <h5 className="text-dark_200 font-normal md:text-base text-sm">
               {formatTimeToshowAmPm(eventDetails?.startTime)}
             </h5>
