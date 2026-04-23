@@ -31,6 +31,7 @@ type allEventsProps = {
   organizerEmail: string;
   city: string;
   eventVenueType: string;
+  displayAddressToUsers: boolean;
 };
 
 type EventsProps = {
@@ -55,10 +56,18 @@ const EventCard: React.FC<{ event: allEventsProps }> = ({ event }) => {
     startTime,
     city,
     eventVenueType,
+    displayAddressToUsers,
   } = event;
   const route = slug
     ? `/events/${slug}`
     : `/events/${eventName?.replaceAll(" ", "-")}/${eventId}`;
+  const isPhysical = eventVenueType?.toLowerCase() === "physical";
+  const shouldShowAddress = displayAddressToUsers;
+
+  const locationText = shouldShowAddress
+    ? `${location ?? ""} ${isPhysical ? (city ?? "") : ""}`
+    : "To be communicated after registration";
+
   return (
     <article
       className="bg-white shadow-md rounded-lg md:p-3 p-2 cursor-pointer flex flex-row-reverse md:h-[180px] h-auto"
@@ -84,12 +93,8 @@ const EventCard: React.FC<{ event: allEventsProps }> = ({ event }) => {
           {eventName}
         </h3>
         <p className="flex md:items-center items-start gap-1 md:text-sm text-xs font-normal text-grey_100">
-          {eventVenueType?.toLowerCase() === "physical" ? (
-            <CiLocationOn className="w-8 h-8" />
-          ) : (
-            <FaLink />
-          )}{" "}
-          {location} {eventVenueType?.toLowerCase() === "physical" && city}
+          {isPhysical ? <CiLocationOn className="w-4 h-4" /> : <FaLink />}
+          {locationText}
         </p>
         <div className="flex md:flex-row flex-col md:items-center items-start md:gap-2 gap-4">
           <div className="flex items-center gap-1 md:text-sm text-xs font-medium text-primary_100">
