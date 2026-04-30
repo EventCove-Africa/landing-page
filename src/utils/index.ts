@@ -63,19 +63,19 @@ function getOrdinalSuffix(day: number): string {
 export function arrayToFormattedDate([year, month, day]: [
   number,
   number,
-  number
+  number,
 ]): string {
   const date = new Date(year, month - 1, day); // Month is 0-based in JavaScript Date
   const options: Intl.DateTimeFormatOptions = { day: "numeric", month: "long" };
   const formattedDate = date.toLocaleDateString("en-GB", options);
   return formattedDate.replace(
     /\d+/,
-    (d) => `${d}${getOrdinalSuffix(Number(d))}`
+    (d) => `${d}${getOrdinalSuffix(Number(d))}`,
   );
 }
 
 export const arrayToFormattedDateWithYear = (
-  dateArray: [number, number, number]
+  dateArray: [number, number, number],
 ): string => {
   const [year, month, day] = dateArray;
   const date = new Date(year, month - 1, day); // Month is zero-based
@@ -107,7 +107,7 @@ export function setDataINCookies(tokens: Record<any, any>) {
 export const calculateTotalAmountForBuyers = (
   price: any,
   QTY: any,
-  chargePercent: any
+  chargePercent: any,
 ): any => {
   const charges = chargePercent * price;
   const chargeValue = charges + 100;
@@ -120,4 +120,17 @@ export const toBoolean = (value: any): boolean => {
   return value?.toLowerCase() === "true";
 };
 
-export const MAX_NUMBER_OF_ALLOWED_TICKETS_TO_PURCHASE = 5
+export const MAX_NUMBER_OF_ALLOWED_TICKETS_TO_PURCHASE = 5;
+
+export type DateTuple = [number, number, number]; // [year, month, day]
+
+export function hasSalesEnded(salesEndDate: DateTuple): boolean {
+  const [year, month, day] = salesEndDate;
+  // JS months are 0-based → subtract 1
+  const endDate = new Date(year, month - 1, day);
+  // Normalize both dates to remove time differences
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  endDate.setHours(0, 0, 0, 0);
+  return today > endDate;
+}

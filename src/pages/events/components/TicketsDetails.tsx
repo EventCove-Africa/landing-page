@@ -5,6 +5,7 @@ import { FaChalkboardTeacher } from "react-icons/fa";
 import { FiMinus } from "react-icons/fi";
 import {
   formatToNaira,
+  hasSalesEnded,
   isObjectEmpty,
   MAX_NUMBER_OF_ALLOWED_TICKETS_TO_PURCHASE,
   setDataINCookies,
@@ -61,11 +62,13 @@ TicketsDetailsProps) {
     soldCount,
     capacity,
     salesEndDate,
+    salesEnded,
     charges,
     chargeAmount,
     transferTransactionFeeToBuyer,
     colour,
     classification,
+    maxCapacityReached,
     notAllowedToSelect,
     showCapacityToUsers,
     ticketUnsold,
@@ -89,10 +92,13 @@ TicketsDetailsProps) {
       capacity,
       chargeAmount,
       salesEndDate,
+      salesEnded,
       colour,
       classification,
       showCapacityToUsers,
       ticketUnsold,
+      maxCapacityReached,
+      notAllowedToSelect,
     });
   };
 
@@ -135,7 +141,9 @@ TicketsDetailsProps) {
                   salesEndDate,
                   showCapacityToUsers,
                 }: ticketDetailsProps) => {
-                  const notAllowedToSelect = soldCount >= capacity;
+                  const maxCapacityReached = soldCount >= capacity;
+                  const salesEnded = hasSalesEnded(salesEndDate);
+                  const notAllowedToSelect = maxCapacityReached || salesEnded;
                   const ticketUnsold = capacity - soldCount;
                   const showCapacityCountClassification =
                     showCapacityToUsers ||
@@ -156,8 +164,10 @@ TicketsDetailsProps) {
                           charges,
                           transferTransactionFeeToBuyer,
                           salesEndDate,
+                          salesEnded,
                           colour,
                           classification,
+                          maxCapacityReached,
                           notAllowedToSelect,
                           showCapacityToUsers,
                           ticketUnsold,
@@ -264,7 +274,7 @@ TicketsDetailsProps) {
                       {notAllowedToSelect && (
                         <div className="w-full flex justify-end items-center mt-5">
                           <span className="text-grey_1200 bg-grey_1100 p-1 rounded text-xs self-end font-bold">
-                            Sold Out
+                            {maxCapacityReached ? "Sold Out" : "Not Available"}
                           </span>
                         </div>
                       )}
