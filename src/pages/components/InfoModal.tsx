@@ -4,7 +4,7 @@ import { LuBadgeCheck } from "react-icons/lu";
 
 type InfoModalProps = {
   onClick: () => void;
-  info?: string;
+  info?: string | null;
   title?: string;
   redirecting?: boolean;
 };
