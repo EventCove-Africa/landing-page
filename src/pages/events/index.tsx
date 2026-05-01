@@ -14,7 +14,7 @@ import SkeletonLoader from "@/components/SkeletonLoader";
 
 const LandingPageEvents = dynamic(
   () => import("../components/LandingPageEvents"),
-  { ssr: false }
+  { ssr: false },
 );
 
 export type EventsPageSearchQueryProps = {
@@ -43,9 +43,7 @@ export default function EventsPage() {
   const [querySearch, setQuerySearch] = useState("");
 
   const handleEventsSearch = () => {
-    if (!queryParams) {
-      return;
-    }
+    if (!queryParams) return;
     const queryParts: string[] = [];
     if (queryParams.city) {
       queryParts.push(`city=${encodeURIComponent(queryParams.city)}`);

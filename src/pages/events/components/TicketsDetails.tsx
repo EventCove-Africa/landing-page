@@ -273,8 +273,8 @@ TicketsDetailsProps) {
                       ) : null}
                       {notAllowedToSelect && (
                         <div className="w-full flex justify-end items-center mt-5">
-                          <span className="text-grey_1200 bg-grey_1100 p-1 rounded text-xs self-end font-bold">
-                            {maxCapacityReached ? "Sold Out" : "Not Available"}
+                          <span className="text-grey_1200 bg-grey_1100 p-1 rounded text-[10px] self-end font-bold">
+                            {maxCapacityReached ? "Sold Out" : "Ticket sales closed"}
                           </span>
                         </div>
                       )}

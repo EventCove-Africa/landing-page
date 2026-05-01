@@ -37,6 +37,9 @@ const useEventsHook = () => {
   const [allEventTickets, setAllEventTickets] = useState<ticketDetailsProps[]>(
     [],
   );
+  const [eventStatusDescription, setEventStatusDescription] = useState<
+    string | null
+  >(null);
   const [eventDetails, setEventDetails] = useState<any>({});
   const [openPassCodeModal, setOpenPassCodeModal] = useState<boolean>(false);
   const [eventExpired, setEventExpired] = useState<boolean>(false);
@@ -174,12 +177,23 @@ const useEventsHook = () => {
         const result = res?.data?.data;
         const isEventPublic = result.eventPrivacy.toLowerCase();
         const eventHasExpired = result.eventHasExpired;
-        if (eventHasExpired) return setEventExpired(eventHasExpired);
+        const published = result.published;
+        if (!published) {
+          setEventStatusDescription("This event is not published yet.");
+          setEventExpired(true);
+          return;
+        }
+        if (eventHasExpired) {
+          setEventStatusDescription(
+            "This event has expired, you can view other events on our platform",
+          );
+          setEventExpired(true);
+          return;
+        }
         if (isEventPublic === "public") {
-          if (!isSlug) {
-            handleFetchEventTicketsDetails(eventId);
-          }
-          return handleFetchEventsDetails(eventId, isSlug);
+          if (!isSlug) handleFetchEventTicketsDetails(eventId);
+          handleFetchEventsDetails(eventId, isSlug);
+          return;
         }
         setOpenPassCodeModal(true);
       }
@@ -208,6 +222,7 @@ const useEventsHook = () => {
     eventDetails,
     allEvents,
     eventExpired,
+    eventStatusDescription,
   };
 };
 

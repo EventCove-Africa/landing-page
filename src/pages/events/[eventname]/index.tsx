@@ -38,6 +38,7 @@ export default function Eventname({
   const {
     eventDetails,
     eventExpired,
+    eventStatusDescription,
     loadingEventDetails,
     handleCheckIfEventIsPrivate,
     handleFetchEventsDetails,
@@ -114,7 +115,7 @@ export default function Eventname({
       
       <ModalPopup isOpen={eventExpired}>
         <InfoModal
-          info="This event has expired, you can view other events on our platform"
+          info={eventStatusDescription}
           onClick={() => router.push("/events")}
           title="View more Events"
         />
