@@ -5,6 +5,7 @@ import { useEffect } from "react";
 
 const Hero = dynamic(() => import("./components/Hero"), { ssr: false });
 const Offer = dynamic(() => import("./components/Offer"), { ssr: false });
+const VendorCTASection = dynamic(() => import("./components/VendorCTASection"), { ssr: false });
 const LandingPageEvents = dynamic(
   () => import("./components/LandingPageEvents"),
   { ssr: false }
@@ -43,6 +44,9 @@ export default function Home() {
       <div className="scroll-smooth">
         <div className="w-full h-auto">
           <Hero />
+        </div>
+        <div className="w-full h-auto">
+          <VendorCTASection />
         </div>
         <div className="w-full h-full">
           <Offer />
