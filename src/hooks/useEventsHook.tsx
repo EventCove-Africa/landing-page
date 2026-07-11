@@ -22,6 +22,7 @@ export type ticketDetailsProps = {
   chargeAmount: number;
   capacity: number;
   salesEndDate: [number, number, number];
+  salesEndTime: string;
 };
 
 const useEventsHook = () => {
