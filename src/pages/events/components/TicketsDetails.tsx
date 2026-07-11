@@ -139,10 +139,11 @@ TicketsDetailsProps) {
                   capacity,
                   chargeAmount,
                   salesEndDate,
+                  salesEndTime,
                   showCapacityToUsers,
                 }: ticketDetailsProps) => {
                   const maxCapacityReached = soldCount >= capacity;
-                  const salesEnded = hasSalesEnded(salesEndDate);
+                  const salesEnded = hasSalesEnded(salesEndDate, salesEndTime);
                   const notAllowedToSelect = maxCapacityReached || salesEnded;
                   const ticketUnsold = capacity - soldCount;
                   const showCapacityCountClassification =

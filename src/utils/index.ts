@@ -124,13 +124,23 @@ export const MAX_NUMBER_OF_ALLOWED_TICKETS_TO_PURCHASE = 5;
 
 export type DateTuple = [number, number, number]; // [year, month, day]
 
-export function hasSalesEnded(salesEndDate: DateTuple): boolean {
+// export function hasSalesEnded(salesEndDate: DateTuple): boolean {
+//   const [year, month, day] = salesEndDate;
+//   // JS months are 0-based → subtract 1
+//   const endDate = new Date(year, month - 1, day);
+//   // Normalize both dates to remove time differences
+//   const today = new Date();
+//   today.setHours(0, 0, 0, 0);
+//   endDate.setHours(0, 0, 0, 0);
+//   return today > endDate;
+// }
+
+export function hasSalesEnded(
+  salesEndDate: DateTuple,
+  salesEndTime: string,
+): boolean {
   const [year, month, day] = salesEndDate;
-  // JS months are 0-based → subtract 1
-  const endDate = new Date(year, month - 1, day);
-  // Normalize both dates to remove time differences
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  endDate.setHours(0, 0, 0, 0);
-  return today > endDate;
+  const [hours, minutes] = salesEndTime.split(":").map(Number);
+  const endDateTime = new Date(year, month - 1, day, hours, minutes, 0, 0,);
+  return new Date() > endDateTime;
 }
