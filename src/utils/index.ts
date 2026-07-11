@@ -137,10 +137,10 @@ export type DateTuple = [number, number, number]; // [year, month, day]
 
 export function hasSalesEnded(
   salesEndDate: DateTuple,
-  salesEndTime: string,
+  salesEndTime: string = '00:00',
 ): boolean {
   const [year, month, day] = salesEndDate;
-  const [hours, minutes] = salesEndTime.split(":").map(Number);
+  const [hours, minutes] = salesEndTime?.split(":")?.map(Number);
   const endDateTime = new Date(year, month - 1, day, hours, minutes, 0, 0,);
   return new Date() > endDateTime;
 }
