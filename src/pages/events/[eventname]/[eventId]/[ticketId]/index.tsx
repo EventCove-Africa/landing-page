@@ -171,9 +171,7 @@ export default function TicketId() {
 
   return (
     <>
-      <CustomHead
-        title="Event ticket details"
-      />
+      <CustomHead title="Event ticket details" />
       <div className="container padding-spacing w-full h-full">
         <DescriptionBar text="Ticket purchase 🌟" />
         <Formik
@@ -316,6 +314,24 @@ export default function TicketId() {
                       touched={touched?.phoneNumber}
                     />
                   </div>
+                  {/* <div className="my-4">
+                    <h1 className="text-dark_200 leading-6 text-base font-bold">
+                      Send ticket to different adresses?
+                    </h1>
+                    <p className="text-grey_100 leading-5 text-sm font-medium my-2">
+                      To send a support ticket, click the “Add Address” button
+                      and provide more details the group members. any other info
+                      that was bot provided would be sent to you
+                    </p>
+                    <button
+                      type="button"
+                      role="button"
+                      className="p-2 text-sm font-medium border border-primary_100 text-primary_100 rounded-xl transition-colors md:block hidden"
+                      aria-label="Add More Users to Purchase ticket for event"
+                    >
+                      Add More
+                    </button>
+                  </div> */}
                 </div>
                 <div className="bg-white lg:w-[60%] w-full h-full rounded-xl px-4 py-6">
                   <SkeletonLoaderEventDetails
