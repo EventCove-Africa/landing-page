@@ -145,7 +145,7 @@ export function hasSalesEnded(
   return new Date() > endDateTime;
 }
 
-export const truncate = (text: string, maxLength: number = 100) => {
+export const truncate = (text: string, maxLength: number = 50) => {
   if (text?.length <= maxLength) return text;
   return text?.slice(0, maxLength - 3) + "......";
 };
