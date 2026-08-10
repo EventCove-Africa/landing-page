@@ -66,7 +66,7 @@ const EventCard: React.FC<{ event: allEventsProps }> = ({ event }) => {
   const shouldShowAddress = displayAddressToUsers;
 
   const locationText = shouldShowAddress
-    ? truncate(`${location ?? ""} ${isPhysical ? (city ?? "") : ""}`)
+    ? truncate([location, isPhysical ? city : ""]?.filter(Boolean)?.join(" "))
     : "To be communicated after registration";
 
   return (
