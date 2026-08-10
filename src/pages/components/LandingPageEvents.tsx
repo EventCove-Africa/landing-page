@@ -13,6 +13,7 @@ import {
   arrayToFormattedDateWithYear,
   formatTimeToshowAmPm,
   isArrayEmpty,
+  truncate,
 } from "@/utils";
 import SkeletonLoader from "@/components/SkeletonLoader";
 
@@ -65,7 +66,7 @@ const EventCard: React.FC<{ event: allEventsProps }> = ({ event }) => {
   const shouldShowAddress = displayAddressToUsers;
 
   const locationText = shouldShowAddress
-    ? `${location ?? ""} ${isPhysical ? (city ?? "") : ""}`
+    ? truncate(`${location ?? ""} ${isPhysical ? (city ?? "") : ""}`)
     : "To be communicated after registration";
 
   return (
@@ -92,7 +93,7 @@ const EventCard: React.FC<{ event: allEventsProps }> = ({ event }) => {
         <h3 className="text-dark_200 font-medium text-sm md:text-base">
           {eventName}
         </h3>
-        <p className="flex md:items-center items-start gap-1 md:text-sm text-xs font-normal text-grey_100">
+        <p className="flex md:items-center text-ellipsis items-start gap-1 md:text-sm text-xs font-normal text-grey_100">
           {isPhysical ? <CiLocationOn className="w-4 h-4" /> : <FaLink />}
           {locationText}
         </p>
