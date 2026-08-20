@@ -62,6 +62,7 @@ export default function TicketId() {
   const price = Number(Cookies.get("selectedTicketPrice")) || 0;
   const QTY = Number(Cookies.get("count")) || 0;
   const ticketType = Cookies.get("ticketType") || "";
+  const callBackUrl = Cookies.get("callBackUrl") || "";
   const charges: any = Number(Cookies.get("charges") || 0);
   const transferTransactionFeeToBuyer =
     toBoolean(Cookies.get("transferTransactionFeeToBuyer")) || false;
@@ -143,13 +144,17 @@ export default function TicketId() {
   };
 
   const handleFinalAction = () => {
-    if (paystackUrl !== "") {
+    if (paystackUrl) {
       setRedirecting(true);
       window.location.href = paystackUrl;
-    } else {
-      setIsOpen(!isOpen);
-      router.push("/events");
+      return;
     }
+    setIsOpen(false);
+    if (callBackUrl) {
+      window.location.href = callBackUrl;
+      return;
+    }
+    router.push("/events");
   };
 
   useEffect(() => {
@@ -427,7 +432,7 @@ export default function TicketId() {
         <InfoModal
           info={successMessage}
           onClick={handleFinalAction}
-          title={`${paystackUrl !== "" ? "Proceed" : "View more Events"}`}
+          title="PROCEED"
           redirecting={redirecting}
         />
       </ModalPopup>

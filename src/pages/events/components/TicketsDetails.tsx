@@ -49,6 +49,7 @@ TicketsDetailsProps) {
   const transferTransactionFeeToBuyer =
     selectedTicket?.transferTransactionFeeToBuyer;
   const ticketType = selectedTicket?.ticketType;
+  const callBackUrl = eventDetails?.callBackUrl;
 
   const increment = () => setCount((prev) => Math.min(maxCapacity, prev + 1));
   const decrement = () => setCount((prev) => Math.max(1, prev - 1));
@@ -72,6 +73,7 @@ TicketsDetailsProps) {
     notAllowedToSelect,
     showCapacityToUsers,
     ticketUnsold,
+    callBackUrl,
   }: any) => {
     setCount(1);
     if (notAllowedToSelect) return null;
@@ -99,6 +101,7 @@ TicketsDetailsProps) {
       ticketUnsold,
       maxCapacityReached,
       notAllowedToSelect,
+      callBackUrl,
     });
   };
 
@@ -175,7 +178,7 @@ TicketsDetailsProps) {
                         })
                       }
                       className={`bg-grey_300 h-fit ${
-                        selectedTicket?.ticketId === ticketId
+                        selectedTicket?.ticketId == ticketId
                           ? "border border-primary_100"
                           : "border border-grey_1100"
                       } ${
@@ -275,7 +278,9 @@ TicketsDetailsProps) {
                       {notAllowedToSelect && (
                         <div className="w-full flex justify-end items-center mt-5">
                           <span className="text-grey_1200 bg-grey_1100 p-1 rounded text-[10px] self-end font-bold">
-                            {maxCapacityReached ? "Sold Out" : "Ticket sales closed"}
+                            {maxCapacityReached
+                              ? "Sold Out"
+                              : "Ticket sales closed"}
                           </span>
                         </div>
                       )}
@@ -317,6 +322,7 @@ TicketsDetailsProps) {
                   ticketType,
                   charges,
                   transferTransactionFeeToBuyer,
+                  callBackUrl,
                 });
                 router.push(
                   `/events/${eventDetails?.eventName.replaceAll(" ", "-")}/${
