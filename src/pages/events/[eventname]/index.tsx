@@ -33,6 +33,7 @@ export default function Eventname({
   description,
 }: Props) {
   const formattedEventName = eventname ? eventname.replace(/-/g, " ") : "Event";
+  // const callBackUrl = eventDetails?.callBackUrl;
   const router = useRouter();
 
   const {
@@ -61,6 +62,7 @@ export default function Eventname({
       "ticketType",
       "charges",
       "transferTransactionFeeToBuyer",
+      'callBackUrl',
     );
   }, []);
 
