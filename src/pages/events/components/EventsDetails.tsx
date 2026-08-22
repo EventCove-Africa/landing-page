@@ -24,15 +24,27 @@ export default function EventsDetails({
     <>
       <div className="w-full relative">
         {eventDetails?.eventImageUrl ? (
-          <Image
-            src={eventDetails?.eventImageUrl}
-            alt="event banner"
-            width={700} // Increase width
-            height={600} // Increase height
-            quality={100}
-            priority
-            className="object-fit rounded-xl w-full h-[300px] sm:h-[350px] md:h-[350px] lg:h-[350px] xl:h-[400px]"
-          />
+          <div className="relative w-full overflow-hidden rounded-xl">
+            {/* Blurred background */}
+            <Image
+              src={eventDetails?.eventImageUrl}
+              alt=""
+              fill
+              priority
+              quality={50}
+              className="scale-110 object-cover blur-sm"
+            />
+            {/* Main image — fully visible */}
+            <Image
+              src={eventDetails?.eventImageUrl}
+              alt="event banner"
+              width={700}
+              height={350}
+              quality={100}
+              priority
+              className="relative z-10 h-auto w-full object-contain"
+            />
+          </div>
         ) : null}
       </div>
       <div className="flex flex-col gap-1 w-full mt-4">
