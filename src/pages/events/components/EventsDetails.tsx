@@ -26,23 +26,23 @@ export default function EventsDetails({
         {eventDetails?.eventImageUrl ? (
           <div className="relative w-full overflow-hidden rounded-xl">
             {/* Blurred background */}
-            <Image
-              src={eventDetails?.eventImageUrl}
-              alt=""
-              fill
-              priority
-              quality={50}
-              className="scale-110 object-cover blur-sm"
+            <div
+              className="absolute inset-0 scale-110 bg-cover bg-center blur-sm"
+              style={{
+                backgroundImage: `url(${eventDetails?.eventImageUrl})`,
+              }}
             />
-            {/* Main image — fully visible */}
+            {/* Optional dark/transparent overlay to make blur more visible */}
+            <div className="absolute inset-0 bg-black/10" />
+            {/* Main image */}
             <Image
               src={eventDetails?.eventImageUrl}
               alt="event banner"
               width={700}
-              height={350}
+              height={600}
               quality={100}
               priority
-              className="relative z-10 h-auto w-full object-contain"
+              className="relative z-10 block w-full h-[300px] sm:h-[350px] md:h-[350px] lg:h-[350px] xl:h-[400px] rounded-xl object-contain"
             />
           </div>
         ) : null}
