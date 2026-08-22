@@ -27,7 +27,7 @@ export default function EventsDetails({
           <div className="relative w-full overflow-hidden rounded-xl">
             {/* Blurred background */}
             <div
-              className="absolute inset-0 scale-110 bg-cover bg-center blur-sm"
+              className="absolute inset-0 scale-110 bg-cover bg-center blur-md"
               style={{
                 backgroundImage: `url(${eventDetails?.eventImageUrl})`,
               }}
