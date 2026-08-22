@@ -76,15 +76,26 @@ const EventCard: React.FC<{ event: allEventsProps }> = ({ event }) => {
       id="event"
     >
       <div
-        className="relative w-full max-w-[323px] rounded-xl overflow-hidden"
-        style={{ aspectRatio: (323.11 / 203.61).toString() }}
+        className="relative w-full max-w-[323px] overflow-hidden rounded-xl"
+        style={{ aspectRatio: "323.11 / 203.61" }}
       >
+        {/* Blurred background */}
+        <Image
+          src={eventImageUrl}
+          alt=""
+          fill
+          sizes="100vw"
+          className="scale-110 object-cover blur-sm"
+          priority
+        />
+
+        {/* Main image */}
         <Image
           src={eventImageUrl}
           alt={`Event banner for ${eventName}`}
           fill
           sizes="100vw"
-          className="object-cover"
+          className="relative z-10 object-contain"
           priority
         />
       </div>

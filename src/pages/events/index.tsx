@@ -91,7 +91,7 @@ export default function EventsPage() {
           src="/assets/images/events_bg.png"
           alt="event bg"
           fill
-          className="object-cover cursor-pointer rounded-xl"
+          className="w-full aspect-[2/1] object-cover cursor-pointer rounded-xl"
           priority
         />
         {/* Gradient Overlay */}
