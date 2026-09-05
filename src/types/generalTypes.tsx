@@ -10,6 +10,7 @@ export interface apiUrlsType {
   RESERVE_TICKET_URL: string;
   INITIATE_TICKET_URL: string;
   SUBSCRIBE_NEWSLETTER_URL: string;
+  ADD_UNIQUE_GUEST_FOR_EVENT_URL: string;
 }
 
 export interface ButtonProps {
