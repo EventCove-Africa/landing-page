@@ -25,6 +25,7 @@ import SkeletonLoaderEventDetails from "@/pages/components/SkeletonLoaderEventDe
 import { api } from "@/services/apiClients";
 import { appUrls } from "@/services/urls";
 import toast from "react-hot-toast";
+import ScrollToFirstError from "@/components/ScrollToFirstError";
 
 type ReserveTransactionProps = {
   email: string;
@@ -246,11 +247,15 @@ export default function TicketId() {
                 onSubmit={handleSubmit}
                 className="w-full flex lg:flex-row flex-col gap-6"
               >
+                
+                <ScrollToFirstError />
+
                 <div className="bg-white rounded-xl lg:w-[40%] w-full p-4 h-fit">
                   <div className="mb-2">
                     <TextInputField
                       labelName="Firstname"
                       name="firstName"
+                      id="firstName"
                       handleChange={handleChange}
                       type="text"
                       placeholder=""
@@ -263,6 +268,7 @@ export default function TicketId() {
                     <TextInputField
                       labelName="Lastname"
                       name="lastName"
+                      id="lastName"
                       handleChange={handleChange}
                       type="text"
                       placeholder=""
@@ -275,6 +281,7 @@ export default function TicketId() {
                     <TextInputField
                       labelName="Email"
                       name="email"
+                      id="email"
                       handleChange={handleChange}
                       type="text"
                       placeholder=""
@@ -287,6 +294,7 @@ export default function TicketId() {
                     <TextInputField
                       labelName="Confirm email"
                       name="confirm_email"
+                      id="confirm_email"
                       handleChange={handleChange}
                       type="email"
                       placeholder=""
@@ -299,6 +307,7 @@ export default function TicketId() {
                     <TextInputField
                       labelName="Location"
                       name="location"
+                      id="location"
                       handleChange={handleChange}
                       type="text"
                       placeholder=""
@@ -311,6 +320,7 @@ export default function TicketId() {
                     <TextInputField
                       labelName="Phone number"
                       name="phoneNumber"
+                      id="phoneNumber"
                       handleChange={handleChange}
                       type="tel"
                       placeholder=""
