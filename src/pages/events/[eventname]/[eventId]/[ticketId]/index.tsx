@@ -25,6 +25,7 @@ import SkeletonLoaderEventDetails from "@/pages/components/SkeletonLoaderEventDe
 import { api } from "@/services/apiClients";
 import { appUrls } from "@/services/urls";
 import toast from "react-hot-toast";
+import ScrollToFirstError from "@/components/ScrollToFirstError";
 
 type ReserveTransactionProps = {
   email: string;
@@ -246,6 +247,7 @@ export default function TicketId() {
                 onSubmit={handleSubmit}
                 className="w-full flex lg:flex-row flex-col gap-6"
               >
+                <ScrollToFirstError />
                 <div className="bg-white rounded-xl lg:w-[40%] w-full p-4 h-fit">
                   <div className="mb-2">
                     <TextInputField
