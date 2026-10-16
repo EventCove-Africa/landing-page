@@ -76,7 +76,7 @@ TicketsDetailsProps) {
     callBackUrl,
   }: any) => {
     setCount(1);
-    if (notAllowedToSelect) return null;
+    // if (notAllowedToSelect) return null;
     if (ticketUnsold < MAX_NUMBER_OF_ALLOWED_TICKETS_TO_PURCHASE) {
       setMaxCapacity(ticketUnsold);
     } else {

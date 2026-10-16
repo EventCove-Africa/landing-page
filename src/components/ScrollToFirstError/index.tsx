@@ -1,31 +1,32 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useFormikContext } from "formik";
 
 const ScrollToFirstError = () => {
-  const { errors, submitCount, isValidating } = useFormikContext();
-
+  const { errors, submitCount, isSubmitting } = useFormikContext();
+  const lastHandledSubmit = useRef(0);
   useEffect(() => {
-    if (submitCount === 0 || isValidating) return;
-
-    const firstErrorField = Object.keys(errors)[0];
-
-    if (!firstErrorField) return;
-
-    const field = document.querySelector(
-      `[name="${firstErrorField}"]`
-    ) as any;
-
-    if (field) {
-      field.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
-
-      field.focus({ preventScroll: true });
+    // Only handle each submission once.
+    if (
+      submitCount === 0 ||
+      submitCount === lastHandledSubmit.current ||
+      isSubmitting
+    ) {
+      return;
     }
-  }, [submitCount, errors, isValidating]);
-
+    const firstErrorField = Object.keys(errors)[0];
+    if (!firstErrorField) {
+      lastHandledSubmit.current = submitCount;
+      return;
+    }
+    const field = document.getElementById(firstErrorField);
+    if (!(field instanceof HTMLElement)) return;
+    lastHandledSubmit.current = submitCount;
+    field.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+    field.focus({ preventScroll: true });
+  }, [submitCount, errors, isSubmitting]);
   return null;
 };
 
