@@ -1,12 +1,10 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect } from "react";
-import { GetServerSideProps } from "next";
-
+/* eslint-disable react-hooks/exhaustive-deps */ 
+/* eslint-disable @typescript-eslint/no-explicit-any */ 
+import React, { useEffect,} from "react";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import CustomHead from "@/components/CustomHead";
 import DescriptionBar from "@/components/DescriptionBar";
 import { _handleClearCookiesAndSession, isObjectEmpty } from "@/utils";
-
 import ModalPopup from "@/components/ModalPopup";
 import PrivatePassCode from "../components/PrivatePassCode";
 import useEventsHook from "@/hooks/useEventsHook";
@@ -23,18 +21,15 @@ type Props = {
   eventname: string;
   eventImageUrl: string;
   description: string;
-  isSlug: boolean;
 };
 
 export default function Eventname({
   eventname,
-  isSlug,
   eventImageUrl,
   description,
-}: Props) {
-  const formattedEventName = eventname ? eventname.replace(/-/g, " ") : "Event";
-  // const callBackUrl = eventDetails?.callBackUrl;
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const router = useRouter();
+  const formattedEventName = eventname ? eventname.replace(/-/g, " ") : "Event";
 
   const {
     eventDetails,
@@ -49,12 +44,21 @@ export default function Eventname({
     setOpenPassCodeModal,
   } = useEventsHook();
 
+  /**
+   * Check whether the event is private.
+   *
+   * `isSlug` is always true for this route, so there is no reason
+   * to keep it as component state/props.
+   */
   useEffect(() => {
-    if (eventname) {
-      handleCheckIfEventIsPrivate(eventname, isSlug);
-    }
-  }, [eventname]);
+    if (!eventname) return;
 
+    handleCheckIfEventIsPrivate(eventname, true);
+  }, [eventname, handleCheckIfEventIsPrivate]);
+
+  /**
+   * Clear stale checkout/session data when entering an event.
+   */
   useEffect(() => {
     _handleClearCookiesAndSession(
       "selectedTicketPrice",
@@ -62,9 +66,17 @@ export default function Eventname({
       "ticketType",
       "charges",
       "transferTransactionFeeToBuyer",
-      'callBackUrl',
+      "callBackUrl",
     );
   }, []);
+
+  const closePassCodeModal = () => {
+    setOpenPassCodeModal(false);
+  };
+
+  const handleViewMoreEvents = () => {
+    router.push("/events");
+  };
 
   return (
     <>
@@ -74,10 +86,13 @@ export default function Eventname({
         slug={eventname}
         description={description}
       />
-      <div className="container padding-spacing w-full h-full">
+
+      <main className="container padding-spacing w-full h-full">
         <DescriptionBar text="Get the full picture of your event 🌟" />
+
         <div className="w-full flex lg:flex-row flex-col gap-4">
-          <div className="bg-white w-full h-full rounded-xl p-3">
+          {/* Event details */}
+          <section className="bg-white w-full h-full rounded-xl p-3">
             <SkeletonLoaderEventDetails
               isLoading={loadingEventDetails?.details}
             />
@@ -85,40 +100,47 @@ export default function Eventname({
             {!loadingEventDetails?.details && !isObjectEmpty(eventDetails) && (
               <EventsDetails eventDetails={eventDetails} />
             )}
-          </div>
+          </section>
 
+          {/* Tickets */}
           <TicketsDetails
             allEventTickets={allEventTickets}
             eventDetails={eventDetails}
             loadingEventDetails={loadingEventDetails}
             eventId={eventname}
-            isSlug={isSlug}
+            isSlug={true}
           />
         </div>
-      </div>
+      </main>
 
+      {/* Private event passcode */}
       <ModalPopup
         backdropFilter="30px"
         isOpen={openPassCodeModal}
-        closeModal={() => setOpenPassCodeModal(!openPassCodeModal)}
+        closeModal={closePassCodeModal}
       >
         <PrivatePassCode
-          closeModal={() => setOpenPassCodeModal(!openPassCodeModal)}
+          closeModal={closePassCodeModal}
           eventId={eventname}
           handleFetchEventsDetails={handleFetchEventsDetails}
           handleFetchEventTicketsDetails={handleFetchEventTicketsDetails}
-          isSlug={isSlug}
+          isSlug={true}
         />
       </ModalPopup>
 
-      <ModalPopup backdropFilter="30px" isOpen={loadingEventDetails?.isPrivate}>
+      {/* Private event loading state */}
+      <ModalPopup
+        backdropFilter="30px"
+        isOpen={Boolean(loadingEventDetails?.isPrivate)}
+      >
         <Loaders />
       </ModalPopup>
-      
-      <ModalPopup isOpen={eventExpired}>
+
+      {/* Expired event */}
+      <ModalPopup isOpen={Boolean(eventExpired)}>
         <InfoModal
           info={eventStatusDescription}
-          onClick={() => router.push("/events")}
+          onClick={handleViewMoreEvents}
           title="View more Events"
         />
       </ModalPopup>
@@ -126,20 +148,53 @@ export default function Eventname({
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { eventname } = context.params as { eventname: string };
-  const isSlug = true;
-  const res = await api.get(
-    appUrls.EVENT_URL + `/guest/${eventname}?isSlug=${isSlug}`,
-  );
-  const result = res.data?.data;
+export const getServerSideProps: GetServerSideProps<Props> = async (
+  context,
+) => {
+  const eventname = context.params?.eventname;
 
-  return {
-    props: {
-      eventname,
-      isSlug,
-      eventImageUrl: result?.eventImageUrl,
-      description: result?.eventDescription,
-    },
-  };
+  if (typeof eventname !== "string" || !eventname.trim()) {
+    return {
+      notFound: true,
+    };
+  }
+
+  try {
+    const response = await api.get(
+      `${appUrls.EVENT_URL}/guest/${encodeURIComponent(eventname)}?isSlug=true`,
+    );
+
+    const result = response.data?.data;
+
+    if (!result) {
+      return {
+        notFound: true,
+      };
+    }
+
+    return {
+      props: {
+        eventname,
+        eventImageUrl: result.eventImageUrl ?? "",
+        description: result.eventDescription ?? "",
+      },
+    };
+  } catch (error: unknown) {
+   
+    /**
+     * If the backend explicitly says the event doesn't exist,
+     * render Next's 404.
+     */
+    const status = (error as { status?: number })?.status;
+    if (status === 404) {
+      return {
+        notFound: true,
+      };
+    }
+
+    /**
+     * For unexpected backend/network errors, throw a REAL Error.
+     */
+    throw error instanceof Error ? error : new Error("Failed to fetch event");
+  }
 };
