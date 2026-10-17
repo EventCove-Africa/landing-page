@@ -46,7 +46,7 @@ export default function Pricing() {
   };
   const tabDescription: Record<string, string> = {
     free_events: "Free events are completely free. No hidden charges.",
-    paid_events: "We only charge 4% + ₦100 per paid ticket.",
+    paid_events: "We only charge 7% + ₦100 per paid ticket.",
   };
 
   const FeatureCard = ({ icon, title, description }: (typeof features)[0]) => (
@@ -140,13 +140,13 @@ export default function Pricing() {
                   Ticket price: ₦5,000
                 </li>
                 <li className="text-grey_100 font-normal text-sm">
-                  Fee: ₦300 (4% + ₦100)
+                  Fee: ₦350 (7% + ₦100)
                 </li>
                 <li className="text-grey_100 font-normal text-sm">
-                  Customer pay: {`${toggleOnOff ? "₦5,300" : "₦5,000"}`}
+                  Customer pay: {`${toggleOnOff ? "₦5,450" : "₦5,000"}`}
                 </li>
                 <li className="text-grey_100 font-normal text-sm">
-                  You receive: {`${toggleOnOff ? "₦5,000" : "₦4,700"}`}
+                  You receive: {`${toggleOnOff ? "₦5,000" : "₦4,550"}`}
                 </li>
               </ul>
             </div>
