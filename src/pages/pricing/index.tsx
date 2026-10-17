@@ -114,7 +114,7 @@ export default function Pricing() {
           </p>
           <div className="bg-primary_200 rounded-md text-jazzberry text-sm p-3 text-center font-normal">
             <span className="md:text-4xl text-2xl font-bold">
-              {activeTab === "free_events" ? "₦0" : "4%"}
+              {activeTab === "free_events" ? "₦0" : "7%"}
             </span>
             {activeTab === "free_events" ? "/ticket" : "+ ₦100/ticket"}
           </div>
