@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FormEvent } from "react";
-
 export interface apiUrlsType {
   EVENT_URL: string;
   LOCATIONS_URL: string;
@@ -34,7 +32,7 @@ export interface ButtonProps {
 
 export interface TextInputFieldProps {
   name: string;
-  handleChange?: (value: FormEvent) => void;
+  handleChange?: (value: React.ChangeEvent<HTMLInputElement>) => void;
   value: string | boolean | any;
   htmlFor?: string;
   labelName?: string;

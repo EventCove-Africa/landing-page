@@ -43,6 +43,7 @@ TicketsDetailsProps) {
   const togglePerks = (ticketId: string) =>
     setExpandedPerks((p) => ({ ...p, [ticketId]: !p[ticketId] }));
   const isNotGroup = selectedTicket?.classification?.toLowerCase() !== "group";
+  const groupTicketLimit = selectedTicket?.groupTicketLimit || 1;
   const isSelectedTicketEmpty = !isObjectEmpty(selectedTicket);
   const selectedTicketPrice = selectedTicket?.price;
   const charges = selectedTicket?.charges;
@@ -74,6 +75,7 @@ TicketsDetailsProps) {
     showCapacityToUsers,
     ticketUnsold,
     callBackUrl,
+    groupTicketLimit,
   }: any) => {
     setCount(1);
     if (notAllowedToSelect) return null;
@@ -102,6 +104,7 @@ TicketsDetailsProps) {
       maxCapacityReached,
       notAllowedToSelect,
       callBackUrl,
+      groupTicketLimit
     });
   };
 
@@ -144,6 +147,7 @@ TicketsDetailsProps) {
                   salesEndDate,
                   salesEndTime,
                   showCapacityToUsers,
+                  groupTicketLimit,
                 }: ticketDetailsProps) => {
                   const maxCapacityReached = soldCount >= capacity;
                   const salesEnded = hasSalesEnded(salesEndDate, salesEndTime);
@@ -175,6 +179,7 @@ TicketsDetailsProps) {
                           notAllowedToSelect,
                           showCapacityToUsers,
                           ticketUnsold,
+                          groupTicketLimit,
                         })
                       }
                       className={`bg-grey_300 h-fit ${
@@ -318,7 +323,7 @@ TicketsDetailsProps) {
               onClick={() => {
                 setDataINCookies({
                   selectedTicketPrice,
-                  count,
+                  count: isNotGroup ? count : groupTicketLimit,
                   ticketType,
                   charges,
                   transferTransactionFeeToBuyer,

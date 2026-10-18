@@ -19,6 +19,7 @@ export type ticketDetailsProps = {
   showCapacityToUsers: boolean;
   validatedCount: number;
   soldCount: number;
+  groupTicketLimit: number;
   chargeAmount: number;
   capacity: number;
   salesEndDate: [number, number, number];
