@@ -26,6 +26,7 @@ import { api } from "@/services/apiClients";
 import { appUrls } from "@/services/urls";
 import toast from "react-hot-toast";
 import ScrollToFirstError from "@/components/ScrollToFirstError";
+import Recipients from "./Recipients";
 
 type ReserveTransactionProps = {
   email: string;
@@ -33,6 +34,12 @@ type ReserveTransactionProps = {
   ticketType: string;
   eventId: string;
   ticketTypeId: string;
+};
+
+type Recipient = {
+  name: string;
+  email: string;
+  phoneNumber: string;
 };
 
 type IntiateTransactionProps = {
@@ -48,20 +55,26 @@ type IntiateTransactionProps = {
   ticketTypeId: string;
   emailValidated: boolean;
   termsAndConditionsAccepted: boolean;
+  recipients: Recipient[];
 };
+
+// const ALLOWED_COUNT_FOR_RECIPIENT = 2;
+const MINUS_TICKET_BUYER_COUNT = 1;
 
 export default function TicketId() {
   const router = useRouter();
   const { eventDetails, loadingEventDetails, handleFetchEventsDetails } =
     useEventsHook();
   const [isOpen, setIsOpen] = useState(false);
+  const [isRecipientOpen, setIsRecipientOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const [redirecting, setRedirecting] = useState(false);
+  const [recipients, setRecipients] = useState<Recipient[]>([]);
   const [paystackUrl, setPaystackUrl] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const { eventId, ticketId } = router.query as any;
   const price = Number(Cookies.get("selectedTicketPrice")) || 0;
-  const QTY = Number(Cookies.get("count")) || 0;
+  const QTY = Number(Cookies.get("count")) || 1;
   const ticketType = Cookies.get("ticketType") || "";
   const callBackUrl = Cookies.get("callBackUrl") || "";
   const charges: any = Number(Cookies.get("charges") || 0);
@@ -77,9 +90,13 @@ export default function TicketId() {
     firstName: Yup.mixed().required("Firstname is required"),
     lastName: Yup.mixed().required("Lastname is required"),
     email: Yup.string()
+      .trim()
+      .lowercase()
       .email("Invalid email address")
       .required("Email is required"),
     confirm_email: Yup.string()
+      .trim()
+      .lowercase()
       .email("Invalid email address")
       .oneOf([Yup.ref("email")], "Email must match")
       .required("Confirm email is required...."),
@@ -205,15 +222,16 @@ export default function TicketId() {
               termsAndConditionsAccepted,
             } = values;
 
+            const normalizedEmail = email.trim().toLocaleLowerCase();
             const reservePayloadTicket = {
-              email,
+              email: normalizedEmail,
               numberOfTickets: QTY,
               ticketType,
               eventId,
               ticketTypeId: ticketId,
             };
             const initiatePayloadTicket = {
-              email,
+              email: normalizedEmail,
               firstName,
               lastName,
               phoneNumber,
@@ -225,6 +243,7 @@ export default function TicketId() {
               ticketTypeId: ticketId,
               emailValidated: true,
               termsAndConditionsAccepted: termsAndConditionsAccepted,
+              recipients,
             };
 
             handleReserveTransaction(
@@ -247,7 +266,6 @@ export default function TicketId() {
                 onSubmit={handleSubmit}
                 className="w-full flex lg:flex-row flex-col gap-6"
               >
-                
                 <ScrollToFirstError />
 
                 <div className="bg-white rounded-xl lg:w-[40%] w-full p-4 h-fit">
@@ -329,24 +347,27 @@ export default function TicketId() {
                       touched={touched?.phoneNumber}
                     />
                   </div>
-                  {/* <div className="my-4">
-                    <h1 className="text-dark_200 leading-6 text-base font-bold">
-                      Send ticket to different adresses?
-                    </h1>
-                    <p className="text-grey_100 leading-5 text-sm font-medium my-2">
-                      To send a support ticket, click the “Add Address” button
-                      and provide more details the group members. any other info
-                      that was bot provided would be sent to you
-                    </p>
-                    <button
-                      type="button"
-                      role="button"
-                      className="p-2 text-sm font-medium border border-primary_100 text-primary_100 rounded-xl transition-colors md:block hidden"
-                      aria-label="Add More Users to Purchase ticket for event"
-                    >
-                      Add More
-                    </button>
-                  </div> */}
+                  {/* {QTY >= ALLOWED_COUNT_FOR_RECIPIENT && (
+                    <div className="my-4">
+                      <h1 className="text-dark_200 leading-6 text-base font-bold">
+                        Send ticket to different adresses?
+                      </h1>
+                      <p className="text-grey_100 leading-5 text-sm font-medium my-2">
+                        To send a support ticket, click the “Add Address” button
+                        and provide more details the group members. any other
+                        info that was not provided would be sent to you
+                      </p>
+                      <button
+                        type="button"
+                        role="button"
+                        className="p-2 text-sm font-medium border border-primary_100 text-primary_100 rounded-xl transition-colors md:block hidden"
+                        aria-label="Add More Users to Purchase ticket for event"
+                        onClick={() => setIsRecipientOpen(!isRecipientOpen)}
+                      >
+                        Add More
+                      </button>
+                    </div>
+                  )} */}
                 </div>
                 <div className="bg-white lg:w-[60%] w-full h-full rounded-xl px-4 py-6">
                   <SkeletonLoaderEventDetails
@@ -444,6 +465,16 @@ export default function TicketId() {
           onClick={handleFinalAction}
           title="PROCEED"
           redirecting={redirecting}
+        />
+      </ModalPopup>
+      <ModalPopup
+        isOpen={isRecipientOpen}
+        closeModal={() => setIsRecipientOpen(false)}
+      >
+        <Recipients
+          onClose={() => setIsRecipientOpen(false)}
+          maxRecipientCount={QTY - MINUS_TICKET_BUYER_COUNT}
+          setRecipients={setRecipients}
         />
       </ModalPopup>
     </>
