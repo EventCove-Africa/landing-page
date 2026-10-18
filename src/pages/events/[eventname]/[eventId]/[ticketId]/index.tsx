@@ -58,7 +58,7 @@ type IntiateTransactionProps = {
   recipients: Recipient[];
 };
 
-const ALLOWED_COUNT_FOR_RECIPIENT = 2;
+// const ALLOWED_COUNT_FOR_RECIPIENT = 2;
 const MINUS_TICKET_BUYER_COUNT = 1;
 
 export default function TicketId() {
@@ -347,7 +347,7 @@ export default function TicketId() {
                       touched={touched?.phoneNumber}
                     />
                   </div>
-                  {QTY >= ALLOWED_COUNT_FOR_RECIPIENT && (
+                  {/* {QTY >= ALLOWED_COUNT_FOR_RECIPIENT && (
                     <div className="my-4">
                       <h1 className="text-dark_200 leading-6 text-base font-bold">
                         Send ticket to different adresses?
@@ -367,7 +367,7 @@ export default function TicketId() {
                         Add More
                       </button>
                     </div>
-                  )}
+                  )} */}
                 </div>
                 <div className="bg-white lg:w-[60%] w-full h-full rounded-xl px-4 py-6">
                   <SkeletonLoaderEventDetails
